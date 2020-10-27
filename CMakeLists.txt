@@ -3,4 +3,19 @@ project(filters)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(filters main.cpp Node.cpp Node.h NodeType.h Image.cpp Image.h IProcessor.h Conveyor.h Conveyor.cpp ConveyorManager.h ConveyorManager.cpp)
+include_directories(.)
+
+add_executable(filters
+        Conveyor.cpp
+        Conveyor.h
+        ConveyorManager.cpp
+        ConveyorManager.h
+        Filters.cpp
+        Filters.h
+        Image.cpp
+        Image.h
+        IProcessor.h
+        main.cpp
+        Node.cpp
+        Node.h
+        NodeType.h)
