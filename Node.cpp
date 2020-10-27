@@ -2,10 +2,12 @@
 // Created by noxin on 10/27/20.
 //
 
+#include <iostream>
 #include "Node.h"
 
 Node::Node(NodeType nodeType) {
     nodeType = nodeType;
+    std::cout << "Node object created" << std::endl;
 //    switch (nodeType) {
 //
 //        case InputNode:
@@ -33,4 +35,8 @@ Node::Node(NodeType nodeType) {
 //            this->processor = std::make_unique<ErosionProcessor>();
 //            break;
 //    }
+}
+
+Node::~Node() {
+    std::cout << "Node object deleted" << std::endl;
 }

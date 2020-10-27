@@ -22,6 +22,7 @@ private:
     std::shared_ptr<Image> outputPointer;
 public:
     Node(NodeType nodeType);
+    ~Node();
     void process();
     void addInput(std::shared_ptr<Node>);
     void addOutput(std::shared_ptr<Node>);
