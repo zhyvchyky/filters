@@ -9,10 +9,16 @@
 #include <vector>
 #include <string>
 
+#include "Conveyor.h"
+#include "ConveyorManager.h"
+
 class Filters {
 private:
     ConveyorManager conveyorManager;
 public:
+    Filters();
+    ~Filters();
+
     void createConveyor();
     void deleteConveyor(int id);
     void loadConveyor(std::string filePath);
