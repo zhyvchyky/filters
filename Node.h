@@ -8,15 +8,15 @@
 #include <memory>
 #include <vector>
 #include "NodeType.h"
-#include "Image.h"
 #include "IProcessor.h"
+#include "Image.h"
 
 class Node {
 
 private:
     std::vector<std::shared_ptr<Node>> inputs;
     std::vector<std::shared_ptr<Node>> outputs;
-    std::shared_ptr<IProcessor> processor;
+    std::unique_ptr<IProcessor> processor;
     std::shared_ptr<Image> preview;
     NodeType nodeType;
     std::shared_ptr<Image> outputPointer;
