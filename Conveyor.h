@@ -33,4 +33,4 @@ public:
     void deleteConnection(int inputNodeId, int outputNodeId, int inputIndex);
 };
 
-
+#endif
