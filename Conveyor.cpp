@@ -12,5 +12,5 @@ Conveyor::Conveyor() {
 }
 
 Conveyor::~Conveyor() {
-    std::cout << "ConveyorManger object deleted" << std::endl;
+    std::cout << "Conveyor object deleted" << std::endl;
 }

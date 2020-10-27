@@ -7,9 +7,9 @@
 #include "ConveyorManager.h"
 
 ConveyorManager::ConveyorManager() {
-    std::cout << "ConveyorManger object created" << std::endl;
+    std::cout << "ConveyorManager object created" << std::endl;
 }
 
 ConveyorManager::~ConveyorManager() {
-    std::cout << "ConveyorManger object deleted" << std::endl;
+    std::cout << "ConveyorManager object deleted" << std::endl;
 }

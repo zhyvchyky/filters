@@ -3,7 +3,14 @@
 //
 
 #include <iostream>
+#include "Filters.h"
+#include "Conveyor.h"
+#include "Node.h"
+#include "NodeType.h"
 
 int main(){
-    std::cout << "Hello world";
+    Filters facade;
+    Conveyor conveyor1;
+    Node node1(NodeType::BlurNode);
+    return 0;
 }
