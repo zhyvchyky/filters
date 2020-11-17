@@ -5,10 +5,30 @@
 #ifndef FILTERS_IMAGE_H
 #define FILTERS_IMAGE_H
 
+#include <optional>
 
-class Image {
+class Pixel {
+public:
+    int red;
+    int green;
+    int blue;
 
+    Pixel();
+
+    Pixel(int red, int green, int blue);
+
+    void setColors(int red, int green, int blue);
 };
 
+class Image {
+private:
+    int height;
+    int width;
+    Pixel *matrix;
+public:
+    Image(int height, int width, int maxColorNumber, Pixel *matrix);
+
+    std::optional<Pixel> getPixel(int row, int col);
+};
 
 #endif //FILTERS_IMAGE_H

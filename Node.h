@@ -8,7 +8,7 @@
 #include <memory>
 #include <vector>
 #include "NodeType.h"
-#include "IProcessor.h"
+#include "processors/IProcessor.h"
 #include "Image.h"
 
 class Node {
