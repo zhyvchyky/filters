@@ -4,8 +4,13 @@
 //
 
 #include <iostream>
+#include "Filters.h"
+#include "Conveyor.h"
+#include "Node.h"
+#include "NodeType.h"
 #include <optional>
 #include "processors/ImageSourceProcessor.h"
+
 int main(){
     ImageSourceProcessor inputProcessor = ImageSourceProcessor();
     Image image = inputProcessor.getImageFromFile("image.ppm").value();
