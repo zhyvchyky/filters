@@ -29,6 +29,7 @@ public:
     Image(int height, int width, int maxColorNumber, Pixel *matrix);
 
     std::optional<Pixel> getPixel(int row, int col);
+    void setPixel(int row, int col, int red, int green, int blue);
 };
 
 #endif //FILTERS_IMAGE_H

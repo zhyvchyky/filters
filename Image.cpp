@@ -16,6 +16,12 @@ std::optional<Pixel> Image::getPixel(int row, int col) {
     return this->matrix[row * width + col];
 }
 
+void Image::setPixel(int row, int col, int red, int green, int blue) {
+    if(row < height && col < width){
+        this->matrix[row * width + col].setColors(red, green, blue);
+    }
+}
+
 Pixel::Pixel(int red, int green, int blue) {
     this->red = red;
     this->green = green;
