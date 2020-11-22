@@ -18,6 +18,8 @@ public:
     Pixel(int red, int green, int blue);
 
     void setColors(int red, int green, int blue);
+    Pixel operator + (const Pixel& pixel1) const;
+    Pixel operator * (double num) const;
 };
 
 class Image {
@@ -30,6 +32,8 @@ public:
 
     std::optional<Pixel> getPixel(int row, int col);
     void setPixel(int row, int col, int red, int green, int blue);
+    int getHeight() const;
+    int getWidth() const;
 };
 
 #endif //FILTERS_IMAGE_H
