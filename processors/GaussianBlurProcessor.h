@@ -4,10 +4,25 @@
 
 #ifndef FILTERS_GAUSSIANBLURPROCESSOR_H
 #define FILTERS_GAUSSIANBLURPROCESSOR_H
+#include "IProcessor.h"
+#include "Image.h"
+#include <vector>
+#include <bits/stdc++.h>
+#include <cmath>
 
+class GaussianBlurProcessor: IProcessor {
+private:
+    int N;
+    double scale = 0;
+    std::vector<double> oneDimTransform;
+public:
+    enum Mode {Horizontal, Vertical};
 
-class GaussianBlurProcessor {
+    explicit GaussianBlurProcessor(int N);
+    void process() override;
 
+    void applyTransform(Image img1);
+    Pixel calculatePixel(Image img1, int row, int col, GaussianBlurProcessor::Mode mode);
 };
 
 

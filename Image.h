@@ -6,6 +6,7 @@
 #define FILTERS_IMAGE_H
 
 #include <optional>
+#include <cmath>
 
 class Pixel {
 public:
@@ -30,7 +31,7 @@ private:
 public:
     Image(int height, int width, int maxColorNumber, Pixel *matrix);
 
-    std::optional<Pixel> getPixel(int row, int col);
+    Pixel getPixel(int row, int col);
     void setPixel(int row, int col, int red, int green, int blue);
     int getHeight() const;
     int getWidth() const;
