@@ -19,6 +19,8 @@ public:
 
     Pixel(int red, int green, int blue);
 
+    int getMaxPixel() const;
+    int getMinPixel() const;
     void setColors(int red, int green, int blue);
     Pixel operator + (const Pixel& pixel1) const;
     Pixel operator * (double num) const;

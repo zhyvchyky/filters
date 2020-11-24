@@ -68,3 +68,15 @@ std::ostream &operator<<(std::ostream &os, const Pixel &obj) {
     os << obj.red << ' ' << obj.green << ' ' << obj.blue;
     return os;
 }
+
+int Pixel::getMaxPixel() const {
+    if(this->blue >= this->green && this->blue >= this->red) return this->blue;
+    else if (this->red >= this->green && this->red >= this->blue) return this->red;
+    else return this->green;
+}
+
+int Pixel::getMinPixel() const {
+    if(this->blue <= this->green && this->blue <= this->red) return this->blue;
+    else if (this->red <= this->green && this->red <= this->blue) return this->red;
+    else return this->green;
+}

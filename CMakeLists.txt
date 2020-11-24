@@ -26,4 +26,6 @@ add_executable(filters
         Node.h
         NodeType.h
         processors/ImageOutputProcessor.cpp
-        processors/ImageOutputProcessor.h)
+        processors/ImageOutputProcessor.h
+        processors/BlackAndWhiteProcessor.cpp
+        processors/BlackAndWhiteProcessor.h)
