@@ -12,7 +12,7 @@ Image::Image(int height, int width, int maxColorNumber, Pixel *matrix) {
 
 Pixel Image::getPixel(int row, int col) {
     if (row >= height || col >= width)
-        return {};
+        return Pixel();
     return this->matrix[row * width + col];
 }
 

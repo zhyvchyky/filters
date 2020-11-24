@@ -30,23 +30,20 @@ void GaussianBlurProcessor::process() {     //розраховує gaussian kern
 void GaussianBlurProcessor::applyTransform(Image img1) {  //застосовуємо фільтр як композицію двох: по вісі х і по вісі у
     int width = img1.getWidth();
     int height = img1.getHeight();
-    auto *img_mat = new Pixel[width * height];  //матриця вихідних значень по вісі Ох
+    Image img2 = Image(height, width, 3, new Pixel[height * width]);
+
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             Pixel pixel = calculatePixel(img1, i, j, Mode::Horizontal);
-            img_mat[i * width + j].setColors(pixel.red, pixel.green, pixel.blue);
+            img2.setPixel(i, j, pixel.red, pixel.green, pixel.blue);
         }
     }
-    Image img2 = Image(height, width, 3, img_mat);  //відфільтрована картинка по вісі Ох
 
-    auto *img_mat1 = new Pixel[width * height];     //масив вихідних значень по вісі Оу
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             Pixel pixel = calculatePixel(img2, i, j, Mode::Vertical);
-            img_mat1[i * width + j].setColors(pixel.red, pixel.green, pixel.blue);
-            //std::cout << pixel.red << " " << pixel.green << " " << pixel.blue << " ";
+            img1.setPixel(i, j, pixel.red, pixel.green, pixel.blue);
         }
-        //std::cout << "\n";
     }
 }
 
