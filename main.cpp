@@ -10,13 +10,15 @@
 #include "NodeType.h"
 #include <optional>
 #include "processors/ImageSourceProcessor.h"
+#include "processors/ImageOutputProcessor.h"
 #include "processors/GaussianBlurProcessor.h"
 
 int main(){
     ImageSourceProcessor inputProcessor = ImageSourceProcessor();
-    Image image = inputProcessor.getImageFromFile("/home/linups/repos/filters1/filters/processors/112.ppm").value();
-    GaussianBlurProcessor blur = GaussianBlurProcessor(4);
-    blur.process();
-    blur.applyTransform(image);
+    Image image = inputProcessor.getImageFromFile("copy.ppm").value();
+    auto imagePtr = std::make_shared<Image>(image);
+    ImageOutputProcessor outputProcessor = ImageOutputProcessor();
+    outputProcessor.writeImageToFile(imagePtr, "copy2.ppm");
+
     return 0;
 }

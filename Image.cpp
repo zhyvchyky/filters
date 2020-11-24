@@ -63,3 +63,8 @@ Pixel Pixel::operator*(double num) const {
     temp.blue = ceil(double(this->blue) * num);
     return temp;
 }
+
+std::ostream &operator<<(std::ostream &os, const Pixel &obj) {
+    os << obj.red << ' ' << obj.green << ' ' << obj.blue;
+    return os;
+}
