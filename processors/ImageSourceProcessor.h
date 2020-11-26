@@ -14,7 +14,7 @@
 
 class ImageSourceProcessor:  IProcessor{
 public:
-    void process();
+    std::shared_ptr<Image> process(Config config) override;
 
 //private: temp comment
     std::optional<Image> getImageFromFile(const std::string& path);

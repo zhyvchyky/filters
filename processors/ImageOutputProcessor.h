@@ -12,7 +12,7 @@
 
 class ImageOutputProcessor : IProcessor {
 public:
-    void process() override;
+    std::shared_ptr<Image> process(Config config) override;
     void writeImageToFile(std::shared_ptr<Image> image);
     void writeImageToFile(std::shared_ptr<Image> image, const std::string &path);
 };

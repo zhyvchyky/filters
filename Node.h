@@ -10,18 +10,20 @@
 #include "NodeType.h"
 #include "processors/IProcessor.h"
 #include "Image.h"
+#include "Config.h"
 
 class Node {
-
-private:
-    std::vector<std::shared_ptr<Node>> inputs;
-    std::vector<std::shared_ptr<Node>> outputs;
+//temporary public should be private
+public:
     std::unique_ptr<IProcessor> processor;
     std::shared_ptr<Image> preview;
     NodeType nodeType;
     std::shared_ptr<Image> outputPointer;
+    Config config;
 public:
     Node(NodeType nodeType);
+    //temp default constructor
+    Node();
     ~Node();
     void process();
     void addInput(std::shared_ptr<Node>);

@@ -9,7 +9,7 @@ GaussianBlurProcessor::GaussianBlurProcessor(int N) {
     this->N = N;
 }
 
-void GaussianBlurProcessor::process() {     //розраховує gaussian kernel
+std::shared_ptr<Image> GaussianBlurProcessor::process(Config config) {     //розраховує gaussian kernel
     double weights[2*N+1];
     weights[N] = 1.;                //додамо до масиву вагу центрального елементу
     scale = 1.;                                 //також додамо значення центрального елементу

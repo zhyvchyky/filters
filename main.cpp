@@ -1,5 +1,3 @@
-//                mode = word[1] - '0'S;
-
 // Created by noxin on 10/27/20.
 //
 
@@ -13,12 +11,20 @@
 #include "processors/ImageOutputProcessor.h"
 #include "processors/GaussianBlurProcessor.h"
 
-int main(){
+int main() {
     ImageSourceProcessor inputProcessor = ImageSourceProcessor();
-    Image image = inputProcessor.getImageFromFile("copy.ppm").value();
-    auto imagePtr = std::make_shared<Image>(image);
     ImageOutputProcessor outputProcessor = ImageOutputProcessor();
-    outputProcessor.writeImageToFile(imagePtr, "copy2.ppm");
+
+    Config config1 = Config();
+    Config config2 = Config();
+
+    config1.fields.emplace_back("image.ppm");
+    config2.fields.emplace_back("copy3.ppm");
+
+    std::shared_ptr<Image> imagePtr = inputProcessor.process(config1);
+    config2.inputs.emplace_back(std::make_shared<Node>());
+    config2.inputs[0]->outputPointer = inputProcessor.process(config1);
+    outputProcessor.process(config2);
 
     return 0;
 }

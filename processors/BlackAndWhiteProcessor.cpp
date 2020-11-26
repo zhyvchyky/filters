@@ -9,7 +9,7 @@ BlackAndWhiteProcessor::BlackAndWhiteProcessor(int scale) {
     this->scale = scale;
 }
 
-void BlackAndWhiteProcessor::process() {
+std::shared_ptr<Image> BlackAndWhiteProcessor::process(Config config) {
 //    applyTransform(Image);
 }
 

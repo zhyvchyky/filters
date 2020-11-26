@@ -6,8 +6,8 @@
 #include "ImageSourceProcessor.h"
 
 
-void ImageSourceProcessor::process() {
-
+std::shared_ptr<Image> ImageSourceProcessor::process(Config config) {
+    return std::make_shared<Image>(getImageFromFile(std::get<std::string>(config.fields[0])).value());
 }
 
 std::optional<Image> ImageSourceProcessor::getImageFromFile(const std::string &path) {

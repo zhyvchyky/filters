@@ -19,7 +19,7 @@ public:
     enum Mode {Horizontal, Vertical};
 
     explicit GaussianBlurProcessor(int N);
-    void process() override;
+    std::shared_ptr<Image> process(Config config) override;
 
     void applyTransform(Image img1);
     Pixel calculatePixel(Image img1, int row, int col, GaussianBlurProcessor::Mode mode);
