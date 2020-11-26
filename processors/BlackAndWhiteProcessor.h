@@ -13,7 +13,7 @@ private:
     int scale;
 public:
     explicit BlackAndWhiteProcessor(int scale);
-    void process() override;
+    std::shared_ptr<Image> process(Config config) override;
     Image* applyTransform(Image *img);
 };
 

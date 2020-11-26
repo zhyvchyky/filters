@@ -40,3 +40,7 @@ Node::Node(NodeType nodeType) {
 Node::~Node() {
     std::cout << "Node object deleted" << std::endl;
 }
+
+Node::Node() {
+
+}

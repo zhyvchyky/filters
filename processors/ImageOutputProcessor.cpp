@@ -3,9 +3,11 @@
 //
 
 #include "ImageOutputProcessor.h"
+#include "Node.h"
 
-void ImageOutputProcessor::process() {
-
+std::shared_ptr<Image> ImageOutputProcessor::process(Config config) {
+    writeImageToFile(config.inputs[0]->outputPointer, std::get<std::string>(config.fields[0]));
+    return nullptr;
 }
 
 void ImageOutputProcessor::writeImageToFile(std::shared_ptr<Image> image, const std::string &path) {
@@ -25,5 +27,9 @@ void ImageOutputProcessor::writeImageToFile(std::shared_ptr<Image> image, const 
     }
     fileOutput << '\n';
     fileOutput.close();
+
+}
+
+void ImageOutputProcessor::writeImageToFile(std::shared_ptr<Image> image) {
 
 }
