@@ -14,7 +14,7 @@ std::shared_ptr<Image> GaussianBlurProcessor::process(Config config) {     //р�
 
 }
 
-double* GaussianBlurProcessor::calcWeights() const {       //розраховує gaussian kernel
+double* GaussianBlurProcessor::calcWeights() {       //розраховує gaussian kernel
     auto weights = new double[2*N+1];
     weights[N] = 1.;                //додамо до масиву вагу центрального елементу
     double scale = 1.;                                 //також додамо значення центрального елементу
@@ -32,7 +32,7 @@ double* GaussianBlurProcessor::calcWeights() const {       //розрахову�
     return weights;
 }
 
-void GaussianBlurProcessor::applyTransform(const std::shared_ptr<Image>& img1) const {  //застосовуємо фільтр як композицію двох: по вісі х і по вісі у
+std::shared_ptr<Image> GaussianBlurProcessor::applyTransform(const std::shared_ptr<Image>& img1) {  //застосовуємо фільтр як композицію двох: по вісі х і по вісі у
     int width = img1->getWidth();
     int height = img1->getHeight();
     double* weights = calcWeights();
@@ -51,5 +51,6 @@ void GaussianBlurProcessor::applyTransform(const std::shared_ptr<Image>& img1) c
             img1->setPixel(i, j, pixel.red, pixel.green, pixel.blue);
         }
     }
+    return img1;
 }
 

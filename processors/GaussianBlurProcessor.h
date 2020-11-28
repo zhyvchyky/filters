@@ -18,8 +18,8 @@ public:
     explicit GaussianBlurProcessor(int N);
     std::shared_ptr<Image> process(Config config) override;
 
-    void applyTransform(const std::shared_ptr<Image>& img1) const;
-    double* calcWeights() const;
+    std::shared_ptr<Image> applyTransform(const std::shared_ptr<Image>& img1);
+    double* calcWeights();
 };
 
 

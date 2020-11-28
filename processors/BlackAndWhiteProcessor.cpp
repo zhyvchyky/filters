@@ -13,12 +13,12 @@ std::shared_ptr<Image> BlackAndWhiteProcessor::process(Config config) {
 //    applyTransform(Image);
 }
 
-Image* BlackAndWhiteProcessor::applyTransform(Image *img) {
+std::shared_ptr<Image> BlackAndWhiteProcessor::applyTransform(const std::shared_ptr<Image>& img) {
 
     int width = img->getWidth();
     int height = img->getHeight();
 
-    Image new_img = Image(height, width, 3, new Pixel[height * width]);;
+    auto new_img = std::make_shared<Image>(height, width, 3, new Pixel[height * width]);
     int grey, max, min;
     Pixel current;
 
@@ -28,8 +28,8 @@ Image* BlackAndWhiteProcessor::applyTransform(Image *img) {
             max = current.getMaxPixel();
             min = current.getMinPixel();
             grey = round(min + (this->scale*(max - min)/100));
-            new_img.setPixel(i, j, grey, grey, grey);
+            new_img->setPixel(i, j, grey, grey, grey);
         }
     }
-    return &new_img;
+    return new_img;
 }
