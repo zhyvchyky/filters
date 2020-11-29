@@ -11,13 +11,18 @@
 #include "processors/ImageOutputProcessor.h"
 #include "processors/GaussianBlurProcessor.h"
 #include "processors/BlackAndWhiteProcessor.h"
+#include "processors/EdgeDetectionProcessor.h"
 
 int main() {
     ImageSourceProcessor input = ImageSourceProcessor();
     auto image = std::make_shared<Image>(input.getImageFromFile("/home/linups/repos/filters/112.ppm").value());
-    auto blur = GaussianBlurProcessor(25);
-    image = blur.applyTransform(image);
+
+    EdgeDetectionProcessor det = EdgeDetectionProcessor();
+    image = det.preProcess(image);
+    auto val = det.calcGradient(image);
+    auto img1 = std::get<0>(val);
+
     ImageOutputProcessor output = ImageOutputProcessor();
-    output.writeImageToFile(image, "/home/linups/repos/filters/new.ppm");
+    output.writeImageToFile(img1, "/home/linups/repos/filters/new.ppm");
     return 0;
 }
