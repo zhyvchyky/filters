@@ -13,16 +13,13 @@
 class GaussianBlurProcessor: IProcessor {
 private:
     int N;
-    double scale = 0;
-    std::vector<double> oneDimTransform;
 public:
-    enum Mode {Horizontal, Vertical};
 
     explicit GaussianBlurProcessor(int N);
     std::shared_ptr<Image> process(Config config) override;
 
-    void applyTransform(Image img1);
-    Pixel calculatePixel(Image img1, int row, int col, GaussianBlurProcessor::Mode mode);
+    std::shared_ptr<Image> applyTransform(const std::shared_ptr<Image>& img1);
+    double* calcWeights();
 };
 
 
