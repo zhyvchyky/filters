@@ -15,14 +15,11 @@
 
 int main() {
     ImageSourceProcessor input = ImageSourceProcessor();
-    auto image = std::make_shared<Image>(input.getImageFromFile("/home/linups/repos/filters/112.ppm").value());
+    auto image = std::make_shared<Image>(input.getImageFromFile("/home/linups/repos/filters/111.ppm").value());
 
     EdgeDetectionProcessor det = EdgeDetectionProcessor();
-    image = det.preProcess(image);
-    auto val = det.calcGradient(image);
-    auto img1 = std::get<0>(val);
-
+    image = det.applyTransform(image);
     ImageOutputProcessor output = ImageOutputProcessor();
-    output.writeImageToFile(img1, "/home/linups/repos/filters/new.ppm");
+    output.writeImageToFile(image, "/home/linups/repos/filters/1111.ppm");
     return 0;
 }

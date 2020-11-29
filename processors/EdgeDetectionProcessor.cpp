@@ -150,3 +150,47 @@ std::shared_ptr<Image> EdgeDetectionProcessor::nonMaxSupression(const std::share
     }
     return result;
 }
+
+std::shared_ptr<Image> EdgeDetectionProcessor::dThresholdEdgeDetector(const std::shared_ptr<Image>& supressedImg) {
+    int height = supressedImg->getHeight();
+    int width = supressedImg->getWidth();
+
+    int highThreshold = ceil(255. * 0.09);
+    int lowThreshold = ceil(highThreshold * 0.1);
+    auto result = std::make_shared<Image>(height, width, 3, new Pixel[height*width]);
+
+    int weak = 25;
+    int strong = 255;
+    for(int i = 0; i < height; i++){
+        for(int j = 0; j < width; j++){
+            int current = supressedImg->getPixel(i, j).red;
+            if(current >= highThreshold){
+                result->setPixel(i, j, strong, strong, strong);
+            }
+            else if((lowThreshold <= current) && (current < highThreshold)){
+                result->setPixel(i, j, weak, weak, weak);
+            }
+        }
+    }
+    for(int i = 0; i < height; i++){
+        for(int j = 0; j < width; j++){
+            if(result->getPixel(i, j).red == weak){
+                if((result->getPixel(i+1, j-1).red == strong) || (result->getPixel(i+1, j).red == strong) || (result->getPixel(i+1, j+1).red == strong) || (result->getPixel(i, j-1).red == strong) || (result->getPixel(i, j+1).red == strong) || (result->getPixel(i-1, j-1).red == strong) || (result->getPixel(i-1, j).red == strong) || (result->getPixel(i-1, j+1).red == strong)){
+                    result->setPixel(i, j, strong, strong, strong);
+                }
+                else{
+                    result->setPixel(i, j, 0, 0, 0);
+                }
+            }
+        }
+    }
+    return result;
+}
+
+std::shared_ptr<Image> EdgeDetectionProcessor::applyTransform(std::shared_ptr<Image> image) {
+    image = preProcess(image);
+    auto tuple = calcGradient(image);
+    image = nonMaxSupression(std::get<0>(tuple), std::get<1>(tuple));
+    image = dThresholdEdgeDetector(image);
+    return image;
+}
