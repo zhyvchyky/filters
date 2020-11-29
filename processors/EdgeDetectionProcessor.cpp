@@ -92,6 +92,11 @@ int* EdgeDetectionProcessor::calcAtan2(const std::shared_ptr<Image> &imgX, const
             double yVal = pixel2.red;
 
             double degreeVal = atan(yVal/xVal) * 180./pi;
+
+            if(degreeVal < 0){
+                degreeVal += 180;
+            }
+
             if((0 <= degreeVal && degreeVal < 22.5) || (157.5 <= degreeVal && degreeVal <= 180)){
                 result[i*width + j] = 0;
             }
@@ -103,6 +108,43 @@ int* EdgeDetectionProcessor::calcAtan2(const std::shared_ptr<Image> &imgX, const
             }
             else if(112.5 <= degreeVal && degreeVal < 157.5){
                 result[i*width + j] = 135;
+            }
+        }
+    }
+    return result;
+}
+
+std::shared_ptr<Image> EdgeDetectionProcessor::nonMaxSupression(const std::shared_ptr<Image>& gradient, const int *angle) {
+    int height = gradient->getHeight();
+    int width = gradient->getWidth();
+    auto result = std::make_shared<Image>(height, width, 3, new Pixel[height*width]);
+    for(int i = 0; i < height; i++){
+        for(int j = 0; j < width; j++){
+            int l = 255;
+            int r = 255;
+
+            if(angle[i*width+j] == 0){
+                l = gradient->getPixel(i,j-1).red;
+                r = gradient->getPixel(i,j+1).red;
+            }
+            else if(angle[i*width+j] == 45){
+                l = gradient->getPixel(i-1, j+1).red;
+                r = gradient->getPixel(i+1, j-1).red;
+            }
+            else if(angle[i*width+j] == 90){
+                l = gradient->getPixel(i-1,j).red;
+                r = gradient->getPixel(i+1,j).red;
+            }
+            else if(angle[i*width+j] == 135){
+                l = gradient->getPixel(i+1,j+1).red;
+                r = gradient->getPixel(i-1,j-1).red;
+            }
+            int current = gradient->getPixel(i, j).red;
+            if((current >= l) && (current >= r)){
+                result->setPixel(i, j, current, current, current);
+            }
+            else{
+                result->setPixel(i, j, 0, 0, 0);
             }
         }
     }
