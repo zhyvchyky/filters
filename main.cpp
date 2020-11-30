@@ -4,22 +4,14 @@
 #include <iostream>
 #include "Filters.h"
 #include "Conveyor.h"
-#include "Node.h"
-#include "NodeType.h"
-#include <optional>
-#include "processors/ImageSourceProcessor.h"
-#include "processors/ImageOutputProcessor.h"
-#include "processors/GaussianBlurProcessor.h"
-#include "processors/BlackAndWhiteProcessor.h"
-#include "processors/EdgeDetectionProcessor.h"
+
+#include "nodes/NodeInput.h"
 
 int main() {
-    ImageSourceProcessor input = ImageSourceProcessor();
-    auto image = std::make_shared<Image>(input.getImageFromFile("/home/linups/repos/filters/111.ppm").value());
+    NodeInput nodeInput = NodeInput();
 
-    EdgeDetectionProcessor det = EdgeDetectionProcessor();
-    image = det.applyTransform(image);
-    ImageOutputProcessor output = ImageOutputProcessor();
-    output.writeImageToFile(image, "/home/linups/repos/filters/1111.ppm");
+    nodeInput.setFields({});
+    nodeInput.process();
+
     return 0;
 }
