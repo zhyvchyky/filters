@@ -10,7 +10,10 @@ void NodeInput::process() {
 
 //TODO
 void NodeInput::setOutput(int index, std::shared_ptr<INode> node) {
-    //this->outputs
+    if(this->outputs.size() <= index)
+        this->outputs.push_back(node);
+    else
+        this->outputs[index] = node;
 }
 
 void NodeInput::setInput(int index, std::shared_ptr<INode> node) {
@@ -82,4 +85,8 @@ std::tuple<int, int, int, int> NodeInput::getHeader(std::ifstream &input) {
 
 std::vector<std::variant<int, std::string>> NodeInput::getFields() {
     return std::vector<std::variant<int, std::string>>();
+}
+
+std::shared_ptr<Image> NodeInput::getOutputPtr() {
+    return this->outputPtr;
 }
