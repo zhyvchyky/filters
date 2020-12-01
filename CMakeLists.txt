@@ -36,4 +36,4 @@ add_executable(filters
         nodes/NodeInput.cpp
         nodes/NodeInput.h
         nodes/INode.h
-        )
+        nodes/NodeOutput.cpp nodes/NodeOutput.h)
