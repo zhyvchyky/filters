@@ -24,6 +24,7 @@ public:
     void setColors(int red, int green, int blue);
     Pixel operator + (const Pixel& pixel1) const;
     Pixel operator * (double num) const;
+    Pixel operator + (double num) const;
     friend std::ostream& operator << (std::ostream& os, const Pixel& obj);
 };
 

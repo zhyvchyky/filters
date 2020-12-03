@@ -17,7 +17,8 @@ public:
     GaussianNoiseProcessor(int brightness, int noise);
 
     std::shared_ptr<Image> process(Config config) override;
-    double* genNormDist(std::shared_ptr<Image> img1);
+    double* genNormDist(const std::shared_ptr<Image>& img1);
+    std::shared_ptr<Image> applyTransform(std::shared_ptr<Image> img1);
 };
 
 
