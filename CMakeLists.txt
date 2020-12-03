@@ -28,4 +28,4 @@ add_executable(filters
         processors/ImageOutputProcessor.cpp
         processors/ImageOutputProcessor.h
         processors/BlackAndWhiteProcessor.cpp
-        processors/BlackAndWhiteProcessor.h utilities/applyVectorTransform.h utilities/applyVectorTransform.cpp processors/EdgeDetectionProcessor.cpp processors/EdgeDetectionProcessor.h)
+        processors/BlackAndWhiteProcessor.h utilities/applyVectorTransform.h utilities/applyVectorTransform.cpp processors/EdgeDetectionProcessor.cpp processors/EdgeDetectionProcessor.h processors/GaussianNoiseProcessor.cpp processors/GaussianNoiseProcessor.h)
