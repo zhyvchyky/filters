@@ -14,14 +14,19 @@
 #include "processors/EdgeDetectionProcessor.h"
 #include "processors/GaussianNoiseProcessor.h"
 #include "processors/NegativeProcessor.h"
+#include "processors/CombineProcessor.h"
 
 int main() {
     ImageSourceProcessor input = ImageSourceProcessor();
     ImageOutputProcessor output = ImageOutputProcessor();
-    auto image = std::make_shared<Image>(input.getImageFromFile("/home/linups/repos/filters/112.ppm").value());
+    auto image = std::make_shared<Image>(input.getImageFromFile("/home/linups/repos/filters/anon.ppm").value());
 
-    NegativeProcessor neg = NegativeProcessor();
-    image = neg.applyTransform(image);
-    output.writeImageToFile(image, "/home/linups/repos/filters/newimg.ppm");
+    EdgeDetectionProcessor det = EdgeDetectionProcessor();
+    auto blur = GaussianBlurProcessor(8);
+    CombineProcessor comb = CombineProcessor();
+    auto image1 = blur.applyTransform(image);
+    auto image2 = det.applyTransform(image);
+    auto img3 = comb.combine(image1, image2);
+    output.writeImageToFile(img3, "/home/linups/repos/filters/newimg2.ppm");
     return 0;
 }
