@@ -4,6 +4,8 @@
 
 #include "NodeOutput.h"
 
+#include <utility>
+
 void NodeOutput::process() {
     writeImageToFile(this->inputs[0]->getOutputPtr(), this->filePath);
 }
@@ -19,16 +21,6 @@ void NodeOutput::setInput(int index, std::shared_ptr<INode> node) {
         this->inputs.push_back(node);
     else
         this->inputs[index] = node;
-}
-
-std::vector<std::variant<int, std::string>> NodeOutput::getFields() {
-    return std::vector<std::variant<int, std::string>>();
-}
-
-void NodeOutput::setFields(std::vector<std::variant<int, std::string>> fields) {
-    assert(!fields.empty() && "Vector should hold 1 field");
-    assert(fields[0].index() == 1 && "Field should be string");
-    this->filePath = std::get<std::string>(fields[0]);
 }
 
 void NodeOutput::writeImageToFile(std::shared_ptr<Image> image, const std::string path) {
@@ -52,4 +44,12 @@ void NodeOutput::writeImageToFile(std::shared_ptr<Image> image, const std::strin
 
 std::shared_ptr<Image> NodeOutput::getOutputPtr() {
     return this->outputPtr;
+}
+
+void NodeOutput::setFilePath(std::string filepath) {
+    this->filePath = std::move(filepath);
+}
+
+std::string  NodeOutput::getFilePath() {
+    return this->filePath;
 }

@@ -4,6 +4,8 @@
 
 #include "NodeInput.h"
 
+#include <utility>
+
 void NodeInput::process() {
     this->outputPtr = getImageFromFile(filePath);
 }
@@ -18,13 +20,6 @@ void NodeInput::setOutput(int index, std::shared_ptr<INode> node) {
 
 void NodeInput::setInput(int index, std::shared_ptr<INode> node) {
     throw std::invalid_argument("Impossible to set inputs for this Node");
-}
-
-//TODO remove magical value 1
-void NodeInput::setFields(std::vector<std::variant<int, std::string>> fields) {
-    assert(!fields.empty() && "Vector should hold 1 field");
-    assert(fields[0].index() == 1 && "Field should be string");
-    this->filePath = std::get<std::string>(fields[0]);
 }
 
 std::shared_ptr<Image> NodeInput::getImageFromFile(const std::string &path) {
@@ -83,10 +78,14 @@ std::tuple<int, int, int, int> NodeInput::getHeader(std::ifstream &input) {
     }
 }
 
-std::vector<std::variant<int, std::string>> NodeInput::getFields() {
-    return std::vector<std::variant<int, std::string>>();
-}
-
 std::shared_ptr<Image> NodeInput::getOutputPtr() {
     return this->outputPtr;
+}
+
+void NodeInput::setFilePath(std::string filepath) {
+    this->filePath = std::move(filepath);
+}
+
+std::string NodeInput::getFilePath() {
+    return this->filePath;
 }

@@ -26,11 +26,11 @@ public:
 
     void setInput(int index, std::shared_ptr<INode>) override;
 
-    std::vector<std::variant<int, std::string>> getFields() override;
-
-    void setFields(std::vector<std::variant<int, std::string>>) override;
-
     std::shared_ptr<Image> getOutputPtr() override;
+
+    void setFilePath(std::string filepath);
+
+    std::string getFilePath();
 };
 
 

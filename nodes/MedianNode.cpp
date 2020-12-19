@@ -64,18 +64,8 @@ void MedianNode::setInput(int index, std::shared_ptr<INode> node) {
         this->inputs[index] = node;
 }
 
-void MedianNode::setFields(std::vector<std::variant<int, std::string>> value) {
-    assert(!value.empty() && "Vector should hold 1 field");
-    assert(value[0].index() == 0 && "Field should be integer");
-    this->N = std::get<int>(value[0]);
-}
-
 std::shared_ptr<Image> MedianNode::getOutputPtr() {
     return this->outputPtr;
-}
-
-std::vector<std::variant<int, std::string>> MedianNode::getFields() {
-    return std::vector<std::variant<int, std::string>>(this->N);
 }
 
 int MedianNode::getPositionMedian(std::vector<double> vec){
@@ -88,4 +78,12 @@ int MedianNode::getPositionMedian(std::vector<double> vec){
     std::nth_element(indices.begin(), indices.begin() + mid, indices.end(), [&](int lhs, int rhs){return vec[lhs] < vec[rhs];});
 
     return indices[mid];
+}
+
+void MedianNode::setMedian(int mdn) {
+    this->N = mdn;
+}
+
+int MedianNode::getMedian() const {
+    return this->N;
 }

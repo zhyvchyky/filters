@@ -51,18 +51,16 @@ void ColorGeneratorNode::setInput(int index, std::shared_ptr<INode> node) {
         this->inputs[index] = node;
 }
 
-void ColorGeneratorNode::setFields(std::vector<std::variant<int, std::string>> value) {
-    assert(value.size()==3 && "Vector should hold 3 fields");
-    assert(value[0].index() == 0 && value[1].index() == 0 && value[2].index() == 0 && "Fields should be integer");
-    this->r = std::get<int>(value[0]);
-    this->g = std::get<int>(value[1]);
-    this->b = std::get<int>(value[2]);
-}
-
 std::shared_ptr<Image> ColorGeneratorNode::getOutputPtr() {
     return this->outputPtr;
 }
 
-std::vector<std::variant<int, std::string>> ColorGeneratorNode::getFields() {
-    return std::vector<std::variant<int, std::string>>({this->r, this->g, this->b});
+void ColorGeneratorNode::setColorValues(int red, int green, int blue) {
+    this->r = red;
+    this->g = green;
+    this->b = blue;
+}
+
+std::tuple<int, int, int> ColorGeneratorNode::getColorValues() {
+    return std::make_tuple(this->r, this->g, this->b);
 }

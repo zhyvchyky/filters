@@ -44,16 +44,14 @@ void BlackAndWhiteNode::setInput(int index, std::shared_ptr<INode> node) {
         this->inputs[index] = node;
 }
 
-void BlackAndWhiteNode::setFields(std::vector<std::variant<int, std::string>> value) {
-    assert(!value.empty() && "Vector should hold 1 field");
-    assert(value[0].index() == 0 && "Field should be integer");
-    this->power = std::get<int>(value[0]);
-}
-
 std::shared_ptr<Image> BlackAndWhiteNode::getOutputPtr() {
     return this->outputPtr;
 }
 
-std::vector<std::variant<int, std::string>> BlackAndWhiteNode::getFields() {
-    return std::vector<std::variant<int, std::string>>(this->power);
+void BlackAndWhiteNode::setPower(int pwr) {
+    this->power = pwr;
+}
+
+int BlackAndWhiteNode::getPower() {
+    return this->power;
 }

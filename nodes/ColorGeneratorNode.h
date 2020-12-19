@@ -25,11 +25,11 @@ public:
 
     void setInput(int index, std::shared_ptr<INode>) override;
 
-    void setFields(std::vector<std::variant<int, std::string>>) override;
+    void setColorValues(int red, int green, int blue);
 
     std::shared_ptr<Image> getOutputPtr() override;
 
-    std::vector<std::variant<int, std::string>> getFields() override;
+    std::tuple<int, int, int> getColorValues();
 };
 
 

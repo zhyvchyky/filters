@@ -27,11 +27,11 @@ public:
 
     void setInput(int index, std::shared_ptr<INode>) override;
 
-    void setFields(std::vector<std::variant<int, std::string>>) override;
+    void setMedian(int mdn);
 
     std::shared_ptr<Image> getOutputPtr() override;
 
-    std::vector<std::variant<int, std::string>> getFields() override;
+    int getMedian() const;
 };
 
 

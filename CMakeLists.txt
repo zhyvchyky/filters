@@ -22,8 +22,6 @@ add_executable(filters
         Image.cpp
         Image.h
         main.cpp
-        Node.cpp
-        Node.h
         NodeType.h
         processors/ImageOutputProcessor.cpp
         processors/ImageOutputProcessor.h
@@ -36,4 +34,13 @@ add_executable(filters
         nodes/NodeInput.cpp
         nodes/NodeInput.h
         nodes/INode.h
-        nodes/NodeOutput.cpp nodes/NodeOutput.h)
+        nodes/NodeOutput.cpp
+        nodes/NodeOutput.h
+        nodes/GaussianBlurNode.cpp
+        nodes/GaussianBlurNode.h
+        nodes/BlackAndWhiteNode.h
+        nodes/BlackAndWhiteNode.cpp
+        nodes/ColorGeneratorNode.h
+        nodes/ColorGeneratorNode.cpp
+        nodes/MedianNode.h
+        nodes/MedianNode.cpp)

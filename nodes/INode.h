@@ -18,10 +18,6 @@ public:
 
     virtual void setInput(int index, std::shared_ptr<INode>) = 0;
 
-    virtual std::vector<std::variant<int, std::string>> getFields() = 0;
-
-    virtual void setFields(std::vector<std::variant<int, std::string>>) = 0;
-
     virtual std::shared_ptr<Image> getOutputPtr() = 0;
 };
 
