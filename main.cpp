@@ -7,15 +7,20 @@
 
 #include "nodes/NodeInput.h"
 #include "nodes/NodeOutput.h"
+#include "nodes/EdgeDetectionNode.h"
 
 int main() {
     auto nodeInput = std::make_shared<NodeInput>();
     auto nodeOutput = std::make_shared<NodeOutput>();
+    auto nodeDet = std::make_shared<EdgeDetectionNode>();
 
-    nodeInput->setFields({"image.ppm"});
-    nodeOutput->setInput(0, nodeInput);
-    nodeOutput->setFields({"copy228.ppm"});
+
+    nodeInput->setFilePath({"/home/linups/repos/project_updated/filters/anon.ppm"});
+    nodeDet->setInput(0, nodeInput);
+    nodeOutput->setInput(0, nodeDet);
+    nodeOutput->setFilePath({"/home/linups/repos/project_updated/filters/anon1.ppm"});
     nodeInput->process();
+    nodeDet->process();
     nodeOutput->process();
     return 0;
 }

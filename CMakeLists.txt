@@ -36,4 +36,4 @@ add_executable(filters
         nodes/CombineNode.h
         nodes/CombineNode.cpp
         nodes/GaussianNoiseNode.h
-        nodes/GaussianNoiseNode.cpp)
+        nodes/GaussianNoiseNode.cpp nodes/EdgeDetectionNode.cpp nodes/EdgeDetectionNode.h nodes/NegativeNode.cpp nodes/NegativeNode.h)
