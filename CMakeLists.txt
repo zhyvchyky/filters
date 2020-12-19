@@ -7,11 +7,6 @@ include_directories(.)
 #include_directories(processors)
 
 add_executable(filters
-        processors/GaussianBlurProcessor.cpp
-        processors/GaussianBlurProcessor.h
-        processors/ImageSourceProcessor.cpp
-        processors/ImageSourceProcessor.h
-        processors/IProcessor.h
         CMakeLists.txt
         Conveyor.cpp
         Conveyor.h
@@ -23,14 +18,8 @@ add_executable(filters
         Image.h
         main.cpp
         NodeType.h
-        processors/ImageOutputProcessor.cpp
-        processors/ImageOutputProcessor.h
-        processors/BlackAndWhiteProcessor.cpp
-        processors/BlackAndWhiteProcessor.h
         utilities/applyVectorTransform.h
         utilities/applyVectorTransform.cpp
-        processors/EdgeDetectionProcessor.cpp
-        processors/EdgeDetectionProcessor.h
         nodes/NodeInput.cpp
         nodes/NodeInput.h
         nodes/INode.h

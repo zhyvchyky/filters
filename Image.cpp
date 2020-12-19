@@ -64,6 +64,14 @@ Pixel Pixel::operator*(double num) const {
     return temp;
 }
 
+Pixel Pixel::operator+(double num) const {
+    Pixel result;
+    result.red = ceil(double(this->red) + num);
+    result.green = ceil(double(this->green) + num);
+    result.blue = ceil(double(this->blue) + num);
+    return result;
+}
+
 std::ostream &operator<<(std::ostream &os, const Pixel &obj) {
     os << obj.red << ' ' << obj.green << ' ' << obj.blue;
     return os;

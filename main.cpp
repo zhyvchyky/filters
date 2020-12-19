@@ -17,8 +17,5 @@ int main() {
     nodeOutput->setFields({"copy228.ppm"});
     nodeInput->process();
     nodeOutput->process();
-
-
-
     return 0;
 }
