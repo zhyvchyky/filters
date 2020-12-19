@@ -32,4 +32,8 @@ add_executable(filters
         nodes/ColorGeneratorNode.h
         nodes/ColorGeneratorNode.cpp
         nodes/MedianNode.h
-        nodes/MedianNode.cpp)
+        nodes/MedianNode.cpp
+        nodes/CombineNode.h
+        nodes/CombineNode.cpp
+        nodes/GaussianNoiseNode.h
+        nodes/GaussianNoiseNode.cpp)

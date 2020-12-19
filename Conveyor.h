@@ -8,14 +8,12 @@
 #include <map>
 #include <memory>
 #include <vector>
-
-#include "Node.h"
 #include "Image.h"
 #include "NodeType.h"
 
 class Conveyor {
 private:
-    std::map<int, std::shared_ptr<Node>> nodes;
+//    std::map<int, std::shared_ptr<Node>> nodes;
     std::shared_ptr<Image> result;
     bool previewOn;
     int getNewId();
