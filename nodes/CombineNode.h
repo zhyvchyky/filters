@@ -13,7 +13,7 @@ private:
     std::vector<std::shared_ptr<INode>> outputs;
     std::shared_ptr<Image> outputPtr;
 
-    std::shared_ptr<Image> combine(const std::shared_ptr<Image>& img1, const std::shared_ptr<Image>& img2);
+    std::shared_ptr<Image> combine(std::shared_ptr<Image> img1,std::shared_ptr<Image> img2);
 
 public:
     void process() override;

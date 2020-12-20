@@ -14,16 +14,14 @@ std::shared_ptr<Image> BlackAndWhiteNode::applyTransform(const std::shared_ptr<I
     int width = img->getWidth();
     int height = img->getHeight();
 
-    std::shared_ptr<Image> new_img = std::make_shared<Image>(Image(height, width, 3, new Pixel[height * width]));
-    int grey, max, min;
+    auto new_img = std::make_shared<Image>(height, width, 3, new Pixel[height * width]);
+    int grey; // max, min;
     Pixel current;
 
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             current = img->getPixel(i, j);
-            max = current.getMaxPixel();
-            min = current.getMinPixel();
-            grey = round(min + (this->power*(max - min)/100));
+            grey = (current.red + current.green + current.blue) / 3;
             new_img->setPixel(i, j, grey, grey, grey);
         }
     }
@@ -46,12 +44,4 @@ void BlackAndWhiteNode::setInput(int index, std::shared_ptr<INode> node) {
 
 std::shared_ptr<Image> BlackAndWhiteNode::getOutputPtr() {
     return this->outputPtr;
-}
-
-void BlackAndWhiteNode::setPower(int pwr) {
-    this->power = pwr;
-}
-
-int BlackAndWhiteNode::getPower() {
-    return this->power;
 }

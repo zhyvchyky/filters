@@ -8,16 +8,17 @@ void CombineNode::process() {
     this->outputPtr = combine(this->inputs[0]->getOutputPtr(), this->inputs[1]->getOutputPtr());
 }
 
-std::shared_ptr<Image> CombineNode::combine(const std::shared_ptr<Image>& img1, const std::shared_ptr<Image>& img2) {
+std::shared_ptr<Image> CombineNode::combine(std::shared_ptr<Image> img1, std::shared_ptr<Image> img2) {
+    //TODO exception if dimensions mismatch
     int height = img1->getHeight();
     int width = img1->getWidth();
     std::shared_ptr<Image> result = std::make_shared<Image>(height, width, 3, new Pixel[height*width]);
+
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             Pixel pixel1 = img1->getPixel(i,j);
             Pixel pixel2 = img2->getPixel(i,j);
-            Pixel resulting_pix = (pixel1 + pixel2) * 0.5;
-            result->setPixel(i, j, resulting_pix.red, resulting_pix.green, resulting_pix.blue);
+            result->setPixel(i, j, (pixel1.red + pixel2.red) / 2, (pixel1.green + pixel2.green) / 2, (pixel1.blue + pixel2.blue) / 2);
         }
     }
     return result;

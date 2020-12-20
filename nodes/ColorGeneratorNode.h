@@ -11,13 +11,12 @@
 
 class ColorGeneratorNode: public INode {
 private:
-    int r,g,b;//R,G,B must fall between -255 and 255 degrees
+    int red,green,blue, height, width;//R,G,B must fall between -255 and 255 degrees
 
     std::vector<std::shared_ptr<INode>> inputs;
     std::vector<std::shared_ptr<INode>> outputs;
     std::shared_ptr<Image> outputPtr;
-    std::shared_ptr<Image> applyTransform(const std::shared_ptr<Image>&);
-    int addToColor(int, int);
+    std::shared_ptr<Image> genColor();
 public:
     void process() override;
 
@@ -25,11 +24,11 @@ public:
 
     void setInput(int index, std::shared_ptr<INode>) override;
 
-    void setColorValues(int red, int green, int blue);
+    void setColorValues(int colorRed, int colorGreen, int colorBlue, int h, int w);
 
     std::shared_ptr<Image> getOutputPtr() override;
 
-    std::tuple<int, int, int> getColorValues();
+    std::tuple<int, int, int, int ,int> getColorValues();
 };
 
 

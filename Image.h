@@ -23,8 +23,7 @@ public:
     int getMinPixel() const;
     void setColors(int red, int green, int blue);
     Pixel operator + (const Pixel& pixel1) const;
-    Pixel operator * (double num) const;
-    Pixel operator + (double num) const;
+    Pixel operator * (int num) const;
     friend std::ostream& operator << (std::ostream& os, const Pixel& obj);
 };
 

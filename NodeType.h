@@ -8,11 +8,9 @@
 enum NodeType{
     InputNode,
     OutputNode,
-    CombineNode,
     BlurNode,
     MotionBlurNode,
     SharpeningNode,
-    BlackAndWhiteNode,
     ErosionNode
 };
 

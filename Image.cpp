@@ -50,26 +50,26 @@ void Pixel::setColors(int red, int green, int blue) {
 
 Pixel Pixel::operator+(const Pixel &pixel1) const {
     Pixel temp;
-    temp.red = this->red + pixel1.red;
-    temp.green = this->green + pixel1.green;
-    temp.blue = this->blue + pixel1.blue;
+    int colorRed = this->red + pixel1.red;;
+    int colorGreen = this->green + pixel1.green;
+    int colorBlue = this->blue + pixel1.blue;
+
+    temp.red = colorRed > 255 ? colorRed % 255 : colorRed;
+    temp.green = colorGreen > 255 ? colorGreen % 255 : colorGreen;
+    temp.blue = colorBlue > 255 ? colorBlue % 255 : colorBlue;
     return temp;
 }
 
-Pixel Pixel::operator*(double num) const {
+Pixel Pixel::operator*(int num) const {
     Pixel temp;
-    temp.red = ceil(double(this->red) * num);
-    temp.green = ceil(double(this->green) * num);
-    temp.blue = ceil(double(this->blue) * num);
-    return temp;
-}
+    int colorRed = this->red * num;
+    int colorGreen = this->green * num;
+    int colorBlue = this->blue * num;
 
-Pixel Pixel::operator+(double num) const {
-    Pixel result;
-    result.red = ceil(double(this->red) + num);
-    result.green = ceil(double(this->green) + num);
-    result.blue = ceil(double(this->blue) + num);
-    return result;
+    temp.red = colorRed > 255 ? colorRed - 255 : colorRed;
+    temp.green = colorGreen > 255 ? colorGreen - 255 : colorGreen;
+    temp.blue = colorBlue > 255 ? colorBlue - 255 : colorBlue;
+    return temp;
 }
 
 std::ostream &operator<<(std::ostream &os, const Pixel &obj) {

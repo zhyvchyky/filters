@@ -5,36 +5,20 @@
 #include "ColorGeneratorNode.h"
 
 void ColorGeneratorNode::process() {
-    this->outputPtr = applyTransform(this->inputs[0]->getOutputPtr());
+    this->outputPtr = genColor();
 }
 
-std::shared_ptr<Image> ColorGeneratorNode::applyTransform(const std::shared_ptr<Image>& img) {
+std::shared_ptr<Image> ColorGeneratorNode::genColor() {
+    auto new_img = std::make_shared<Image>(height, width, 3, new Pixel[height * width]);
 
-    int width = img->getWidth();
-    int height = img->getHeight();
-
-    std::shared_ptr<Image> new_img = std::make_shared<Image>(Image(height, width, 3, new Pixel[height * width]));
-
-    Pixel current;
+    Pixel pixel1(this->red, this->green, this->blue);
 
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
-            current = img->getPixel(i, j);
-            current.red = addToColor(current.red, this->r);
-            current.green = addToColor(current.green, this->g);
-            current.blue = addToColor(current.blue, this->b);
-
-            new_img->setPixel(i, j, current.red, current.green, current.blue);
+            new_img->setPixel(i, j, pixel1.red, pixel1.green, pixel1.blue);
         }
     }
     return new_img;
-}
-
-int ColorGeneratorNode::addToColor(int p1, int p2){
-    p1 += p2;
-    if(p1 > 255) p1 = 255;
-    else if(p1 < 0) p1 = 0;
-    return p1;
 }
 
 void ColorGeneratorNode::setOutput(int index, std::shared_ptr<INode> node) {
@@ -55,12 +39,14 @@ std::shared_ptr<Image> ColorGeneratorNode::getOutputPtr() {
     return this->outputPtr;
 }
 
-void ColorGeneratorNode::setColorValues(int red, int green, int blue) {
-    this->r = red;
-    this->g = green;
-    this->b = blue;
+void ColorGeneratorNode::setColorValues(int colorRed, int colorGreen, int colorBlue, int h, int w) {
+    this->red = colorRed;
+    this->green = colorGreen;
+    this->blue = colorBlue;
+    this->height = h;
+    this->width = w;
 }
 
-std::tuple<int, int, int> ColorGeneratorNode::getColorValues() {
-    return std::make_tuple(this->r, this->g, this->b);
+std::tuple<int, int, int, int, int> ColorGeneratorNode::getColorValues() {
+    return std::make_tuple(this->red, this->green, this->blue, this->height, this->width);
 }

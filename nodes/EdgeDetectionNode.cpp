@@ -11,7 +11,6 @@ void EdgeDetectionNode::process() {
 std::shared_ptr<Image> EdgeDetectionNode::preProcess(std::shared_ptr<Image> img1) {
     auto nodeBW = std::make_shared<BlackAndWhiteNode>();
     auto nodeBlur = std::make_shared<GaussianBlurNode>();
-    nodeBW->setPower(50);
     nodeBlur->setRadius(2);
     nodeBW->setInput(0, this->inputs[0]);
     nodeBlur->setInput(0, nodeBW);

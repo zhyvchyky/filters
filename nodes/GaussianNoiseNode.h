@@ -8,14 +8,13 @@
 
 class GaussianNoiseNode: public INode {
 private:
-    int noise;
+    int noise, height, width;
 
     std::vector<std::shared_ptr<INode>> inputs;
     std::vector<std::shared_ptr<INode>> outputs;
     std::shared_ptr<Image> outputPtr;
 
-    double* genNormDist(const std::shared_ptr<Image>& img1);
-    std::shared_ptr<Image> applyTransform(std::shared_ptr<Image> img1);
+    std::shared_ptr<Image> genNormDist();
 
 public:
     void process() override;
@@ -24,11 +23,11 @@ public:
 
     void setInput(int index, std::shared_ptr<INode>) override;
 
-    void setNoise(int ns);
+    void setNoise(int ns, int h, int w);
 
     std::shared_ptr<Image> getOutputPtr() override;
 
-    int getNoise();
+    std::tuple<int,int,int> getNoise();
 };
 
 

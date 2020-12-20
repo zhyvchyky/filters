@@ -10,8 +10,6 @@
 
 class BlackAndWhiteNode: public INode {
 private:
-    int power;//power must fall between 0 and 100
-
     std::vector<std::shared_ptr<INode>> inputs;
     std::vector<std::shared_ptr<INode>> outputs;
     std::shared_ptr<Image> outputPtr;
@@ -23,10 +21,6 @@ public:
     void setOutput(int index, std::shared_ptr<INode>) override;
 
     void setInput(int index, std::shared_ptr<INode>) override;
-
-    void setPower(int pwr);
-
-    int getPower();
 
     std::shared_ptr<Image> getOutputPtr() override;
 };
