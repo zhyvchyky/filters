@@ -4,7 +4,6 @@ project(filters)
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories(.)
-#include_directories(processors)
 
 add_executable(filters
         CMakeLists.txt
