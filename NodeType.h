@@ -6,13 +6,16 @@
 #define FILTERS_NODETYPE_H
 
 enum NodeType{
-    InputNode,
-    OutputNode,
-    BlurNode,
-    MotionBlurNode,
-    SharpeningNode,
-    ErosionNode
+    Input,
+    Output,
+    GaussianBlur,
+    EdgeDetection,
+    Median,
+    ColorGenerator,
+    Negative,
+    GaussianNoise,
+    Combine,
+    BlackAndWhite
 };
-
 
 #endif //FILTERS_NODETYPE_H
