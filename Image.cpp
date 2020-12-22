@@ -22,6 +22,10 @@ void Image::setPixel(int row, int col, int red, int green, int blue) {
     }
 }
 
+Image::~Image() {
+    delete [] this->matrix;
+}
+
 int Image::getHeight() const {
     return this->height;
 }
