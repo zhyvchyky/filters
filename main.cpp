@@ -17,26 +17,21 @@
 #include "nodes/GaussianNoiseNode.h"
 #include "nodes/ColorGeneratorNode.h"
 
+#include "Conveyor.h"
+
 int main() {
-    auto nodeInput = std::make_shared<NodeInput>();
-    auto nodeInput1 = std::make_shared<NodeInput>();
-    auto nodeOutput = std::make_shared<NodeOutput>();
-    auto nodeDet = std::make_shared<CombineNode>();
-    auto nodeBW = std::make_shared<BlackAndWhiteNode>();
+    Conveyor conveyor;
+    std::shared_ptr<ANode> nodeIn = conveyor.createNode(NodeType::NodeInput);
+    std::shared_ptr<ANode> nodeBlackWhite = conveyor.createNode(NodeType::BlackAndWhiteNode);
 
-    nodeInput->setFilePath({"/home/linups/repos/proj/filters/cherniy.ppm"});
-    nodeInput1->setFilePath({"/home/linups/repos/proj/filters/anon.ppm"});
+    conveyor.createConnection(nodeIn, nodeBlackWhite, 0);
+    conveyor.createConnection(nodeBlackWhite, conveyor.getOutputNode(), 0);
 
-    nodeDet->setInput(0, nodeInput);
-    nodeDet->setInput(1, nodeInput1);
-    nodeBW->setInput(0, nodeDet);
-    nodeOutput->setInput(0, nodeBW);
-    nodeOutput->setFilePath({"/home/linups/repos/proj/filters/anon1.ppm"});
+    std::dynamic_pointer_cast<NodeInput>(nodeIn)->setFilePath("cherniy.ppm");
 
-    nodeInput->process();
-    nodeInput1->process();
-    nodeDet->process();
-    nodeBW->process();
-    nodeOutput->process();
+    std::dynamic_pointer_cast<NodeOutput>(conveyor.getOutputNode())->setFilePath("whitedCherniy.ppm");
+
+    conveyor.process();
+
     return 0;
 }

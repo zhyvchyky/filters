@@ -7,12 +7,7 @@
 #include "Conveyor.h"
 
 Conveyor::Conveyor() {
-    std::cout << "Conveyor object created" << std::endl;
     this->nodes.push_back(std::make_shared<NodeOutput>());
-}
-
-Conveyor::~Conveyor() {
-    std::cout << "Conveyor object deleted" << std::endl;
 }
 
 bool Conveyor::isCyclic() {
@@ -56,55 +51,55 @@ void Conveyor::process() {
     }
 }
 
-void Conveyor::putNode(std::shared_ptr<ANode> node) {
-    int id = getNewId();
+std::shared_ptr<ANode> Conveyor::putNode(std::shared_ptr<ANode> node) {
+    int id = this->idGenerator.getNewId();
     if(nodes.size() == id){
         nodes.push_back(node);
     }
     else{
         nodes[id] = node;
     }
+    return node;
 }
 
-void Conveyor::createNode(NodeType nodeType) {
+std::shared_ptr<ANode> Conveyor::createNode(NodeType nodeType) {
     switch (nodeType) {
         case NodeType::NodeInput:
-            putNode(std::make_shared<NodeInput>());
+            return putNode(std::make_shared<NodeInput>());
         case NodeType::NegativeNode:
-            putNode(std::make_shared<NegativeNode>());
+            return putNode(std::make_shared<NegativeNode>());
         case NodeType::MedianNode:
-            putNode(std::make_shared<MedianNode>());
+            return putNode(std::make_shared<MedianNode>());
         case NodeType::GaussianNoiseNode:
-            putNode(std::make_shared<GaussianNoiseNode>());
+            return putNode(std::make_shared<GaussianNoiseNode>());
         case NodeType::GaussianBlurNode:
-            putNode(std::make_shared<GaussianBlurNode>());
+            return putNode(std::make_shared<GaussianBlurNode>());
         case NodeType::EdgeDetectionNode:
-            putNode(std::make_shared<EdgeDetectionNode>());
+            return putNode(std::make_shared<EdgeDetectionNode>());
         case NodeType::CombineNode:
-            putNode(std::make_shared<CombineNode>());
+            return putNode(std::make_shared<CombineNode>());
         case NodeType::ColorGeneratorNode:
-            putNode(std::make_shared<ColorGeneratorNode>());
+            return putNode(std::make_shared<ColorGeneratorNode>());
         case NodeType::BlackAndWhiteNode:
-            putNode(std::make_shared<BlackAndWhiteNode>());
+            return putNode(std::make_shared<BlackAndWhiteNode>());
     }
 }
 
-void Conveyor::createConnection(int inputNodeId, int outputNodeId, int inputIndex) {
-    this->nodes[outputNodeId]->setInput(inputIndex, this->nodes[inputNodeId]);
-    this->nodes[inputNodeId]->setOutput(inputIndex, this->nodes[outputNodeId]); //may del prev Output due to incorrect idx
+void Conveyor::createConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode, size_t inputIndex) {
+    outputNode->setInput(inputIndex, inputNode);
+    inputNode->setOutput(inputIndex, outputNode);
     if(isCyclic()){
         std::cout << "Graph contains cycle!" << std::endl; //TODO raise some error
+        deleteConnection(inputNode, outputNode);
     }
 }
 
-void Conveyor::deleteConnection(int inputNodeId, int outputNodeId) {
-    auto nodeIn = this->nodes[inputNodeId];
-    auto nodeOut = this->nodes[outputNodeId];
+void Conveyor::deleteConnection(std::shared_ptr<ANode> nodeIn, std::shared_ptr<ANode> nodeOut) {
     nodeIn->resetOutput(nodeOut);
     nodeOut->resetInput(nodeIn);
 }
 
-void Conveyor::deleteNode(int nodeId) {
+void Conveyor::deleteNode(size_t nodeId) {
     auto rmvNode = this->nodes[nodeId];
     auto inputs = rmvNode->getInputs();
     for(int i = 0; i < inputs.size(); i++){
@@ -112,5 +107,9 @@ void Conveyor::deleteNode(int nodeId) {
     }
     inputs.clear();
     this->nodes[nodeId] = nullptr;
-    //TODO add NodeId to IDGenerator vector
+    this->idGenerator.freeId(nodeId);
+}
+
+std::shared_ptr<ANode> Conveyor::getOutputNode() {
+    return this->nodes[0];
 }
