@@ -5,20 +5,25 @@
 #include "CombineNode.h"
 
 void CombineNode::process() {
-    this->outputPtr = combine(this->inputs[0]->getOutputPtr(), this->inputs[1]->getOutputPtr());
+    this->outputPtr = combine();
 }
 
-std::shared_ptr<Image> CombineNode::combine(std::shared_ptr<Image> img1, std::shared_ptr<Image> img2) {
+std::shared_ptr<Image> CombineNode::combine() {
     //TODO exception if dimensions mismatch
-    int height = img1->getHeight();
-    int width = img1->getWidth();
-    std::shared_ptr<Image> result = std::make_shared<Image>(height, width, 3, new Pixel[height*width]);
+    int height = this->inputs[0]->getOutputPtr()->getHeight();
+    int width = this->inputs[0]->getOutputPtr()->getWidth();
+    auto result = std::make_shared<Image>(height, width, 3, new Pixel[height*width]);
 
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
-            Pixel pixel1 = img1->getPixel(i,j);
-            Pixel pixel2 = img2->getPixel(i,j);
-            result->setPixel(i, j, (pixel1.red + pixel2.red) / 2, (pixel1.green + pixel2.green) / 2, (pixel1.blue + pixel2.blue) / 2);
+            int colorRed = 0, colorGreen = 0, colorBlue = 0;
+            for(int k = 0; k < this->inputs.size(); k++){
+                Pixel pixel = this->inputs[k]->getOutputPtr()->getPixel(i, j);
+                colorRed += pixel.red;
+                colorGreen += pixel.green;
+                colorBlue += pixel.blue;
+            }
+            result->setPixel(i, j, colorRed / this->inputs.size(), colorGreen / this->inputs.size(), colorBlue / this->inputs.size());
         }
     }
     return result;

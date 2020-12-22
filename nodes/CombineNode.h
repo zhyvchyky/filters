@@ -11,7 +11,7 @@ class CombineNode: public ANode {
 private:
 
 
-    std::shared_ptr<Image> combine(std::shared_ptr<Image> img1,std::shared_ptr<Image> img2);
+    std::shared_ptr<Image> combine();
 
 public:
     void process() override;
