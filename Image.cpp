@@ -30,6 +30,10 @@ int Image::getWidth() const{
     return this->width;
 }
 
+Image::~Image() {
+    delete [] this->matrix;
+}
+
 Pixel::Pixel(int red, int green, int blue) {
     this->red = red;
     this->green = green;
