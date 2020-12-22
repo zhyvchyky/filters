@@ -5,17 +5,17 @@
 #ifndef FILTERS_NODETYPE_H
 #define FILTERS_NODETYPE_H
 
-enum NodeType{
-    Input,
-    Output,
-    GaussianBlur,
-    EdgeDetection,
-    Median,
-    ColorGenerator,
-    Negative,
-    GaussianNoise,
-    Combine,
-    BlackAndWhite
+enum class NodeType{
+    NodeInput,
+    NodeOutput,
+    GaussianBlurNode,
+    EdgeDetectionNode,
+    MedianNode,
+    ColorGeneratorNode,
+    NegativeNode,
+    GaussianNoiseNode,
+    CombineNode,
+    BlackAndWhiteNode
 };
 
 #endif //FILTERS_NODETYPE_H

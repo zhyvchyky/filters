@@ -16,7 +16,7 @@ private:
 public:
     void process() override;
 
-    void setInput(int index, std::shared_ptr<ANode> node);
+    void setInput(int index, std::shared_ptr<ANode> node) override;
 };
 
 
