@@ -24,24 +24,10 @@ std::shared_ptr<Image> CombineNode::combine(std::shared_ptr<Image> img1, std::sh
     return result;
 }
 
-void CombineNode::setOutput(int index, std::shared_ptr<INode> node) {
-    if(this->outputs.size() <= index)
-        this->outputs.push_back(node);
-    else
-        this->outputs[index] = node;
-}
-
-void CombineNode::setInput(int index, std::shared_ptr<INode> node) {
+void CombineNode::setInput(int index, std::shared_ptr<ANode> node) {
     if(this->inputs.size() <= index)
         this->inputs.push_back(node);
     else
         this->inputs[index] = node;
 }
 
-std::shared_ptr<Image> CombineNode::getOutputPtr() {
-    return this->outputPtr;
-}
-
-std::vector<std::shared_ptr<INode>> CombineNode::getInputs() {
-    return this->inputs;
-}

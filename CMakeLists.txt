@@ -21,7 +21,7 @@ add_executable(filters
         utilities/applyVectorTransform.cpp
         nodes/NodeInput.cpp
         nodes/NodeInput.h
-        nodes/INode.h
+        nodes/ANode.h
         nodes/NodeOutput.cpp
         nodes/NodeOutput.h
         nodes/GaussianBlurNode.cpp

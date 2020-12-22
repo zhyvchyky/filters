@@ -27,25 +27,3 @@ std::shared_ptr<Image> BlackAndWhiteNode::applyTransform(const std::shared_ptr<I
     }
     return new_img;
 }
-
-void BlackAndWhiteNode::setOutput(int index, std::shared_ptr<INode> node) {
-    if(this->outputs.size() <= index)
-        this->outputs.push_back(node);
-    else
-        this->outputs[index] = node;
-}
-
-void BlackAndWhiteNode::setInput(int index, std::shared_ptr<INode> node) {
-    if(this->inputs.size() <= index)
-        this->inputs.push_back(node);
-    else
-        this->inputs[index] = node;
-}
-
-std::shared_ptr<Image> BlackAndWhiteNode::getOutputPtr() {
-    return this->outputPtr;
-}
-
-std::vector<std::shared_ptr<INode>> BlackAndWhiteNode::getInputs() {
-    return this->inputs;
-}

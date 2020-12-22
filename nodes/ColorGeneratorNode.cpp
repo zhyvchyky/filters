@@ -22,23 +22,6 @@ std::shared_ptr<Image> ColorGeneratorNode::genColor() {
     return new_img;
 }
 
-void ColorGeneratorNode::setOutput(int index, std::shared_ptr<INode> node) {
-    if(this->outputs.size() <= index)
-        this->outputs.push_back(node);
-    else
-        this->outputs[index] = node;
-}
-
-void ColorGeneratorNode::setInput(int index, std::shared_ptr<INode> node) {
-    if(this->inputs.size() <= index)
-        this->inputs.push_back(node);
-    else
-        this->inputs[index] = node;
-}
-
-std::shared_ptr<Image> ColorGeneratorNode::getOutputPtr() {
-    return this->outputPtr;
-}
 
 void ColorGeneratorNode::setColorValues(int colorRed, int colorGreen, int colorBlue, int h, int w) {
     this->red = colorRed;
@@ -50,8 +33,4 @@ void ColorGeneratorNode::setColorValues(int colorRed, int colorGreen, int colorB
 
 std::tuple<int, int, int, int, int> ColorGeneratorNode::getColorValues() {
     return std::make_tuple(this->red, this->green, this->blue, this->height, this->width);
-}
-
-std::vector<std::shared_ptr<INode>> ColorGeneratorNode::getInputs() {
-    return this->inputs;
 }

@@ -16,12 +16,12 @@ Conveyor::~Conveyor() {
 }
 
 bool Conveyor::isCyclic() {
-    std::set<std::shared_ptr<INode>> hashset;
+    std::set<std::shared_ptr<ANode>> hashset;
     return this->DFS(this->nodes[0], hashset);
 }
 
-bool Conveyor::DFS(std::shared_ptr<INode> node, std::set<std::shared_ptr<INode>> hashset) {
-    std::vector<std::shared_ptr<INode>> inputs = node->getInputs();
+bool Conveyor::DFS(std::shared_ptr<ANode> node, std::set<std::shared_ptr<ANode>> hashset) {
+    std::vector<std::shared_ptr<ANode>> inputs = node->getInputs();
     if(inputs.empty()) return false;
 
     for(auto & input : inputs){
@@ -37,9 +37,9 @@ bool Conveyor::DFS(std::shared_ptr<INode> node, std::set<std::shared_ptr<INode>>
 
 
 void Conveyor::process() {
-    std::stack<std::shared_ptr<INode>> stack;
+    std::stack<std::shared_ptr<ANode>> stack;
 
-    std::queue<std::shared_ptr<INode>> queue;
+    std::queue<std::shared_ptr<ANode>> queue;
     queue.push(this->nodes[0]);
 
     while(!queue.empty()){

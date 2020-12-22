@@ -13,16 +13,16 @@
 #include <queue>
 #include "Image.h"
 #include "NodeType.h"
-#include "nodes/INode.h"
+#include "nodes/ANode.h"
 
 class Conveyor {
 private:
-    std::map<int, std::shared_ptr<INode>> nodes;
+    std::map<int, std::shared_ptr<ANode>> nodes;
     std::shared_ptr<Image> result;
     bool previewOn;
     int getNewId();
     bool isCyclic();
-    bool DFS(std::shared_ptr<INode>, std::set<std::shared_ptr<INode>>);
+    bool DFS(std::shared_ptr<ANode>, std::set<std::shared_ptr<ANode>>);
 public:
     Conveyor();
     ~Conveyor();

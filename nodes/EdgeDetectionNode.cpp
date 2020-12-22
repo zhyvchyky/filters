@@ -197,25 +197,3 @@ std::shared_ptr<Image> EdgeDetectionNode::applyTransform(std::shared_ptr<Image> 
     image = dThresholdEdgeDetector(image);
     return image;
 }
-
-std::shared_ptr<Image> EdgeDetectionNode::getOutputPtr() {
-    return this->outputPtr;
-}
-
-void EdgeDetectionNode::setOutput(int index, std::shared_ptr<INode> node) {
-    if(this->outputs.size() <= index)
-        this->outputs.push_back(node);
-    else
-        this->outputs[index] = node;
-}
-
-void EdgeDetectionNode::setInput(int index, std::shared_ptr<INode> node) {
-    if(this->inputs.size() <= index)
-        this->inputs.push_back(node);
-    else
-        this->inputs[index] = node;
-}
-
-std::vector<std::shared_ptr<INode>> EdgeDetectionNode::getInputs() {
-    return this->inputs;
-}

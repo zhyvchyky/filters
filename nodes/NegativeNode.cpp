@@ -22,25 +22,3 @@ std::shared_ptr<Image> NegativeNode::applyTransform(std::shared_ptr<Image> img1)
     }
     return result;
 }
-
-void NegativeNode::setOutput(int index, std::shared_ptr<INode> node) {
-    if(this->outputs.size() <= index)
-        this->outputs.push_back(node);
-    else
-        this->outputs[index] = node;
-}
-
-void NegativeNode::setInput(int index, std::shared_ptr<INode> node) {
-    if(this->inputs.size() <= index)
-        this->inputs.push_back(node);
-    else
-        this->inputs[index] = node;
-}
-
-std::shared_ptr<Image> NegativeNode::getOutputPtr() {
-    return this->outputPtr;
-}
-
-std::vector<std::shared_ptr<INode>> NegativeNode::getInputs() {
-    return this->inputs;
-}

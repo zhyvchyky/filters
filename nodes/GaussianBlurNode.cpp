@@ -47,32 +47,10 @@ std::shared_ptr<Image> GaussianBlurNode::applyTransform(const std::shared_ptr<Im
     return img1;
 }
 
-void GaussianBlurNode::setOutput(int index, std::shared_ptr<INode> node) {
-    if(this->outputs.size() <= index)
-        this->outputs.push_back(node);
-    else
-        this->outputs[index] = node;
-}
-
-void GaussianBlurNode::setInput(int index, std::shared_ptr<INode> node) {
-    if(this->inputs.size() <= index)
-        this->inputs.push_back(node);
-    else
-        this->inputs[index] = node;
-}
-
 void GaussianBlurNode::setRadius(int radius) {
     this->N = radius;
 }
 
 int GaussianBlurNode::getRadius() const {
     return this->N;
-}
-
-std::shared_ptr<Image> GaussianBlurNode::getOutputPtr() {
-    return this->outputPtr;
-}
-
-std::vector<std::shared_ptr<INode>> GaussianBlurNode::getInputs() {
-    return this->inputs;
 }
