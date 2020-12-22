@@ -8,7 +8,7 @@
 
 Conveyor::Conveyor() {
     std::cout << "Conveyor object created" << std::endl;
-    //createNode(OutputNode);
+    this->nodes.push_back(std::make_shared<NodeOutput>());
 }
 
 Conveyor::~Conveyor() {
@@ -54,4 +54,63 @@ void Conveyor::process() {
         stack.top()->process();
         stack.pop();
     }
+}
+
+void Conveyor::putNode(std::shared_ptr<ANode> node) {
+    int id = getNewId();
+    if(nodes.size() == id){
+        nodes.push_back(node);
+    }
+    else{
+        nodes[id] = node;
+    }
+}
+
+void Conveyor::createNode(NodeType nodeType) {
+    switch (nodeType) {
+        case NodeType::NodeInput:
+            putNode(std::make_shared<NodeInput>());
+        case NodeType::NegativeNode:
+            putNode(std::make_shared<NegativeNode>());
+        case NodeType::MedianNode:
+            putNode(std::make_shared<MedianNode>());
+        case NodeType::GaussianNoiseNode:
+            putNode(std::make_shared<GaussianNoiseNode>());
+        case NodeType::GaussianBlurNode:
+            putNode(std::make_shared<GaussianBlurNode>());
+        case NodeType::EdgeDetectionNode:
+            putNode(std::make_shared<EdgeDetectionNode>());
+        case NodeType::CombineNode:
+            putNode(std::make_shared<CombineNode>());
+        case NodeType::ColorGeneratorNode:
+            putNode(std::make_shared<ColorGeneratorNode>());
+        case NodeType::BlackAndWhiteNode:
+            putNode(std::make_shared<BlackAndWhiteNode>());
+    }
+}
+
+void Conveyor::createConnection(int inputNodeId, int outputNodeId, int inputIndex) {
+    this->nodes[outputNodeId]->setInput(inputIndex, this->nodes[inputNodeId]);
+    this->nodes[inputNodeId]->setOutput(inputIndex, this->nodes[outputNodeId]); //may del prev Output due to incorrect idx
+    if(isCyclic()){
+        std::cout << "Graph contains cycle!" << std::endl; //TODO raise some error
+    }
+}
+
+void Conveyor::deleteConnection(int inputNodeId, int outputNodeId) {
+    auto nodeIn = this->nodes[inputNodeId];
+    auto nodeOut = this->nodes[outputNodeId];
+    nodeIn->resetOutput(nodeOut);
+    nodeOut->resetInput(nodeIn);
+}
+
+void Conveyor::deleteNode(int nodeId) {
+    auto rmvNode = this->nodes[nodeId];
+    auto inputs = rmvNode->getInputs();
+    for(int i = 0; i < inputs.size(); i++){
+        inputs[i]->resetOutput(rmvNode);
+    }
+    inputs.clear();
+    this->nodes[nodeId] = nullptr;
+    //TODO add NodeId to IDGenerator vector
 }

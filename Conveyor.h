@@ -17,12 +17,13 @@
 
 class Conveyor {
 private:
-    std::map<int, std::shared_ptr<ANode>> nodes;
+    std::vector<std::shared_ptr<ANode>> nodes;
     std::shared_ptr<Image> result;
     bool previewOn;
     int getNewId();
     bool isCyclic();
     bool DFS(std::shared_ptr<ANode>, std::set<std::shared_ptr<ANode>>);
+    void putNode(std::shared_ptr<ANode> node);
 public:
     Conveyor();
     ~Conveyor();
@@ -32,7 +33,7 @@ public:
     std::vector<int> getNodeIds();
     void process();
     void createConnection(int inputNodeId, int outputNodeId, int inputIndex);
-    void deleteConnection(int inputNodeId, int outputNodeId, int inputIndex);
+    void deleteConnection(int inputNodeId, int outputNodeId);
 };
 
 #endif
