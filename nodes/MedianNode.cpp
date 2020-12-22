@@ -14,7 +14,7 @@ std::shared_ptr<Image> MedianNode::applyTransform(const std::shared_ptr<Image> &
     int width = img->getWidth();
     int height = img->getHeight();
 
-    std::shared_ptr<Image> new_img = std::make_shared<Image>(Image(height, width, 3, new Pixel[height * width]));
+    auto new_img = std::make_shared<Image>(height, width, 3, new Pixel[height * width]);
     std::vector<double> g, b, r;
     int i,j,h,w;
 
@@ -50,24 +50,6 @@ std::shared_ptr<Image> MedianNode::applyTransform(const std::shared_ptr<Image> &
     return new_img;
 }
 
-void MedianNode::setOutput(int index, std::shared_ptr<INode> node) {
-    if(this->outputs.size() <= index)
-        this->outputs.push_back(node);
-    else
-        this->outputs[index] = node;
-}
-
-void MedianNode::setInput(int index, std::shared_ptr<INode> node) {
-    if(this->inputs.size() <= index)
-        this->inputs.push_back(node);
-    else
-        this->inputs[index] = node;
-}
-
-std::shared_ptr<Image> MedianNode::getOutputPtr() {
-    return this->outputPtr;
-}
-
 int MedianNode::getPositionMedian(std::vector<double> vec){
     auto const len = vec.size();
     auto const mid = (len-1)/2;
@@ -86,8 +68,4 @@ void MedianNode::setMedian(int mdn) {
 
 int MedianNode::getMedian() const {
     return this->N;
-}
-
-std::vector<std::shared_ptr<INode>> MedianNode::getInputs() {
-    return this->inputs;
 }

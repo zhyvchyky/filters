@@ -5,10 +5,10 @@
 #include "EdgeDetectionNode.h"
 
 void EdgeDetectionNode::process() {
-    this->outputPtr = applyTransform(this->inputs[0]->getOutputPtr());
+    this->outputPtr = applyTransform();
 }
 
-std::shared_ptr<Image> EdgeDetectionNode::preProcess(std::shared_ptr<Image> img1) {
+std::shared_ptr<Image> EdgeDetectionNode::preProcess() {
     auto nodeBW = std::make_shared<BlackAndWhiteNode>();
     auto nodeBlur = std::make_shared<GaussianBlurNode>();
     nodeBlur->setRadius(2);
@@ -190,32 +190,10 @@ std::shared_ptr<Image> EdgeDetectionNode::dThresholdEdgeDetector(const std::shar
     return result;
 }
 
-std::shared_ptr<Image> EdgeDetectionNode::applyTransform(std::shared_ptr<Image> image) {
-    image = preProcess(image);
-    auto tuple = calcGradient(image);
-    image = nonMaxSupression(std::get<0>(tuple), std::get<1>(tuple));
-    image = dThresholdEdgeDetector(image);
-    return image;
-}
-
-std::shared_ptr<Image> EdgeDetectionNode::getOutputPtr() {
-    return this->outputPtr;
-}
-
-void EdgeDetectionNode::setOutput(int index, std::shared_ptr<INode> node) {
-    if(this->outputs.size() <= index)
-        this->outputs.push_back(node);
-    else
-        this->outputs[index] = node;
-}
-
-void EdgeDetectionNode::setInput(int index, std::shared_ptr<INode> node) {
-    if(this->inputs.size() <= index)
-        this->inputs.push_back(node);
-    else
-        this->inputs[index] = node;
-}
-
-std::vector<std::shared_ptr<INode>> EdgeDetectionNode::getInputs() {
-    return this->inputs;
+std::shared_ptr<Image> EdgeDetectionNode::applyTransform() {
+    auto img1 = preProcess();
+    auto tuple = calcGradient(img1);
+    img1 = nonMaxSupression(std::get<0>(tuple), std::get<1>(tuple));
+    img1 = dThresholdEdgeDetector(img1);
+    return img1;
 }

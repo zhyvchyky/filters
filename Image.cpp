@@ -59,37 +59,25 @@ Pixel Pixel::operator+(const Pixel &pixel1) const {
     int colorGreen = this->green + pixel1.green;
     int colorBlue = this->blue + pixel1.blue;
 
-    temp.red = colorRed > 255 ? colorRed % 255 : colorRed;
-    temp.green = colorGreen > 255 ? colorGreen % 255 : colorGreen;
-    temp.blue = colorBlue > 255 ? colorBlue % 255 : colorBlue;
+    temp.red = colorRed;
+    temp.green = colorGreen;
+    temp.blue = colorBlue;
     return temp;
 }
 
-Pixel Pixel::operator*(int num) const {
+Pixel Pixel::operator*(double num) const {
     Pixel temp;
-    int colorRed = this->red * num;
-    int colorGreen = this->green * num;
-    int colorBlue = this->blue * num;
+    int colorRed = ceil(double(this->red) * num);
+    int colorGreen = ceil(double(this->green) * num);
+    int colorBlue = ceil(double(this->blue) * num);
 
-    temp.red = colorRed > 255 ? colorRed - 255 : colorRed;
-    temp.green = colorGreen > 255 ? colorGreen - 255 : colorGreen;
-    temp.blue = colorBlue > 255 ? colorBlue - 255 : colorBlue;
+    temp.red = colorRed;
+    temp.green = colorGreen;
+    temp.blue = colorBlue;
     return temp;
 }
 
 std::ostream &operator<<(std::ostream &os, const Pixel &obj) {
     os << obj.red << ' ' << obj.green << ' ' << obj.blue;
     return os;
-}
-
-int Pixel::getMaxPixel() const {
-    if(this->blue >= this->green && this->blue >= this->red) return this->blue;
-    else if (this->red >= this->green && this->red >= this->blue) return this->red;
-    else return this->green;
-}
-
-int Pixel::getMinPixel() const {
-    if(this->blue <= this->green && this->blue <= this->red) return this->blue;
-    else if (this->red <= this->green && this->red <= this->blue) return this->red;
-    else return this->green;
 }

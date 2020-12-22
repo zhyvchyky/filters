@@ -43,25 +43,3 @@ void GaussianNoiseNode::setNoise(int ns, int h, int w) {
 std::tuple<int,int,int> GaussianNoiseNode::getNoise() {
     return std::make_tuple(this->noise, this->height, this->width);
 }
-
-void GaussianNoiseNode::setOutput(int index, std::shared_ptr<INode> node) {
-    if(this->outputs.size() <= index)
-        this->outputs.push_back(node);
-    else
-        this->outputs[index] = node;
-}
-
-void GaussianNoiseNode::setInput(int index, std::shared_ptr<INode> node) {
-    if(this->inputs.size() <= index)
-        this->inputs.push_back(node);
-    else
-        this->inputs[index] = node;
-}
-
-std::shared_ptr<Image> GaussianNoiseNode::getOutputPtr() {
-    return this->outputPtr;
-}
-
-std::vector<std::shared_ptr<INode>> GaussianNoiseNode::getInputs() {
-    return this->inputs;
-}

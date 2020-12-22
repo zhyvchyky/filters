@@ -13,26 +13,27 @@
 #include <queue>
 #include "Image.h"
 #include "NodeType.h"
-#include "nodes/INode.h"
+#include "nodes/ANode.h"
+#include "utilities/IdGenerator.h"
 
 class Conveyor {
 private:
-    std::map<int, std::shared_ptr<INode>> nodes;
+    std::vector<std::shared_ptr<ANode>> nodes;
     std::shared_ptr<Image> result;
-    bool previewOn;
-    int getNewId();
+    IdGenerator idGenerator;
     bool isCyclic();
-    bool DFS(std::shared_ptr<INode>, std::set<std::shared_ptr<INode>>);
+    bool DFS(std::shared_ptr<ANode>, std::set<std::shared_ptr<ANode>>);
+    std::shared_ptr<ANode> putNode(std::shared_ptr<ANode> node);
 public:
     Conveyor();
-    ~Conveyor();
 
-    void createNode(NodeType nodeType);
-    void deleteNode(int nodeId);
-    std::vector<int> getNodeIds();
+    std::shared_ptr<ANode> createNode(NodeType nodeType);
+    std::shared_ptr<ANode> getOutputNode();
+    void deleteNode(size_t nodeId);
+    std::vector<size_t> getNodeIds();
     void process();
-    void createConnection(int inputNodeId, int outputNodeId, int inputIndex);
-    void deleteConnection(int inputNodeId, int outputNodeId, int inputIndex);
+    void createConnection(std::shared_ptr<ANode> inputNodeId, std::shared_ptr<ANode> outputNodeId, size_t inputIndex);
+    void deleteConnection(std::shared_ptr<ANode> inputNodeId, std::shared_ptr<ANode> outputNodeId);
 };
 
 #endif

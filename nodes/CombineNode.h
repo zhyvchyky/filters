@@ -4,27 +4,21 @@
 
 #ifndef FILTERS_COMBINENODE_H
 #define FILTERS_COMBINENODE_H
-#include "INode.h"
+#include "ANode.h"
 
 
-class CombineNode: public INode {
+class CombineNode: public ANode {
 private:
-    std::vector<std::shared_ptr<INode>> inputs;
-    std::vector<std::shared_ptr<INode>> outputs;
-    std::shared_ptr<Image> outputPtr;
 
-    std::shared_ptr<Image> combine(std::shared_ptr<Image> img1,std::shared_ptr<Image> img2);
+
+    std::shared_ptr<Image> combine();
 
 public:
     void process() override;
 
-    void setOutput(int index, std::shared_ptr<INode>) override;
+    void setInput(int index, std::shared_ptr<ANode> node) override;
 
-    void setInput(int index, std::shared_ptr<INode>) override;
-
-    std::vector<std::shared_ptr<INode>> getInputs() override;
-
-    std::shared_ptr<Image> getOutputPtr() override;
+    void resetInput(std::shared_ptr<ANode> node) override;
 };
 
 

@@ -11,18 +11,6 @@ void NodeInput::process() {
     this->outputPtr = getImageFromFile(filePath);
 }
 
-//TODO
-void NodeInput::setOutput(int index, std::shared_ptr<INode> node) {
-    if(this->outputs.size() <= index)
-        this->outputs.push_back(node);
-    else
-        this->outputs[index] = node;
-}
-
-void NodeInput::setInput(int index, std::shared_ptr<INode> node) {
-    throw std::invalid_argument("Impossible to set inputs for this Node");
-}
-
 std::shared_ptr<Image> NodeInput::getImageFromFile(const std::string &path) {
     std::ifstream fileInput;
     fileInput.open(path);
@@ -44,7 +32,7 @@ std::shared_ptr<Image> NodeInput::getImageFromFile(const std::string &path) {
             matrix[i].setColors(red, green, blue);
         }
         fileInput.close();
-        return std::make_shared<Image>(Image(height, width, maxColorNumber, matrix));
+        return std::make_shared<Image>(height, width, maxColorNumber, matrix);
     } catch (const std::ifstream::failure &e) {
         throw std::invalid_argument("Bad file");
     }
@@ -79,18 +67,10 @@ std::tuple<int, int, int, int> NodeInput::getHeader(std::ifstream &input) {
     }
 }
 
-std::shared_ptr<Image> NodeInput::getOutputPtr() {
-    return this->outputPtr;
-}
-
 void NodeInput::setFilePath(std::string filepath) {
     this->filePath = std::move(filepath);
 }
 
 std::string NodeInput::getFilePath() {
     return this->filePath;
-}
-
-std::vector<std::shared_ptr<INode>> NodeInput::getInputs() {
-    return this->inputs;
 }
