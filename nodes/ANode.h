@@ -23,7 +23,11 @@ public:
 
     virtual void setOutput(int index, std::shared_ptr<ANode> node);
 
+    virtual void resetOutput(std::shared_ptr<ANode> node);
+
     virtual void setInput(int index, std::shared_ptr<ANode> node);
+
+    virtual void resetInput(std::shared_ptr<ANode> node);
 
     virtual std::shared_ptr<Image> getOutputPtr();
 
@@ -42,6 +46,14 @@ inline void ANode::setInput(int index, std::shared_ptr<ANode> node) {
         else
             this->inputs[0] = node;
     }
+}
+
+inline void ANode::resetInput(std::shared_ptr<ANode> node) {
+    this->inputs.clear();
+}
+
+inline void ANode::resetOutput(std::shared_ptr<ANode> node) {
+    this->outputs.erase(std::find(this->outputs.begin(), this->outputs.end(), node));
 }
 
 inline  void ANode::setOutput(int index, std::shared_ptr<ANode> node) {

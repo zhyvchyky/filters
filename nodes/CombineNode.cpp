@@ -36,3 +36,7 @@ void CombineNode::setInput(int index, std::shared_ptr<ANode> node) {
         this->inputs[index] = node;
 }
 
+void CombineNode::resetInput(std::shared_ptr<ANode> node) {
+    this->inputs.erase(std::find(this->inputs.begin(), this->inputs.end(), node));
+}
+
