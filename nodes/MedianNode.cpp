@@ -14,7 +14,7 @@ std::shared_ptr<Image> MedianNode::applyTransform(const std::shared_ptr<Image> &
     int width = img->getWidth();
     int height = img->getHeight();
 
-    std::shared_ptr<Image> new_img = std::make_shared<Image>(Image(height, width, 3, new Pixel[height * width]));
+    std::shared_ptr<Image> new_img = std::make_shared<Image>(height, width, 3, new Pixel[height * width]);
     std::vector<double> g, b, r;
     int i,j,h,w;
 

@@ -43,7 +43,7 @@ std::shared_ptr<Image> NodeInput::getImageFromFile(const std::string &path) {
             matrix[i].setColors(red, green, blue);
         }
         fileInput.close();
-        return std::make_shared<Image>(Image(height, width, maxColorNumber, matrix));
+        return std::make_shared<Image>(height, width, maxColorNumber, matrix);
     } catch (const std::ifstream::failure &e) {
         throw std::invalid_argument("Bad file");
     }
