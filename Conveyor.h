@@ -8,17 +8,21 @@
 #include <map>
 #include <memory>
 #include <vector>
+#include <set>
+#include <stack>
+#include <queue>
 #include "Image.h"
 #include "NodeType.h"
+#include "nodes/INode.h"
 
 class Conveyor {
 private:
-//    std::map<int, std::shared_ptr<Node>> nodes;
+    std::map<int, std::shared_ptr<INode>> nodes;
     std::shared_ptr<Image> result;
     bool previewOn;
     int getNewId();
     bool isCyclic();
-
+    bool DFS(std::shared_ptr<INode>, std::set<std::shared_ptr<INode>>);
 public:
     Conveyor();
     ~Conveyor();

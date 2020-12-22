@@ -215,3 +215,7 @@ void EdgeDetectionNode::setInput(int index, std::shared_ptr<INode> node) {
     else
         this->inputs[index] = node;
 }
+
+std::vector<std::shared_ptr<INode>> EdgeDetectionNode::getInputs() {
+    return this->inputs;
+}

@@ -19,6 +19,8 @@ public:
     virtual void setInput(int index, std::shared_ptr<INode>) = 0;
 
     virtual std::shared_ptr<Image> getOutputPtr() = 0;
+
+    virtual std::vector<std::shared_ptr<INode>> getInputs() = 0;
 };
 
 

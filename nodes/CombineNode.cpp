@@ -41,3 +41,7 @@ void CombineNode::setInput(int index, std::shared_ptr<INode> node) {
 std::shared_ptr<Image> CombineNode::getOutputPtr() {
     return this->outputPtr;
 }
+
+std::vector<std::shared_ptr<INode>> CombineNode::getInputs() {
+    return this->inputs;
+}

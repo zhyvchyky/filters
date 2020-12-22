@@ -34,7 +34,6 @@ private:
     Pixel *matrix;
 public:
     Image(int height, int width, int maxColorNumber, Pixel *matrix);
-    ~Image();
 
     Pixel getPixel(int row, int col);
     void setPixel(int row, int col, int red, int green, int blue);

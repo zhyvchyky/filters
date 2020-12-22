@@ -72,3 +72,7 @@ int GaussianBlurNode::getRadius() const {
 std::shared_ptr<Image> GaussianBlurNode::getOutputPtr() {
     return this->outputPtr;
 }
+
+std::vector<std::shared_ptr<INode>> GaussianBlurNode::getInputs() {
+    return this->inputs;
+}

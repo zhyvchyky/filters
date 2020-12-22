@@ -34,6 +34,8 @@ public:
 
     void setInput(int index, std::shared_ptr<INode>) override;
 
+    std::vector<std::shared_ptr<INode>> getInputs() override;
+
     std::shared_ptr<Image> getOutputPtr() override;
 };
 

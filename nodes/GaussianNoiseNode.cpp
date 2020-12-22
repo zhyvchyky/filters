@@ -3,6 +3,7 @@
 //
 
 #include "GaussianNoiseNode.h"
+#include <time.h>
 
 void GaussianNoiseNode::process() {
     this->outputPtr = genNormDist();
@@ -59,4 +60,8 @@ void GaussianNoiseNode::setInput(int index, std::shared_ptr<INode> node) {
 
 std::shared_ptr<Image> GaussianNoiseNode::getOutputPtr() {
     return this->outputPtr;
+}
+
+std::vector<std::shared_ptr<INode>> GaussianNoiseNode::getInputs() {
+    return this->inputs;
 }

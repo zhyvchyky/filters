@@ -32,6 +32,8 @@ public:
 
     void setFilePath(std::string filepath);
 
+    std::vector<std::shared_ptr<INode>> getInputs() override;
+
     std::shared_ptr<Image> getOutputPtr() override;
 
     std::string getFilePath();

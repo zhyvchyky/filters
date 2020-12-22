@@ -4,6 +4,7 @@
 
 #include "ColorGeneratorNode.h"
 
+
 void ColorGeneratorNode::process() {
     this->outputPtr = genColor();
 }
@@ -49,4 +50,8 @@ void ColorGeneratorNode::setColorValues(int colorRed, int colorGreen, int colorB
 
 std::tuple<int, int, int, int, int> ColorGeneratorNode::getColorValues() {
     return std::make_tuple(this->red, this->green, this->blue, this->height, this->width);
+}
+
+std::vector<std::shared_ptr<INode>> ColorGeneratorNode::getInputs() {
+    return this->inputs;
 }

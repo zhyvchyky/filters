@@ -53,3 +53,7 @@ void NodeOutput::setFilePath(std::string filepath) {
 std::string  NodeOutput::getFilePath() {
     return this->filePath;
 }
+
+std::vector<std::shared_ptr<INode>> NodeOutput::getInputs() {
+    return this->inputs;
+}

@@ -11,10 +11,9 @@ Image::Image(int height, int width, int maxColorNumber, Pixel *matrix) {
 }
 
 Pixel Image::getPixel(int row, int col) {
-    if ((0 <= row && row < height) && (0 <= col && col < width)){
-        return this->matrix[row * width + col];
-    }
-    return Pixel();
+    if (row >= height || col >= width)
+        return Pixel();
+    return this->matrix[row * width + col];
 }
 
 void Image::setPixel(int row, int col, int red, int green, int blue) {
@@ -29,10 +28,6 @@ int Image::getHeight() const {
 
 int Image::getWidth() const{
     return this->width;
-}
-
-Image::~Image() {
-    delete [] this->matrix;
 }
 
 Pixel::Pixel(int red, int green, int blue) {

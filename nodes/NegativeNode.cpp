@@ -40,3 +40,7 @@ void NegativeNode::setInput(int index, std::shared_ptr<INode> node) {
 std::shared_ptr<Image> NegativeNode::getOutputPtr() {
     return this->outputPtr;
 }
+
+std::vector<std::shared_ptr<INode>> NegativeNode::getInputs() {
+    return this->inputs;
+}

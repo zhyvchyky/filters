@@ -45,3 +45,7 @@ void BlackAndWhiteNode::setInput(int index, std::shared_ptr<INode> node) {
 std::shared_ptr<Image> BlackAndWhiteNode::getOutputPtr() {
     return this->outputPtr;
 }
+
+std::vector<std::shared_ptr<INode>> BlackAndWhiteNode::getInputs() {
+    return this->inputs;
+}
