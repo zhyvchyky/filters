@@ -17,6 +17,7 @@ private:
 
     std::shared_ptr<Image> applyTransform(const std::shared_ptr<Image>& img1);
     double* calcWeights();
+    Pixel regulatePixel(Pixel pxl);
 public:
     void process() override;
 

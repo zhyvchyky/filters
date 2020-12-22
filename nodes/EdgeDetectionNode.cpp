@@ -5,10 +5,10 @@
 #include "EdgeDetectionNode.h"
 
 void EdgeDetectionNode::process() {
-    this->outputPtr = applyTransform(this->inputs[0]->getOutputPtr());
+    this->outputPtr = applyTransform();
 }
 
-std::shared_ptr<Image> EdgeDetectionNode::preProcess(std::shared_ptr<Image> img1) {
+std::shared_ptr<Image> EdgeDetectionNode::preProcess() {
     auto nodeBW = std::make_shared<BlackAndWhiteNode>();
     auto nodeBlur = std::make_shared<GaussianBlurNode>();
     nodeBlur->setRadius(2);
@@ -190,10 +190,10 @@ std::shared_ptr<Image> EdgeDetectionNode::dThresholdEdgeDetector(const std::shar
     return result;
 }
 
-std::shared_ptr<Image> EdgeDetectionNode::applyTransform(std::shared_ptr<Image> image) {
-    image = preProcess(image);
-    auto tuple = calcGradient(image);
-    image = nonMaxSupression(std::get<0>(tuple), std::get<1>(tuple));
-    image = dThresholdEdgeDetector(image);
-    return image;
+std::shared_ptr<Image> EdgeDetectionNode::applyTransform() {
+    auto img1 = preProcess();
+    auto tuple = calcGradient(img1);
+    img1 = nonMaxSupression(std::get<0>(tuple), std::get<1>(tuple));
+    img1 = dThresholdEdgeDetector(img1);
+    return img1;
 }
