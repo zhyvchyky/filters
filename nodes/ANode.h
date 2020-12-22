@@ -21,38 +21,41 @@ public:
 
     virtual void process() = 0;
 
-    void setOutput(int index, std::shared_ptr<ANode> node);
+    virtual void setOutput(int index, std::shared_ptr<ANode> node);
 
-    void setInput(int index, std::shared_ptr<ANode> node);
+    virtual void setInput(int index, std::shared_ptr<ANode> node);
 
-    std::shared_ptr<Image> getOutputPtr();
+    virtual std::shared_ptr<Image> getOutputPtr();
 
-    std::vector<std::shared_ptr<ANode>> getInputs();
-    std::vector<std::shared_ptr<ANode>> getOutputs();
+    virtual std::vector<std::shared_ptr<ANode>> getInputs();
+    virtual std::vector<std::shared_ptr<ANode>> getOutputs();
 };
 
-std::shared_ptr<Image> ANode::getOutputPtr() {
+inline std::shared_ptr<Image> ANode::getOutputPtr() {
     return this->outputPtr;
 }
 
-void ANode::setInput(int index, std::shared_ptr<ANode> node) {
-    if (index == 0)
-        this->inputs[0] = node;
-
+inline void ANode::setInput(int index, std::shared_ptr<ANode> node) {
+    if (index == 0){
+        if(this->inputs.empty())
+            this->inputs.push_back(node);
+        else
+            this->inputs[0] = node;
+    }
 }
 
-void ANode::setOutput(int index, std::shared_ptr<ANode> node) {
+inline  void ANode::setOutput(int index, std::shared_ptr<ANode> node) {
     if(this->outputs.size() <= index)
         this->outputs.push_back(node);
     else
         this->outputs[index] = node;
 }
 
-std::vector<std::shared_ptr<ANode>> ANode::getInputs(){
+inline std::vector<std::shared_ptr<ANode>> ANode::getInputs(){
     return this->inputs;
 };
 
-std::vector<std::shared_ptr<ANode>> ANode::getOutputs(){
+inline std::vector<std::shared_ptr<ANode>> ANode::getOutputs(){
     return this->outputs;
 };
 
