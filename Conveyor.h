@@ -34,6 +34,8 @@ public:
     void process();
     void createConnection(std::shared_ptr<ANode> inputNodeId, std::shared_ptr<ANode> outputNodeId, size_t inputIndex);
     void deleteConnection(std::shared_ptr<ANode> inputNodeId, std::shared_ptr<ANode> outputNodeId);
+
+    std::vector<std::shared_ptr<ANode>> getNodes();
 };
 
 #endif

@@ -113,3 +113,7 @@ void Conveyor::deleteNode(size_t nodeId) {
 std::shared_ptr<ANode> Conveyor::getOutputNode() {
     return this->nodes[0];
 }
+
+std::vector<std::shared_ptr<ANode>> Conveyor::getNodes() {
+    return this->nodes;
+}
