@@ -5,26 +5,25 @@
 #ifndef FILTERS_CONVEYORMANAGER_H
 #define FILTERS_CONVEYORMANAGER_H
 
-#include <map>
+#include <vector>
 #include <string>
+#include <fstream>
+#include <map>
 
 #include "Conveyor.h"
+#include "utilities/IdGenerator.h"
 
 
 class ConveyorManager {
-
 private:
-    std::map<int, Conveyor> conveyors;
-    int getNewId();
+    std::vector<std::shared_ptr<Conveyor>> conveyors;
+    IdGenerator idGenerator;
 
 public:
-    ConveyorManager();
-    ~ConveyorManager();
-
-    void createConveyor();
-    void loadConveyor(std::string filepath);
-    void saveConveyor(int conveyorId, std::string filepath);
-    void deleteConveyor(int id);
+    std::shared_ptr<Conveyor> createConveyor();
+    void loadConveyor(const std::string& filepath);
+    void saveConveyor(int conveyorId, const std::string& filepath);
+    void deleteConveyor(size_t id);
 };
 
 #endif //FILTERS_CONVEYORMANAGER_H

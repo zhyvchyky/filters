@@ -32,8 +32,10 @@ public:
     void deleteNode(size_t nodeId);
     std::vector<size_t> getNodeIds();
     void process();
-    void createConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode);
-    void deleteConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode);
+    void createConnection(std::shared_ptr<ANode> inputNodeId, std::shared_ptr<ANode> outputNodeId, size_t inputIndex);
+    void deleteConnection(std::shared_ptr<ANode> inputNodeId, std::shared_ptr<ANode> outputNodeId);
+
+    std::vector<std::shared_ptr<ANode>> getNodes();
 };
 
 #endif

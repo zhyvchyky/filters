@@ -85,7 +85,7 @@ std::shared_ptr<ANode> Conveyor::createNode(NodeType nodeType) {
     }
 }
 
-void Conveyor::createConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode) {
+void Conveyor::createConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode, size_t inputIndex) {
     outputNode->setInput(inputNode);
     inputNode->setOutput(outputNode);
     if(isCyclic()){
@@ -112,4 +112,8 @@ void Conveyor::deleteNode(size_t nodeId) {
 
 std::shared_ptr<ANode> Conveyor::getOutputNode() {
     return this->nodes[0];
+}
+
+std::vector<std::shared_ptr<ANode>> Conveyor::getNodes() {
+    return this->nodes;
 }
