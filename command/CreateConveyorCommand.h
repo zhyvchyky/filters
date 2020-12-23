@@ -1,0 +1,22 @@
+//
+// Created by noxin on 12/23/20.
+//
+
+#ifndef FILTERS_CREATECONVEYORCOMMAND_H
+#define FILTERS_CREATECONVEYORCOMMAND_H
+
+#include "ICommand.h"
+#include <memory>
+#include "ConveyorManager.h"
+
+class ConveyorManager;
+class CreateConveyorCommand: public ICommand {
+    std::shared_ptr<ConveyorManager> receiver;
+
+public:
+    explicit CreateConveyorCommand(std::shared_ptr<ConveyorManager>);
+    bool execute() override;
+};
+
+
+#endif //FILTERS_CREATECONVEYORCOMMAND_H

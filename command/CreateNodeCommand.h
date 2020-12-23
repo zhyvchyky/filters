@@ -14,7 +14,7 @@ private:
     size_t conveyorId;
 public:
     CreateNodeCommand(size_t conveyorId, NodeType nodeType);
-    void execute() override;
+    bool execute() override;
 };
 
 

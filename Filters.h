@@ -13,13 +13,13 @@
 
 class Filters {
 private:
-    ConveyorManager conveyorManager;
-    CustomStack<ICommand> commandHistory;
+    std::shared_ptr<ConveyorManager> conveyorManager;
+    CustomStack<std::shared_ptr<ICommand>> commandHistory;
 
 public:
     Filters();
-    ~Filters();
-
+    std::shared_ptr<ConveyorManager> getConveyorManager();
+    void executeCommand(std::shared_ptr<ICommand> command);
 };
 
 

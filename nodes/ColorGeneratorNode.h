@@ -11,7 +11,7 @@
 
 class ColorGeneratorNode: public ANode {
 private:
-    int red,green,blue, height, width;//R,G,B must fall between -255 and 255 degrees
+    int red,green,blue, height, width;
 
     std::shared_ptr<Image> genColor();
 public:

@@ -14,10 +14,23 @@ private:
     std::list<T> stack;
     size_t max_size{};
 public:
-    CustomStack(size_t max_size);
-    void push(T element);
-    void pop();
-    T back();
+    CustomStack(size_t max_size){
+        this->max_size = max_size;
+    }
+    void push(T element){
+        if (this->stack.size() >= max_size){
+            stack.pop_front();
+        }
+        stack.push_back(element);
+    }
+    void pop(){
+        stack.pop_back();
+    }
+    T back(){
+        return stack.back();
+    }
 };
+
+
 
 #endif //FILTERS_CUSTOMSTACK_H
