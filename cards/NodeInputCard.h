@@ -5,9 +5,16 @@
 #ifndef FILTERS_NODEINPUTCARD_H
 #define FILTERS_NODEINPUTCARD_H
 
+#include "IObserver.h"
+#include "nodes/NodeInput.h"
 
-class NodeInputCard {
 
+class NodeInputCard: public IObserver<NodeInput> {
+private:
+    std::string filepath;
+public:
+    std::string getFilePath();
+    void notify(std::shared_ptr<NodeInput> node) override;
 };
 
 
