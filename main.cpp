@@ -24,8 +24,8 @@ int main() {
     std::shared_ptr<ANode> nodeIn = conveyor.createNode(NodeType::NodeInput);
     std::shared_ptr<ANode> nodeBlackWhite = conveyor.createNode(NodeType::BlackAndWhiteNode);
 
-    conveyor.createConnection(nodeIn, nodeBlackWhite, 0);
-    conveyor.createConnection(nodeBlackWhite, conveyor.getOutputNode(), 0);
+    conveyor.createConnection(nodeIn, nodeBlackWhite);
+    conveyor.createConnection(nodeBlackWhite, conveyor.getOutputNode());
 
     std::dynamic_pointer_cast<NodeInput>(nodeIn)->setFilePath("cherniy.ppm");
 
