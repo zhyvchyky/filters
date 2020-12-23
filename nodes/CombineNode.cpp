@@ -1,4 +1,5 @@
-//
+//      Temperature() {}
+
 // Created by linups on 12/19/20.
 //
 
@@ -29,14 +30,11 @@ std::shared_ptr<Image> CombineNode::combine() {
     return result;
 }
 
-void CombineNode::setInput(int index, std::shared_ptr<ANode> node) {
-    if(this->inputs.size() <= index)
-        this->inputs.push_back(node);
-    else
-        this->inputs[index] = node;
-}
 
 void CombineNode::resetInput(std::shared_ptr<ANode> node) {
     this->inputs.erase(std::find(this->inputs.begin(), this->inputs.end(), node));
 }
 
+void CombineNode::setInput(std::shared_ptr<ANode> node) {
+    this->inputs.push_back(node);
+}
