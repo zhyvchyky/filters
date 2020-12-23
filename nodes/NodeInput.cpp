@@ -69,6 +69,7 @@ std::tuple<int, int, int, int> NodeInput::getHeader(std::ifstream &input) {
 
 void NodeInput::setFilePath(std::string filepath) {
     this->filePath = std::move(filepath);
+    notify();
 }
 
 std::string NodeInput::getFilePath() {

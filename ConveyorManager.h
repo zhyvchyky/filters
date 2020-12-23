@@ -12,15 +12,19 @@
 
 #include "Conveyor.h"
 #include "utilities/IdGenerator.h"
+#include "command/CreateConveyorCommand.h"
 
+class CreateConveyorCommand;
 
 class ConveyorManager {
+    friend class CreateConveyorCommand;
 private:
     std::vector<std::shared_ptr<Conveyor>> conveyors;
     IdGenerator idGenerator;
+    std::shared_ptr<Conveyor> createConveyor();
+
 
 public:
-    std::shared_ptr<Conveyor> createConveyor();
     void loadConveyor(const std::string& filepath);
     void saveConveyor(int conveyorId, const std::string& filepath);
     void deleteConveyor(size_t id);

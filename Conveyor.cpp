@@ -85,6 +85,7 @@ std::shared_ptr<ANode> Conveyor::createNode(NodeType nodeType) {
     }
 }
 
+
 void Conveyor::createConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode) {
     outputNode->setInput(inputNode);
     inputNode->setOutput(outputNode);

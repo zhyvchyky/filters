@@ -6,10 +6,13 @@
 #define FILTERS_GAUSSIANBLURNODE_H
 #include "ANode.h"
 #include "utilities/applyVectorTransform.h"
+#include "ISubject.h"
 #include <cassert>
 
 
-class GaussianBlurNode: public ANode {
+
+class GaussianBlurNode: public ANode, public ISubject<GaussianBlurNode> {
+
 private:
     int N; //radius of blur must fall between 1 and 100
 
