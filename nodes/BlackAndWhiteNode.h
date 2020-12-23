@@ -6,15 +6,17 @@
 #define FILTERS_BLACKANDWHITENODE_H
 
 #include "ANode.h"
+#include "ISubject.h"
 #include <cassert>
 
-class BlackAndWhiteNode: public ANode {
+class BlackAndWhiteNode: public ANode, public ISubject<BlackAndWhiteNode> {
 private:
 
 
     std::shared_ptr<Image> applyTransform(const std::shared_ptr<Image>&);
 public:
     void process() override;
+    NodeType getNodeType() override;
 };
 
 

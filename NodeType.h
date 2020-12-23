@@ -24,7 +24,8 @@ enum class NodeType{
     NegativeNode,
     GaussianNoiseNode,
     CombineNode,
-    BlackAndWhiteNode
+    BlackAndWhiteNode,
+    NodeOutput
 };
 
 #endif //FILTERS_NODETYPE_H

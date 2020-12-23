@@ -37,3 +37,7 @@ void NodeOutput::setFilePath(std::string filepath) {
 std::string  NodeOutput::getFilePath() {
     return this->filePath;
 }
+
+NodeType NodeOutput::getNodeType() {
+    return NodeType::NodeOutput;
+}

@@ -69,3 +69,7 @@ void MedianNode::setMedian(int mdn) {
 int MedianNode::getMedian() const {
     return this->N;
 }
+
+NodeType MedianNode::getNodeType() {
+    return NodeType::MedianNode;
+}

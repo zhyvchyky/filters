@@ -5,9 +5,10 @@
 #ifndef FILTERS_NEGATIVENODE_H
 #define FILTERS_NEGATIVENODE_H
 #include "ANode.h"
+#include "ISubject.h"
 
 
-class NegativeNode: public ANode {
+class NegativeNode: public ANode, public ISubject<NegativeNode> {
 private:
 
 
@@ -15,6 +16,7 @@ private:
 
 public:
     void process() override;
+    NodeType getNodeType() override;
 };
 
 

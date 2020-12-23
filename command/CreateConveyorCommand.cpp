@@ -10,5 +10,5 @@ CreateConveyorCommand::CreateConveyorCommand(std::shared_ptr<ConveyorManager> re
 
 bool CreateConveyorCommand::execute() {
     this->receiver->createConveyor();
-
+    return true;
 }

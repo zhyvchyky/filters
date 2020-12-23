@@ -5,11 +5,12 @@
 #ifndef FILTERS_EDGEDETECTIONNODE_H
 #define FILTERS_EDGEDETECTIONNODE_H
 #include "ANode.h"
+#include "ISubject.h"
 #include "BlackAndWhiteNode.h"
 #include "GaussianBlurNode.h"
 
 
-class EdgeDetectionNode: public ANode {
+class EdgeDetectionNode: public ANode, public ISubject<EdgeDetectionNode> {
 private:
     double kernelX1[3] = {1., 0., -1.};
     double kernelX2[3] = {1., 2., 1.};
@@ -26,6 +27,7 @@ private:
 
 public:
     void process() override;
+    NodeType getNodeType() override;
 };
 
 #endif //FILTERS_EDGEDETECTIONNODE_H

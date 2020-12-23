@@ -38,3 +38,7 @@ void CombineNode::resetInput(std::shared_ptr<ANode> node) {
 void CombineNode::setInput(std::shared_ptr<ANode> node) {
     this->inputs.push_back(node);
 }
+
+NodeType CombineNode::getNodeType() {
+    return NodeType::CombineNode;
+}

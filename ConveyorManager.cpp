@@ -21,3 +21,7 @@ void ConveyorManager::deleteConveyor(size_t id) {
     this->conveyors[id] = nullptr;
     this->idGenerator.freeId(id);
 }
+
+std::shared_ptr<Conveyor> ConveyorManager::getConveyorByID(size_t id) {
+    return this->conveyors[id];
+}

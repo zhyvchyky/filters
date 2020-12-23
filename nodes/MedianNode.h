@@ -6,10 +6,11 @@
 #define FILTERS_MEDIANNODE_H
 
 #include "ANode.h"
+#include "ISubject.h"
 #include <cassert>
 #include <algorithm>
 
-class MedianNode: public ANode {
+class MedianNode: public ANode, public ISubject<MedianNode> {
 private:
     int N;//N must fall between 1 and 5
 
@@ -22,6 +23,8 @@ public:
     void setMedian(int mdn);
 
     int getMedian() const;
+
+    NodeType getNodeType() override;
 };
 
 

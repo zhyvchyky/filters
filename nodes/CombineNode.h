@@ -5,9 +5,10 @@
 #ifndef FILTERS_COMBINENODE_H
 #define FILTERS_COMBINENODE_H
 #include "ANode.h"
+#include "ISubject.h"
 
 
-class CombineNode: public ANode {
+class CombineNode: public ANode, public ISubject<CombineNode> {
 private:
 
 
@@ -15,6 +16,7 @@ private:
 
 public:
     void process() override;
+    NodeType getNodeType() override;
 
     void setInput(std::shared_ptr<ANode> node) override;
 

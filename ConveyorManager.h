@@ -28,6 +28,7 @@ public:
     void loadConveyor(const std::string& filepath);
     void saveConveyor(int conveyorId, const std::string& filepath);
     void deleteConveyor(size_t id);
+    std::shared_ptr<Conveyor> getConveyorByID(size_t);
 };
 
 #endif //FILTERS_CONVEYORMANAGER_H

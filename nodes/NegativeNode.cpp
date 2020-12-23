@@ -22,3 +22,7 @@ std::shared_ptr<Image> NegativeNode::applyTransform(std::shared_ptr<Image> img1)
     }
     return result;
 }
+
+NodeType NegativeNode::getNodeType() {
+    return NodeType::NegativeNode;
+}

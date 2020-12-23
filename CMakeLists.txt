@@ -51,4 +51,4 @@ add_executable(filters
         ISubject.h
         cards/GaussianBlurCard.cpp
         cards/GaussianBlurCard.h
-        utilities/CustomStack.h command/CreateConveyorCommand.cpp command/CreateConveyorCommand.h)
+        utilities/CustomStack.h command/CreateConveyorCommand.cpp command/CreateConveyorCommand.h command/CreateConnectionCommand.cpp command/CreateConnectionCommand.h command/DeleteConnectionCommand.cpp command/DeleteConnectionCommand.h command/DeleteConveyorCommand.cpp command/DeleteConveyorCommand.h command/DeleteNodeCommand.cpp command/DeleteNodeCommand.h command/ProcessCommand.cpp command/ProcessCommand.h)

@@ -5,8 +5,9 @@
 #ifndef FILTERS_GAUSSIANNOISENODE_H
 #define FILTERS_GAUSSIANNOISENODE_H
 #include "ANode.h"
+#include "ISubject.h"
 
-class GaussianNoiseNode: public ANode {
+class GaussianNoiseNode: public ANode, public ISubject<GaussianNoiseNode> {
 private:
     int noise, height, width;
 
@@ -20,6 +21,8 @@ public:
     void setNoise(int ns, int h, int w);
 
     std::tuple<int,int,int> getNoise();
+
+    NodeType getNodeType() override;
 };
 
 

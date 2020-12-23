@@ -29,6 +29,7 @@ public:
 
     std::string getFilePath();
 
+    NodeType getNodeType() override;
 };
 
 
