@@ -11,8 +11,11 @@
 
 #include "Conveyor.h"
 
+#include "Conveyor.h"
+
 int main() {
     Conveyor conveyor;
+
     std::shared_ptr<ANode> nodeIn = conveyor.createNode(NodeType::GaussianBlurNode);
 
     auto nodeInd = std::dynamic_pointer_cast<GaussianBlurNode>(nodeIn);
@@ -24,5 +27,6 @@ int main() {
     nodeInd->unsubscribe(card);
     nodeInd->setRadius(15);
     std::cout << card->getRadius() << std::endl;
+
     return 0;
 }

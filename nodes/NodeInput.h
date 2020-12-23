@@ -12,7 +12,9 @@
 #include <fstream>
 #include <cassert>
 
+
 class NodeInput : public ANode, public ISubject<NodeInput> {
+
 private:
     std::string filePath;
 

@@ -10,7 +10,9 @@
 #include <cassert>
 
 
+
 class GaussianBlurNode: public ANode, public ISubject<GaussianBlurNode> {
+
 private:
     int N; //radius of blur must fall between 1 and 100
 

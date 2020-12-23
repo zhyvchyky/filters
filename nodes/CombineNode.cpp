@@ -30,11 +30,11 @@ std::shared_ptr<Image> CombineNode::combine() {
     return result;
 }
 
-void CombineNode::setInput(std::shared_ptr<ANode> node) {
-    this->inputs.push_back(node);
-}
 
 void CombineNode::resetInput(std::shared_ptr<ANode> node) {
     this->inputs.erase(std::find(this->inputs.begin(), this->inputs.end(), node));
 }
 
+void CombineNode::setInput(std::shared_ptr<ANode> node) {
+    this->inputs.push_back(node);
+}
