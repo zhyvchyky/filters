@@ -52,6 +52,7 @@ std::shared_ptr<Image> GaussianBlurNode::applyTransform(const std::shared_ptr<Im
 
 void GaussianBlurNode::setRadius(int radius) {
     this->N = radius;
+    notify();
 }
 
 int GaussianBlurNode::getRadius() const {

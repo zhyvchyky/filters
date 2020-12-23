@@ -7,11 +7,12 @@
 
 #include "ANode.h"
 #include "Image.h"
+#include "ISubject.h"
 #include <iostream>
 #include <fstream>
 #include <cassert>
 
-class NodeInput : public ANode {
+class NodeInput : public ANode, public ISubject<NodeInput> {
 private:
     std::string filePath;
 

@@ -2,36 +2,27 @@
 //
 
 #include <iostream>
-#include "Filters.h"
-//#include "Conveyor.h"
 
-#include "nodes/NodeInput.h"
-#include "nodes/NodeOutput.h"
-#include "nodes/EdgeDetectionNode.h"
-#include "nodes/BlackAndWhiteNode.h"
-#include "nodes/GaussianBlurNode.h"
+
 #include "nodes/NegativeNode.h"
-#include "nodes/MedianNode.h"
-#include "nodes/ColorGeneratorNode.h"
-#include "nodes/CombineNode.h"
-#include "nodes/GaussianNoiseNode.h"
-#include "nodes/ColorGeneratorNode.h"
+#include "cards/NodeInputCard.h"
+#include "cards/GaussianBlurCard.h"
+
 
 #include "Conveyor.h"
 
 int main() {
     Conveyor conveyor;
-    std::shared_ptr<ANode> nodeIn = conveyor.createNode(NodeType::NodeInput);
-    std::shared_ptr<ANode> nodeBlackWhite = conveyor.createNode(NodeType::BlackAndWhiteNode);
+    std::shared_ptr<ANode> nodeIn = conveyor.createNode(NodeType::GaussianBlurNode);
 
-    conveyor.createConnection(nodeIn, nodeBlackWhite);
-    conveyor.createConnection(nodeBlackWhite, conveyor.getOutputNode());
+    auto nodeInd = std::dynamic_pointer_cast<GaussianBlurNode>(nodeIn);
 
-    std::dynamic_pointer_cast<NodeInput>(nodeIn)->setFilePath("cherniy.ppm");
-
-    std::dynamic_pointer_cast<NodeOutput>(conveyor.getOutputNode())->setFilePath("whitedCherniy.ppm");
-
-    conveyor.process();
-
+    auto card = std::make_shared<GaussianBlurCard>();
+    nodeInd->subscribe(card);
+    nodeInd->setRadius(10);
+    std::cout << card->getRadius() << std::endl;
+    nodeInd->unsubscribe(card);
+    nodeInd->setRadius(15);
+    std::cout << card->getRadius() << std::endl;
     return 0;
 }
