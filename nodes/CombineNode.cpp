@@ -29,11 +29,8 @@ std::shared_ptr<Image> CombineNode::combine() {
     return result;
 }
 
-void CombineNode::setInput(int index, std::shared_ptr<ANode> node) {
-    if(this->inputs.size() <= index)
-        this->inputs.push_back(node);
-    else
-        this->inputs[index] = node;
+void CombineNode::setInput(std::shared_ptr<ANode> node) {
+    this->inputs.push_back(node);
 }
 
 void CombineNode::resetInput(std::shared_ptr<ANode> node) {

@@ -85,9 +85,9 @@ std::shared_ptr<ANode> Conveyor::createNode(NodeType nodeType) {
     }
 }
 
-void Conveyor::createConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode, size_t inputIndex) {
-    outputNode->setInput(inputIndex, inputNode);
-    inputNode->setOutput(inputIndex, outputNode);
+void Conveyor::createConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode) {
+    outputNode->setInput(inputNode);
+    inputNode->setOutput(outputNode);
     if(isCyclic()){
         std::cout << "Graph contains cycle!" << std::endl; //TODO raise some error
         deleteConnection(inputNode, outputNode);
