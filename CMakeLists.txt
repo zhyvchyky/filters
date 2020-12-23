@@ -35,4 +35,4 @@ add_executable(filters
         nodes/CombineNode.h
         nodes/CombineNode.cpp
         nodes/GaussianNoiseNode.h
-        nodes/GaussianNoiseNode.cpp nodes/EdgeDetectionNode.cpp nodes/EdgeDetectionNode.h nodes/NegativeNode.cpp nodes/NegativeNode.h utilities/IdGenerator.cpp utilities/IdGenerator.h command/ICommand.h command/CreateNodeCommand.cpp command/CreateNodeCommand.h cards/NodeInputCard.cpp cards/NodeInputCard.h IObserver.h ISubject.h cards/GaussianBlurCard.cpp cards/GaussianBlurCard.h)
+        nodes/GaussianNoiseNode.cpp nodes/EdgeDetectionNode.cpp nodes/EdgeDetectionNode.h nodes/NegativeNode.cpp nodes/NegativeNode.h utilities/IdGenerator.cpp utilities/IdGenerator.h command/ICommand.h command/CreateNodeCommand.cpp command/CreateNodeCommand.h cards/NodeInputCard.cpp cards/NodeInputCard.h IObserver.h ISubject.h cards/GaussianBlurCard.cpp cards/GaussianBlurCard.h utilities/CustomStack.cpp utilities/CustomStack.h)

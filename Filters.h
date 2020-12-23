@@ -6,25 +6,20 @@
 #define FILTERS_FILTERS_H
 
 
-#include <vector>
-#include <string>
-
 #include "Conveyor.h"
 #include "ConveyorManager.h"
+#include "command/ICommand.h"
+#include "utilities/CustomStack.h"
 
 class Filters {
 private:
     ConveyorManager conveyorManager;
+    CustomStack<ICommand> commandHistory;
+
 public:
     Filters();
     ~Filters();
 
-    void createConveyor();
-    void deleteConveyor(int id);
-    void loadConveyor(std::string filePath);
-    void saveConveyor(int id, std::string filePath);
-    std::vector<int> getConveyorIds();
-    Conveyor& getConveyor(int conveyorId);
 };
 
 
