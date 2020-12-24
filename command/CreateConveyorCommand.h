@@ -9,7 +9,7 @@
 #include <memory>
 #include "ConveyorManager.h"
 
-class ConveyorManager;
+
 class CreateConveyorCommand: public ICommand {
     std::shared_ptr<ConveyorManager> receiver;
 

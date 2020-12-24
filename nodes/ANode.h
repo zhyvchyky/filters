@@ -16,12 +16,8 @@ protected:
     std::shared_ptr<Image> outputPtr;
     std::vector<std::shared_ptr<ANode>> outputs;
     std::vector<std::shared_ptr<ANode>> inputs;
-//    NodeType nodetype;
 
 public:
-//    inline ANode(NodeType type){
-//        this->nodetype = type;
-//    }
     virtual NodeType getNodeType() = 0;
     virtual void process() = 0;
 
