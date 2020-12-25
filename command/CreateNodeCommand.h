@@ -15,7 +15,7 @@ private:
     size_t conveyorId;
     std::shared_ptr<ConveyorManager> receiver;
 public:
-    CreateNodeCommand(size_t conveyorId, NodeType nodeType, std::shared_ptr<ConveyorManager>);
+    CreateNodeCommand(size_t conveyorId, NodeType nodeType, std::shared_ptr<ConveyorManager> rec);
     bool execute() override;
 };
 

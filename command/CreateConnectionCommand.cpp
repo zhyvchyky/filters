@@ -4,14 +4,14 @@
 
 #include "CreateConnectionCommand.h"
 
-CreateConnectionCommand::CreateConnectionCommand(std::shared_ptr<ConveyorManager> rec, size_t conveyorId, std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode) {
+CreateConnectionCommand::CreateConnectionCommand(std::shared_ptr<ConveyorManager> rec, size_t conveyorId, size_t inputNodeId, size_t outputNodeId) {
     this->receiver = rec;
     this->conveyorId = conveyorId;
-    this->inputNode = inputNode;
-    this->outputNode = outputNode;
+    this->inputNodeId = inputNodeId;
+    this->outputNodeId = outputNodeId;
 }
 
 bool CreateConnectionCommand::execute() {
-    this->receiver->getConveyorByID(conveyorId)->createConnection(inputNode, outputNode);
+    this->receiver->getConveyorByID(conveyorId)->createConnection(inputNodeId, outputNodeId);
     return true;
 }

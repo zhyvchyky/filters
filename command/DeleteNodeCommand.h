@@ -15,7 +15,7 @@ private:
     size_t conveyorId;
     std::shared_ptr<ConveyorManager> receiver;
 public:
-    DeleteNodeCommand(size_t, size_t, std::shared_ptr<ConveyorManager>);
+    DeleteNodeCommand(size_t nodeId, size_t conveyorId, std::shared_ptr<ConveyorManager> rec);
     bool execute() override;
 };
 

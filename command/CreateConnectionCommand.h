@@ -12,11 +12,9 @@
 class CreateConnectionCommand: public ICommand {
 private:
     std::shared_ptr<ConveyorManager> receiver;
-    size_t conveyorId;
-    std::shared_ptr<ANode> inputNode;
-    std::shared_ptr<ANode> outputNode;
+    size_t conveyorId, inputNodeId, outputNodeId;
 public:
-    explicit CreateConnectionCommand(std::shared_ptr<ConveyorManager>, size_t, std::shared_ptr<ANode>, std::shared_ptr<ANode>);
+    explicit CreateConnectionCommand(std::shared_ptr<ConveyorManager> rec, size_t conveyorId, size_t inputNodeId, size_t outputNodeId);
     bool execute() override;
 };
 

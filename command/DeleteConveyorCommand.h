@@ -13,7 +13,7 @@ class DeleteConveyorCommand: public ICommand {
     std::shared_ptr<ConveyorManager> receiver;
     size_t conveyorId;
 public:
-    explicit DeleteConveyorCommand(std::shared_ptr<ConveyorManager>, size_t);
+    explicit DeleteConveyorCommand(std::shared_ptr<ConveyorManager> rec, size_t conveyorId);
     bool execute() override;
 };
 
