@@ -10,28 +10,42 @@
 #include "command/DeleteNodeCommand.h"
 #include "command/DeleteConnectionCommand.h"
 #include "command/ProcessCommand.h"
+#include "command/SetNodeInputCommand.h"
+#include "command/SetNodeOutputCommand.h"
+#include "command/SetGaussianNoiseCommand.h"
 #include "Filters.h"
 
 
 
 int main() {
-    Filters filters;
-    auto createConveyorCommand = std::make_shared<CreateConveyorCommand>(filters.getConveyorManager());
-    createConveyorCommand->execute();
-    auto createNodeCommand1 = std::make_shared<CreateNodeCommand>(0, NodeType::BlackAndWhiteNode, filters.getConveyorManager());
-    createNodeCommand1->execute();
-    auto createNodeCommand2 = std::make_shared<CreateNodeCommand>(0, NodeType::NodeInput, filters.getConveyorManager());
-    createNodeCommand2->execute();
+    Filters filters = Filters();
+    auto createConv = std::make_shared<CreateConveyorCommand>(filters.getConveyorManager());
+    auto createNo = std::make_shared<CreateNodeCommand>(0, NodeType::NodeInput, filters.getConveyorManager());
+    auto createNeg = std::make_shared<CreateNodeCommand>(0, NodeType::NegativeNode, filters.getConveyorManager());
+    auto createNS = std::make_shared<CreateNodeCommand>(0, NodeType::GaussianNoiseNode, filters.getConveyorManager());
+    auto createComb = std::make_shared<CreateNodeCommand>(0, NodeType::CombineNode, filters.getConveyorManager());
+    auto createCon = std::make_shared<CreateConnectionCommand>(filters.getConveyorManager(), 0, 1, 2);
+    auto createCon1 = std::make_shared<CreateConnectionCommand>(filters.getConveyorManager(), 0, 2, 4);
+    auto createCon2 = std::make_shared<CreateConnectionCommand>(filters.getConveyorManager(), 0, 3, 4);
+    auto createCon3 = std::make_shared<CreateConnectionCommand>(filters.getConveyorManager(), 0, 4, 0);
+    auto setInp = std::make_shared<SetNodeInputCommand>(filters.getConveyorManager(), 0, 1, "anon.ppm");
+    auto setOutp = std::make_shared<SetNodeOutputCommand>(filters.getConveyorManager(), 0, "anon1.ppm");
+    auto setNS = std::make_shared<SetGaussianNoiseCommand>(filters.getConveyorManager(), 0, 3, 10000, 500, 500);
     auto pro = std::make_shared<ProcessCommand>(0, filters.getConveyorManager());
-//    pro->execute();
-    auto deleNodeCommand2 = std::make_shared<DeleteNodeCommand>(0, 2, filters.getConveyorManager());
-    deleNodeCommand2->execute();
-    auto deleNodeCommand1 = std::make_shared<DeleteNodeCommand>(0, 1, filters.getConveyorManager());
-    deleNodeCommand1->execute();
-    auto deleteConveyorCommand = std::make_shared<DeleteConveyorCommand>(filters.getConveyorManager(), 0);
-    deleteConveyorCommand->execute();
-    //filters.getConveyorManager()->com = createConveyorCommand;
-//    filters.executeCommand(createConveyorCommand);
+
+    filters.executeCommand(createConv);
+    filters.executeCommand(createNo);
+    filters.executeCommand(createNeg);
+    filters.executeCommand(createNS);
+    filters.executeCommand(createComb);
+    filters.executeCommand(createCon);
+    filters.executeCommand(createCon1);
+    filters.executeCommand(createCon2);
+    filters.executeCommand(createCon3);
+    filters.executeCommand(setInp);
+    filters.executeCommand(setOutp);
+    filters.executeCommand(setNS);
+    filters.executeCommand(pro);
 
     return 0;
 }
