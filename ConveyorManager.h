@@ -12,21 +12,19 @@
 
 #include "Conveyor.h"
 #include "utilities/IdGenerator.h"
+#include "utilities/EnumToStr.h"
 
 
-class ConveyorManager {
+class ConveyorManager: public ISubject<ConveyorManager> {
+private:
+    std::map<size_t, std::shared_ptr<Conveyor>> conveyors;
+    IdGenerator idGenerator;
+    size_t createConveyor();
+    void deleteConveyor(size_t id);
+public:
+    std::shared_ptr<Conveyor> getConveyorByID(size_t);
     friend class CreateConveyorCommand;
     friend class DeleteConveyorCommand;
-private:
-    std::vector<std::shared_ptr<Conveyor>> conveyors;
-    IdGenerator idGenerator;
-    std::shared_ptr<Conveyor> createConveyor();
-    void deleteConveyor(size_t id);
-
-public:
-    void loadConveyor(const std::string& filepath);
-    void saveConveyor(int conveyorId, const std::string& filepath);
-    std::shared_ptr<Conveyor> getConveyorByID(size_t);
 };
 
 #endif //FILTERS_CONVEYORMANAGER_H

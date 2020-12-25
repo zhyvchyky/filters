@@ -29,10 +29,6 @@ public:
 
     virtual void resetInput(std::shared_ptr<ANode> node);
 
-    virtual void insertInput(int index, std::shared_ptr<ANode> node);
-
-    virtual void insertOutput(int index, std::shared_ptr<ANode> node);
-
     virtual std::shared_ptr<Image> getOutputPtr();
 
     virtual std::vector<std::shared_ptr<ANode>> getInputs();
@@ -49,12 +45,6 @@ inline void ANode::setInput(std::shared_ptr<ANode> node) {
     }
 }
 
-inline void ANode::insertInput(int index, std::shared_ptr<ANode> node) {
-    if(index < this->inputs.size()){
-        this->inputs[index] = node;
-    }
-}
-
 inline void ANode::resetInput(std::shared_ptr<ANode> node) {
     this->inputs.clear();
 }
@@ -66,12 +56,6 @@ inline void ANode::resetOutput(std::shared_ptr<ANode> node) {
 
 inline void ANode::setOutput(std::shared_ptr<ANode> node) {
     this->outputs.push_back(node);
-}
-
-inline void ANode::insertOutput(int index, std::shared_ptr<ANode> node) {
-    if(index < this->outputs.size()){
-        this->outputs[index] = node;
-    }
 }
 
 inline std::vector<std::shared_ptr<ANode>> ANode::getInputs(){

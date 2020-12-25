@@ -7,7 +7,7 @@
 #include "Conveyor.h"
 
 Conveyor::Conveyor() {
-    this->nodes.push_back(std::make_shared<NodeOutput>());
+    this->nodes[0] = std::make_shared<NodeOutput>();
 }
 
 bool Conveyor::isCyclic() {
@@ -51,70 +51,66 @@ void Conveyor::process() {
     }
 }
 
-std::shared_ptr<ANode> Conveyor::putNode(std::shared_ptr<ANode> node) {
+size_t Conveyor::createNode(NodeType nodeType) {
     int id = this->idGenerator.getNewId();
-    if(nodes.size() == id){
-        nodes.push_back(node);
-    }
-    else{
-        nodes[id] = node;
-    }
-    return node;
-}
-
-std::shared_ptr<ANode> Conveyor::createNode(NodeType nodeType) {
     switch (nodeType) {
         case NodeType::NodeInput:
-            return putNode(std::make_shared<NodeInput>());
+            this->nodes[id] = std::make_shared<NodeInput>();
+            break;
         case NodeType::NegativeNode:
-            return putNode(std::make_shared<NegativeNode>());
+            this->nodes[id] = std::make_shared<NegativeNode>();
+            break;
         case NodeType::MedianNode:
-            return putNode(std::make_shared<MedianNode>());
+            this->nodes[id] = std::make_shared<MedianNode>();
+            break;
         case NodeType::GaussianNoiseNode:
-            return putNode(std::make_shared<GaussianNoiseNode>());
+            this->nodes[id] = std::make_shared<GaussianNoiseNode>();
+            break;
         case NodeType::GaussianBlurNode:
-            return putNode(std::make_shared<GaussianBlurNode>());
+            this->nodes[id] = std::make_shared<GaussianBlurNode>();
+            break;
         case NodeType::EdgeDetectionNode:
-            return putNode(std::make_shared<EdgeDetectionNode>());
+            this->nodes[id] = std::make_shared<EdgeDetectionNode>();
+            break;
         case NodeType::CombineNode:
-            return putNode(std::make_shared<CombineNode>());
+            this->nodes[id] = std::make_shared<CombineNode>();
+            break;
         case NodeType::ColorGeneratorNode:
-            return putNode(std::make_shared<ColorGeneratorNode>());
+            this->nodes[id] = std::make_shared<ColorGeneratorNode>();
+            break;
         case NodeType::BlackAndWhiteNode:
-            return putNode(std::make_shared<BlackAndWhiteNode>());
+            this->nodes[id] = std::make_shared<BlackAndWhiteNode>();
+            break;
     }
+    return id;
 }
 
 
-void Conveyor::createConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode) {
+void Conveyor::createConnection(size_t inputNodeId, size_t outputNodeId) {
+    std::shared_ptr<ANode> inputNode = this->nodes[inputNodeId];
+    std::shared_ptr<ANode> outputNode = this->nodes[outputNodeId];
     outputNode->setInput(inputNode);
     inputNode->setOutput(outputNode);
     if(isCyclic()){
-        std::cout << "Graph contains cycle!" << std::endl; //TODO raise some error
-        deleteConnection(inputNode, outputNode);
+        std::cout << "Graph contains cycle!" << std::endl;
+        deleteConnection(inputNodeId, outputNodeId);
     }
 }
 
-void Conveyor::deleteConnection(std::shared_ptr<ANode> nodeIn, std::shared_ptr<ANode> nodeOut) {
-    nodeIn->resetOutput(nodeOut);
-    nodeOut->resetInput(nodeIn);
+void Conveyor::deleteConnection(size_t inputNodeId, size_t outputNodeId) {
+    std::shared_ptr<ANode> inputNode = this->nodes[inputNodeId];
+    std::shared_ptr<ANode> outputNode = this->nodes[outputNodeId];
+    inputNode->resetOutput(outputNode);
+    outputNode->resetInput(inputNode);
 }
 
 void Conveyor::deleteNode(size_t nodeId) {
-    auto rmvNode = this->nodes[nodeId];
-    auto inputs = rmvNode->getInputs();
+    std::shared_ptr<ANode> rmvNode = this->nodes[nodeId];
+    std::vector<std::shared_ptr<ANode>> inputs = rmvNode->getInputs();
     for(int i = 0; i < inputs.size(); i++){
         inputs[i]->resetOutput(rmvNode);
     }
     inputs.clear();
     this->nodes[nodeId] = nullptr;
     this->idGenerator.freeId(nodeId);
-}
-
-std::shared_ptr<ANode> Conveyor::getOutputNode() {
-    return this->nodes[0];
-}
-
-std::vector<std::shared_ptr<ANode>> Conveyor::getNodes() {
-    return this->nodes;
 }

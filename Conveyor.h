@@ -25,33 +25,32 @@
 #include "nodes/CombineNode.h"
 #include "nodes/GaussianNoiseNode.h"
 #include "utilities/IdGenerator.h"
+#include "ISubject.h"
 
-class Conveyor {
+class Conveyor: public ISubject<Conveyor> {
+private:
+    std::map<size_t, std::shared_ptr<ANode>> nodes;
+    IdGenerator idGenerator;
+    bool isCyclic();
+    bool DFS(std::shared_ptr<ANode>, std::set<std::shared_ptr<ANode>>);
+    size_t createNode(NodeType nodeType);
+    void deleteNode(size_t nodeId);
+    void createConnection(size_t inputNodeId, size_t outputNodeId);
+    void deleteConnection(size_t inputNodeId, size_t outputNodeId);
+    void process();
+public:
+    Conveyor();
     friend class CreateNodeCommand;
     friend class DeleteNodeCommand;
     friend class CreateConnectionCommand;
     friend class DeleteConnectionCommand;
     friend class ProcessCommand;
-private:
-    std::vector<std::shared_ptr<ANode>> nodes;
-    std::shared_ptr<Image> result;
-    IdGenerator idGenerator;
-    bool isCyclic();
-    bool DFS(std::shared_ptr<ANode>, std::set<std::shared_ptr<ANode>>);
-    std::shared_ptr<ANode> putNode(std::shared_ptr<ANode> node);
-    std::shared_ptr<ANode> createNode(NodeType nodeType);
-    void deleteNode(size_t nodeId);
-    void createConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode);
-    void deleteConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode);
-    void process();
-public:
-    Conveyor();
-
-    std::shared_ptr<ANode> getOutputNode();
-    std::vector<size_t> getNodeIds();
-    std::vector<std::shared_ptr<ANode>> getNodes();
-
-
+    friend class SetColorGeneratorCommand;
+    friend class SetGaussianBlurCommand;
+    friend class SetGaussianNoiseCommand;
+    friend class SetMedianCommand;
+    friend class SetNodeInputCommand;
+    friend class SetNodeOutputCommand;
 };
 
 #endif
