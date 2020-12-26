@@ -75,4 +75,25 @@ add_executable(filters
         command/SetNodeInputCommand.cpp
         command/SetNodeInputCommand.h
         command/SetNodeOutputCommand.cpp
-        command/SetNodeOutputCommand.h command/AttachCommand.cpp command/AttachCommand.h)
+        command/SetNodeOutputCommand.h
+        cards/ColorGeneratorCard.cpp
+        cards/ColorGeneratorCard.h
+        cards/GaussianNoiseCard.cpp
+        cards/GaussianNoiseCard.h
+        cards/MedianCard.cpp
+        cards/MedianCard.h
+        cards/NodeOutputCard.cpp
+        cards/NodeOutputCard.h
+        command/AConnectCommand.h
+        command/ConnectGaussianBlurCommand.cpp
+        command/ConnectGaussianBlurCommand.h
+        command/ConnectInputCommand.cpp
+        command/ConnectInputCommand.h
+        command/ConnectOutputCommand.cpp
+        command/ConnectOutputCommand.h
+        command/ConnectMedianCommand.cpp
+        command/ConnectMedianCommand.h
+        command/ConnectGaussianNoiseCommand.cpp
+        command/ConnectGaussianNoiseCommand.h
+        command/ConnectColorGeneratorCommand.cpp
+        command/ConnectColorGeneratorCommand.h)
