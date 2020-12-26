@@ -21,3 +21,7 @@ void ConveyorManager::deleteConveyor(size_t id) {
 std::shared_ptr<Conveyor> ConveyorManager::getConveyorByID(size_t id) {
     return this->conveyors[id];
 }
+
+std::map<size_t, std::shared_ptr<Conveyor>> ConveyorManager::getConveyors() {
+    return this->conveyors;
+}

@@ -82,6 +82,7 @@ size_t Conveyor::createNode(NodeType nodeType) {
             this->nodes[id] = std::make_shared<BlackAndWhiteNode>();
             break;
     }
+    notify();
     return id;
 }
 
@@ -113,4 +114,8 @@ void Conveyor::deleteNode(size_t nodeId) {
     inputs.clear();
     this->nodes[nodeId] = nullptr;
     this->idGenerator.freeId(nodeId);
+}
+
+std::map<size_t, std::shared_ptr<ANode>> Conveyor::getNodes() {
+    return this->nodes;
 }

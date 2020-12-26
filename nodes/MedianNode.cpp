@@ -64,6 +64,7 @@ int MedianNode::getPositionMedian(std::vector<double> vec){
 
 void MedianNode::setMedian(int mdn) {
     this->N = mdn;
+    notify();
 }
 
 int MedianNode::getMedian() const {

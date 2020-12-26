@@ -22,6 +22,7 @@ private:
     void deleteConveyor(size_t id);
 public:
     std::shared_ptr<Conveyor> getConveyorByID(size_t);
+    std::map<size_t, std::shared_ptr<Conveyor>> getConveyors();
     friend class CreateConveyorCommand;
     friend class DeleteConveyorCommand;
 };

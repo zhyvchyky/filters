@@ -96,4 +96,4 @@ add_executable(filters
         command/ConnectGaussianNoiseCommand.cpp
         command/ConnectGaussianNoiseCommand.h
         command/ConnectColorGeneratorCommand.cpp
-        command/ConnectColorGeneratorCommand.h)
+        command/ConnectColorGeneratorCommand.h command/DisconnectColorGeneratorCommand.cpp command/DisconnectColorGeneratorCommand.h command/DisconnectGaussianBlurCommand.cpp command/DisconnectGaussianBlurCommand.h command/DisconnectGaussianNoiseCommand.cpp command/DisconnectGaussianNoiseCommand.h command/DisconnectInputCommand.cpp command/DisconnectInputCommand.h command/DisconnectMedianCommand.cpp command/DisconnectMedianCommand.h command/DisconnectOutputCommand.cpp command/DisconnectOutputCommand.h cards/ConveyorCard.cpp cards/ConveyorCard.h cards/ConveyorManagerCard.cpp cards/ConveyorManagerCard.h)

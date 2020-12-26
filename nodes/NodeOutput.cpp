@@ -32,6 +32,7 @@ void NodeOutput::writeImageToFile(std::shared_ptr<Image> image, const std::strin
 
 void NodeOutput::setFilePath(std::string filepath) {
     this->filePath = std::move(filepath);
+    notify();
 }
 
 std::string  NodeOutput::getFilePath() {

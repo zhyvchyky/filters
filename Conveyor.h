@@ -40,6 +40,7 @@ private:
     void process();
 public:
     Conveyor();
+    std::map<size_t, std::shared_ptr<ANode>> getNodes();
     friend class CreateNodeCommand;
     friend class DeleteNodeCommand;
     friend class CreateConnectionCommand;
@@ -57,6 +58,12 @@ public:
     friend class ConnectMedianCommand;
     friend class ConnectGaussianNoiseCommand;
     friend class ConnectColorGeneratorCommand;
+    friend class DisconnectGaussianBlurCommand;
+    friend class DisconnectInputCommand;
+    friend class DisconnectOutputCommand;
+    friend class DisconnectMedianCommand;
+    friend class DisconnectGaussianNoiseCommand;
+    friend class DisconnectColorGeneratorCommand;
 };
 
 #endif

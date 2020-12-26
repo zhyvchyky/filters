@@ -29,6 +29,7 @@ void ColorGeneratorNode::setColorValues(int colorRed, int colorGreen, int colorB
     this->blue = colorBlue;
     this->height = h;
     this->width = w;
+    notify();
 }
 
 std::tuple<int, int, int, int, int> ColorGeneratorNode::getColorValues() {
