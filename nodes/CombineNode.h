@@ -10,12 +10,11 @@
 
 class CombineNode: public ANode, public ISubject<CombineNode> {
 private:
-
+    void process() override;
 
     std::shared_ptr<Image> combine();
 
 public:
-    void process() override;
     NodeType getNodeType() override;
 
     void setInput(std::shared_ptr<ANode> node) override;

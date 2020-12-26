@@ -6,7 +6,6 @@
 #define FILTERS_DELETECONVEYORCOMMAND_H
 
 #include "ICommand.h"
-#include <memory>
 #include "ConveyorManager.h"
 
 class DeleteConveyorCommand: public ICommand {

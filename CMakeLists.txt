@@ -51,4 +51,28 @@ add_executable(filters
         ISubject.h
         cards/GaussianBlurCard.cpp
         cards/GaussianBlurCard.h
-        utilities/CustomStack.h command/CreateConveyorCommand.cpp command/CreateConveyorCommand.h command/CreateConnectionCommand.cpp command/CreateConnectionCommand.h command/DeleteConnectionCommand.cpp command/DeleteConnectionCommand.h command/DeleteConveyorCommand.cpp command/DeleteConveyorCommand.h command/DeleteNodeCommand.cpp command/DeleteNodeCommand.h command/ProcessCommand.cpp command/ProcessCommand.h utilities/EnumToStr.cpp utilities/EnumToStr.h command/SetColorGeneratorCommand.cpp command/SetColorGeneratorCommand.h command/SetGaussianBlurCommand.cpp command/SetGaussianBlurCommand.h command/SetGaussianNoiseCommand.cpp command/SetGaussianNoiseCommand.h command/SetMedianCommand.cpp command/SetMedianCommand.h command/SetNodeInputCommand.cpp command/SetNodeInputCommand.h command/SetNodeOutputCommand.cpp command/SetNodeOutputCommand.h)
+        utilities/CustomStack.h
+        command/CreateConveyorCommand.cpp
+        command/CreateConveyorCommand.h
+        command/CreateConnectionCommand.cpp
+        command/CreateConnectionCommand.h
+        command/DeleteConnectionCommand.cpp
+        command/DeleteConnectionCommand.h
+        command/DeleteConveyorCommand.cpp
+        command/DeleteConveyorCommand.h
+        command/DeleteNodeCommand.cpp
+        command/DeleteNodeCommand.h
+        command/ProcessCommand.cpp
+        command/ProcessCommand.h
+        command/SetColorGeneratorCommand.cpp
+        command/SetColorGeneratorCommand.h
+        command/SetGaussianBlurCommand.cpp
+        command/SetGaussianBlurCommand.h
+        command/SetGaussianNoiseCommand.cpp
+        command/SetGaussianNoiseCommand.h
+        command/SetMedianCommand.cpp
+        command/SetMedianCommand.h
+        command/SetNodeInputCommand.cpp
+        command/SetNodeInputCommand.h
+        command/SetNodeOutputCommand.cpp
+        command/SetNodeOutputCommand.h command/AttachCommand.cpp command/AttachCommand.h)

@@ -12,7 +12,6 @@
 
 #include "Conveyor.h"
 #include "utilities/IdGenerator.h"
-#include "utilities/EnumToStr.h"
 
 
 class ConveyorManager: public ISubject<ConveyorManager> {

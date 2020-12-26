@@ -6,7 +6,6 @@
 #define FILTERS_CREATECONVEYORCOMMAND_H
 
 #include "ICommand.h"
-#include <memory>
 #include "ConveyorManager.h"
 
 

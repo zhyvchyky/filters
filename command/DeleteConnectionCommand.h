@@ -6,7 +6,6 @@
 #define FILTERS_DELETECONNECTIONCOMMAND_H
 
 #include "ICommand.h"
-#include <memory>
 #include "ConveyorManager.h"
 
 class DeleteConnectionCommand : public ICommand {

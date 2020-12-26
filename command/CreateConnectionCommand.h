@@ -6,7 +6,6 @@
 #define FILTERS_CREATECONNECTIONCOMMAND_H
 
 #include "ICommand.h"
-#include <memory>
 #include "ConveyorManager.h"
 
 class CreateConnectionCommand: public ICommand {

@@ -16,15 +16,14 @@ class GaussianBlurNode: public ANode, public ISubject<GaussianBlurNode> {
 private:
     int N; //radius of blur must fall between 1 and 100
 
-
-
+    void setRadius(int radius);
     std::shared_ptr<Image> applyTransform(const std::shared_ptr<Image>& img1);
     double* calcWeights();
     Pixel regulatePixel(Pixel pxl);
-public:
     void process() override;
-
-    void setRadius(int radius);
+public:
+    friend class SetGaussianBlurCommand;
+    friend class EdgeDetectionNode;
 
     int getRadius() const;
 

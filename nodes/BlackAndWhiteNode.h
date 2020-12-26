@@ -11,11 +11,12 @@
 
 class BlackAndWhiteNode: public ANode, public ISubject<BlackAndWhiteNode> {
 private:
-
+    void process() override;
 
     std::shared_ptr<Image> applyTransform(const std::shared_ptr<Image>&);
 public:
-    void process() override;
+    friend class EdgeDetectionNode;
+
     NodeType getNodeType() override;
 };
 

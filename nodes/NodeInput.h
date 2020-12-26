@@ -18,14 +18,13 @@ class NodeInput : public ANode, public ISubject<NodeInput> {
 private:
     std::string filePath;
 
+    void setFilePath(std::string filepath);
     static std::shared_ptr<Image> getImageFromFile(const std::string &path);
-
     static std::tuple<int, int, int, int> getHeader(std::ifstream &input);
-
-public:
     void process() override;
 
-    void setFilePath(std::string filepath);
+public:
+    friend class SetNodeInputCommand;
 
     std::string getFilePath();
 

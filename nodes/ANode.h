@@ -8,6 +8,7 @@
 #include <memory>
 #include <vector>
 #include <variant>
+#include <algorithm>
 #include "Image.h"
 #include "NodeType.h"
 
@@ -16,10 +17,11 @@ protected:
     std::shared_ptr<Image> outputPtr;
     std::vector<std::shared_ptr<ANode>> outputs;
     std::vector<std::shared_ptr<ANode>> inputs;
-
-public:
-    virtual NodeType getNodeType() = 0;
     virtual void process() = 0;
+public:
+    friend class Conveyor;
+
+    virtual NodeType getNodeType() = 0;
 
     virtual void setOutput(std::shared_ptr<ANode> node);
 
