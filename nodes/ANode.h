@@ -55,7 +55,6 @@ inline void ANode::resetOutput(std::shared_ptr<ANode> node) {
     this->outputs.erase(std::find(this->outputs.begin(), this->outputs.end(), node));
 }
 
-
 inline void ANode::setOutput(std::shared_ptr<ANode> node) {
     this->outputs.push_back(node);
 }

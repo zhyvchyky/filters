@@ -41,13 +41,24 @@ int main() {
     auto cardConveyorManager = std::make_shared<ConveyorManagerCard>();
     auto conn = std::make_shared<ConnectConveyorManagerCommand>(filters->getConveyorManager(), cardConveyorManager);
     filters->executeCommand(conn);
-    auto cc = std::make_shared<CreateConveyorCommand>(filters->getConveyorManager());
-    filters->executeCommand(cc);
+    auto cc1 = std::make_shared<CreateConveyorCommand>(filters->getConveyorManager());
+    filters->executeCommand(cc1);
+
+    auto cc2 = std::make_shared<CreateConveyorCommand>(filters->getConveyorManager());
+    filters->executeCommand(cc2);
+
     std::cout<<cardConveyorManager->getConveyors().size();
+
     auto dcc = std::make_shared<DisconnectConveyorManagerCommand>(filters->getConveyorManager(), cardConveyorManager);
     filters->executeCommand(dcc);
     auto conn1 = std::make_shared<ConnectConveyorManagerCommand>(filters->getConveyorManager(), cardConveyorManager);
     filters->executeCommand(conn1);
+
+    std::cout<<cardConveyorManager->getConveyors().size();
+
+
+    auto deleteConveyorCommand = std::make_shared<DeleteConveyorCommand>(filters->getConveyorManager(), 0);
+    filters->executeCommand(deleteConveyorCommand);
     std::cout<<cardConveyorManager->getConveyors().size();
 //    auto filters = std::make_shared<Filters>();
 ////Create Conveyor

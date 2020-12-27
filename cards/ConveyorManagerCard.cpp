@@ -4,7 +4,7 @@
 
 #include "ConveyorManagerCard.h"
 
-std::map<size_t, std::shared_ptr<Conveyor>> ConveyorManagerCard::getConveyors() {
+std::vector<std::shared_ptr<Conveyor>> ConveyorManagerCard::getConveyors() {
     return this->conveyors;
 }
 

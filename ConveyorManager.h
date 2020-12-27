@@ -16,13 +16,14 @@
 
 class ConveyorManager: public ISubject<ConveyorManager> {
 private:
-    std::map<size_t, std::shared_ptr<Conveyor>> conveyors;
+    size_t curId = 0;
+    std::vector<std::shared_ptr<Conveyor>> conveyors;
     IdGenerator idGenerator;
     size_t createConveyor();
     void deleteConveyor(size_t id);
 public:
     std::shared_ptr<Conveyor> getConveyorByID(size_t);
-    std::map<size_t, std::shared_ptr<Conveyor>> getConveyors();
+    std::vector<std::shared_ptr<Conveyor>> getConveyors();
     friend class CreateConveyorCommand;
     friend class DeleteConveyorCommand;
 };

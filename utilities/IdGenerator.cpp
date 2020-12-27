@@ -5,7 +5,7 @@
 #include "IdGenerator.h"
 
 size_t IdGenerator::getNewId() {
-    if(this->freedIds.empty()){
+    if(this->freedIds.size() == 0){
         return currentId++;
     } else {
         size_t retValue = this->freedIds.front();
