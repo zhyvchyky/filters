@@ -6,10 +6,9 @@
 #define FILTERS_CREATECONVEYORCOMMAND_H
 
 #include "ICommand.h"
-#include <memory>
 #include "ConveyorManager.h"
 
-class ConveyorManager;
+
 class CreateConveyorCommand: public ICommand {
     std::shared_ptr<ConveyorManager> receiver;
 

@@ -14,29 +14,56 @@
 #include "Image.h"
 #include "NodeType.h"
 #include "nodes/ANode.h"
+#include "nodes/NodeInput.h"
+#include "nodes/NodeOutput.h"
+#include "nodes/EdgeDetectionNode.h"
+#include "nodes/BlackAndWhiteNode.h"
+#include "nodes/GaussianBlurNode.h"
+#include "nodes/NegativeNode.h"
+#include "nodes/MedianNode.h"
+#include "nodes/ColorGeneratorNode.h"
+#include "nodes/CombineNode.h"
+#include "nodes/GaussianNoiseNode.h"
 #include "utilities/IdGenerator.h"
+#include "ISubject.h"
 
-class Conveyor {
+class Conveyor: public ISubject<Conveyor> {
 private:
-    std::vector<std::shared_ptr<ANode>> nodes;
-    std::shared_ptr<Image> result;
+    std::map<size_t, std::shared_ptr<ANode>> nodes;
     IdGenerator idGenerator;
     bool isCyclic();
     bool DFS(std::shared_ptr<ANode>, std::set<std::shared_ptr<ANode>>);
-    std::shared_ptr<ANode> putNode(std::shared_ptr<ANode> node);
+    size_t createNode(NodeType nodeType);
+    void deleteNode(size_t nodeId);
+    void createConnection(size_t inputNodeId, size_t outputNodeId);
+    void deleteConnection(size_t inputNodeId, size_t outputNodeId);
+    void process();
 public:
     Conveyor();
-
-    std::shared_ptr<ANode> createNode(NodeType nodeType);
-    std::shared_ptr<ANode> getOutputNode();
-    void deleteNode(size_t nodeId);
-    std::vector<size_t> getNodeIds();
-    void process();
-    std::vector<std::shared_ptr<ANode>> getNodes();
-
-    void createConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode);
-    void deleteConnection(std::shared_ptr<ANode> inputNode, std::shared_ptr<ANode> outputNode);
-
+    std::map<size_t, std::shared_ptr<ANode>> getNodes();
+    friend class CreateNodeCommand;
+    friend class DeleteNodeCommand;
+    friend class CreateConnectionCommand;
+    friend class DeleteConnectionCommand;
+    friend class ProcessCommand;
+    friend class SetColorGeneratorCommand;
+    friend class SetGaussianBlurCommand;
+    friend class SetGaussianNoiseCommand;
+    friend class SetMedianCommand;
+    friend class SetNodeInputCommand;
+    friend class SetNodeOutputCommand;
+    friend class ConnectGaussianBlurCommand;
+    friend class ConnectInputCommand;
+    friend class ConnectOutputCommand;
+    friend class ConnectMedianCommand;
+    friend class ConnectGaussianNoiseCommand;
+    friend class ConnectColorGeneratorCommand;
+    friend class DisconnectGaussianBlurCommand;
+    friend class DisconnectInputCommand;
+    friend class DisconnectOutputCommand;
+    friend class DisconnectMedianCommand;
+    friend class DisconnectGaussianNoiseCommand;
+    friend class DisconnectColorGeneratorCommand;
 };
 
 #endif

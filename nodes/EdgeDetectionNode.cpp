@@ -197,3 +197,7 @@ std::shared_ptr<Image> EdgeDetectionNode::applyTransform() {
     img1 = dThresholdEdgeDetector(img1);
     return img1;
 }
+
+NodeType EdgeDetectionNode::getNodeType() {
+    return NodeType::EdgeDetectionNode;
+}

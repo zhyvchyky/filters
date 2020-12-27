@@ -8,18 +8,20 @@
 #include <memory>
 #include <vector>
 #include <variant>
+#include <algorithm>
 #include "Image.h"
+#include "NodeType.h"
 
 class ANode {
 protected:
     std::shared_ptr<Image> outputPtr;
     std::vector<std::shared_ptr<ANode>> outputs;
     std::vector<std::shared_ptr<ANode>> inputs;
-
-
-public:
-
     virtual void process() = 0;
+public:
+    friend class Conveyor;
+
+    virtual NodeType getNodeType() = 0;
 
     virtual void setOutput(std::shared_ptr<ANode> node);
 
@@ -28,10 +30,6 @@ public:
     virtual void setInput(std::shared_ptr<ANode> node);
 
     virtual void resetInput(std::shared_ptr<ANode> node);
-
-    virtual void insertInput(int index, std::shared_ptr<ANode> node);
-
-    virtual void insertOutput(int index, std::shared_ptr<ANode> node);
 
     virtual std::shared_ptr<Image> getOutputPtr();
 
@@ -49,12 +47,6 @@ inline void ANode::setInput(std::shared_ptr<ANode> node) {
     }
 }
 
-inline void ANode::insertInput(int index, std::shared_ptr<ANode> node) {
-    if(index < this->inputs.size()){
-        this->inputs[index] = node;
-    }
-}
-
 inline void ANode::resetInput(std::shared_ptr<ANode> node) {
     this->inputs.clear();
 }
@@ -63,15 +55,8 @@ inline void ANode::resetOutput(std::shared_ptr<ANode> node) {
     this->outputs.erase(std::find(this->outputs.begin(), this->outputs.end(), node));
 }
 
-
 inline void ANode::setOutput(std::shared_ptr<ANode> node) {
     this->outputs.push_back(node);
-}
-
-inline void ANode::insertOutput(int index, std::shared_ptr<ANode> node) {
-    if(index < this->outputs.size()){
-        this->outputs[index] = node;
-    }
 }
 
 inline std::vector<std::shared_ptr<ANode>> ANode::getInputs(){

@@ -38,8 +38,13 @@ void GaussianNoiseNode::setNoise(int ns, int h, int w) {
     this->noise = ns;
     this->height = h;
     this->width = w;
+    notify();
 }
 
 std::tuple<int,int,int> GaussianNoiseNode::getNoise() {
     return std::make_tuple(this->noise, this->height, this->width);
+}
+
+NodeType GaussianNoiseNode::getNodeType() {
+    return NodeType::GaussianBlurNode;
 }

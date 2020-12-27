@@ -7,13 +7,15 @@
 
 #include "ICommand.h"
 #include "NodeType.h"
+#include "ConveyorManager.h"
 
 class CreateNodeCommand: public ICommand{
 private:
     NodeType nodeType;
     size_t conveyorId;
+    std::shared_ptr<ConveyorManager> receiver;
 public:
-    CreateNodeCommand(size_t conveyorId, NodeType nodeType);
+    CreateNodeCommand( std::shared_ptr<ConveyorManager> rec, size_t conveyorId, NodeType nodeType);
     bool execute() override;
 };
 

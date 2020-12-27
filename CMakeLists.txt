@@ -51,4 +51,49 @@ add_executable(filters
         ISubject.h
         cards/GaussianBlurCard.cpp
         cards/GaussianBlurCard.h
-        utilities/CustomStack.h command/CreateConveyorCommand.cpp command/CreateConveyorCommand.h)
+        utilities/CustomStack.h
+        command/CreateConveyorCommand.cpp
+        command/CreateConveyorCommand.h
+        command/CreateConnectionCommand.cpp
+        command/CreateConnectionCommand.h
+        command/DeleteConnectionCommand.cpp
+        command/DeleteConnectionCommand.h
+        command/DeleteConveyorCommand.cpp
+        command/DeleteConveyorCommand.h
+        command/DeleteNodeCommand.cpp
+        command/DeleteNodeCommand.h
+        command/ProcessCommand.cpp
+        command/ProcessCommand.h
+        command/SetColorGeneratorCommand.cpp
+        command/SetColorGeneratorCommand.h
+        command/SetGaussianBlurCommand.cpp
+        command/SetGaussianBlurCommand.h
+        command/SetGaussianNoiseCommand.cpp
+        command/SetGaussianNoiseCommand.h
+        command/SetMedianCommand.cpp
+        command/SetMedianCommand.h
+        command/SetNodeInputCommand.cpp
+        command/SetNodeInputCommand.h
+        command/SetNodeOutputCommand.cpp
+        command/SetNodeOutputCommand.h
+        cards/ColorGeneratorCard.cpp
+        cards/ColorGeneratorCard.h
+        cards/GaussianNoiseCard.cpp
+        cards/GaussianNoiseCard.h
+        cards/MedianCard.cpp
+        cards/MedianCard.h
+        cards/NodeOutputCard.cpp
+        cards/NodeOutputCard.h
+        command/AConnectCommand.h
+        command/ConnectGaussianBlurCommand.cpp
+        command/ConnectGaussianBlurCommand.h
+        command/ConnectInputCommand.cpp
+        command/ConnectInputCommand.h
+        command/ConnectOutputCommand.cpp
+        command/ConnectOutputCommand.h
+        command/ConnectMedianCommand.cpp
+        command/ConnectMedianCommand.h
+        command/ConnectGaussianNoiseCommand.cpp
+        command/ConnectGaussianNoiseCommand.h
+        command/ConnectColorGeneratorCommand.cpp
+        command/ConnectColorGeneratorCommand.h command/DisconnectColorGeneratorCommand.cpp command/DisconnectColorGeneratorCommand.h command/DisconnectGaussianBlurCommand.cpp command/DisconnectGaussianBlurCommand.h command/DisconnectGaussianNoiseCommand.cpp command/DisconnectGaussianNoiseCommand.h command/DisconnectInputCommand.cpp command/DisconnectInputCommand.h command/DisconnectMedianCommand.cpp command/DisconnectMedianCommand.h command/DisconnectOutputCommand.cpp command/DisconnectOutputCommand.h cards/ConveyorCard.cpp cards/ConveyorCard.h cards/ConveyorManagerCard.cpp cards/ConveyorManagerCard.h command/ConnectConveyorCommand.cpp command/ConnectConveyorCommand.h command/DisconnectConveyorCommand.cpp command/DisconnectConveyorCommand.h command/ConnectConveyorManagerCommand.cpp command/ConnectConveyorManagerCommand.h command/DisconnectConveyorManagerCommand.cpp command/DisconnectConveyorManagerCommand.h)

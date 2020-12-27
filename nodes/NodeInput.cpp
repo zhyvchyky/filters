@@ -75,3 +75,7 @@ void NodeInput::setFilePath(std::string filepath) {
 std::string NodeInput::getFilePath() {
     return this->filePath;
 }
+
+NodeType NodeInput::getNodeType() {
+    return NodeType::NodeInput;
+}

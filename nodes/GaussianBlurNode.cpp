@@ -65,3 +65,7 @@ Pixel GaussianBlurNode::regulatePixel(Pixel pxl) {
     if(pxl.blue > 255){pxl.blue = 255;}
     return pxl;
 }
+
+NodeType GaussianBlurNode::getNodeType() {
+    return NodeType::GaussianBlurNode;
+}

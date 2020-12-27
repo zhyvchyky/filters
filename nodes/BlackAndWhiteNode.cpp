@@ -27,3 +27,7 @@ std::shared_ptr<Image> BlackAndWhiteNode::applyTransform(const std::shared_ptr<I
     }
     return new_img;
 }
+
+NodeType BlackAndWhiteNode::getNodeType() {
+    return NodeType::BlackAndWhiteNode;
+}

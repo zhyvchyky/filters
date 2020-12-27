@@ -7,18 +7,20 @@
 
 
 #include "ANode.h"
+#include "ISubject.h"
 #include <cassert>
 
-class ColorGeneratorNode: public ANode {
+class ColorGeneratorNode: public ANode, public ISubject<ColorGeneratorNode> {
 private:
-    int red,green,blue, height, width;
+    int red, green, blue, height, width;
 
+    void process() override;
+    void setColorValues(int colorRed, int colorGreen, int colorBlue, int h, int w);
     std::shared_ptr<Image> genColor();
 public:
-    void process() override;
+    friend class SetColorGeneratorCommand;
 
-    void setColorValues(int colorRed, int colorGreen, int colorBlue, int h, int w);
-
+    NodeType getNodeType() override;
     std::tuple<int, int, int, int ,int> getColorValues();
 };
 
