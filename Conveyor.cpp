@@ -96,6 +96,7 @@ void Conveyor::createConnection(size_t inputNodeId, size_t outputNodeId) {
         std::cout << "Graph contains cycle!" << std::endl;
         deleteConnection(inputNodeId, outputNodeId);
     }
+    notify();
 }
 
 void Conveyor::deleteConnection(size_t inputNodeId, size_t outputNodeId) {
@@ -103,6 +104,7 @@ void Conveyor::deleteConnection(size_t inputNodeId, size_t outputNodeId) {
     std::shared_ptr<ANode> outputNode = this->nodes[outputNodeId];
     inputNode->resetOutput(outputNode);
     outputNode->resetInput(inputNode);
+    notify();
 }
 
 void Conveyor::deleteNode(size_t nodeId) {

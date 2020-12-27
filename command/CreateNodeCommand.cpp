@@ -4,7 +4,7 @@
 
 #include "CreateNodeCommand.h"
 
-CreateNodeCommand::CreateNodeCommand(size_t conveyorId, NodeType nodeType, std::shared_ptr<ConveyorManager> rec) {
+CreateNodeCommand::CreateNodeCommand(std::shared_ptr<ConveyorManager> rec, size_t conveyorId, NodeType nodeType) {
     this->conveyorId = conveyorId;
     this->nodeType = nodeType;
     this->receiver = rec;

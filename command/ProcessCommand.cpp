@@ -4,7 +4,7 @@
 
 #include "ProcessCommand.h"
 
-ProcessCommand::ProcessCommand(size_t conveyorId, std::shared_ptr<ConveyorManager> rec) {
+ProcessCommand::ProcessCommand(std::shared_ptr<ConveyorManager> rec, size_t conveyorId) {
     this->conveyorId = conveyorId;
     this->receiver = rec;
 }

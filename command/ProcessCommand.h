@@ -14,7 +14,7 @@ private:
     size_t conveyorId;
     std::shared_ptr<ConveyorManager> receiver;
 public:
-    ProcessCommand(size_t conveyorId, std::shared_ptr<ConveyorManager> rec);
+    ProcessCommand(std::shared_ptr<ConveyorManager> rec, size_t conveyorId);
     bool execute() override;
 };
 
