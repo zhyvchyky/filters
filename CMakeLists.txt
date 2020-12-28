@@ -1,9 +1,14 @@
 cmake_minimum_required(VERSION 3.17)
 project(filters)
-
+set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories(.)
+
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+
 
 add_executable(filters
         CMakeLists.txt
@@ -43,57 +48,86 @@ add_executable(filters
         utilities/IdGenerator.cpp
         utilities/IdGenerator.h
         command/ICommand.h
-        command/CreateNodeCommand.cpp
-        command/CreateNodeCommand.h
-        cards/NodeInputCard.cpp
-        cards/NodeInputCard.h
+        command/createCommands/CreateNodeCommand.cpp
+        command/createCommands/CreateNodeCommand.h
+        gui/cards/NodeInputCard.cpp
+        gui/cards/NodeInputCard.h
         IObserver.h
         ISubject.h
-        cards/GaussianBlurCard.cpp
-        cards/GaussianBlurCard.h
+        gui/cards/GaussianBlurCard.cpp
+        gui/cards/GaussianBlurCard.h
         utilities/CustomStack.h
-        command/CreateConveyorCommand.cpp
-        command/CreateConveyorCommand.h
-        command/CreateConnectionCommand.cpp
-        command/CreateConnectionCommand.h
-        command/DeleteConnectionCommand.cpp
-        command/DeleteConnectionCommand.h
-        command/DeleteConveyorCommand.cpp
-        command/DeleteConveyorCommand.h
-        command/DeleteNodeCommand.cpp
-        command/DeleteNodeCommand.h
+        command/createCommands/CreateConveyorCommand.cpp
+        command/createCommands/CreateConveyorCommand.h
+        command/createCommands/CreateConnectionCommand.cpp
+        command/createCommands/CreateConnectionCommand.h
+        command/deleteCommands/DeleteConnectionCommand.cpp
+        command/deleteCommands/DeleteConnectionCommand.h
+        command/deleteCommands/DeleteConveyorCommand.cpp
+        command/deleteCommands/DeleteConveyorCommand.h
+        command/deleteCommands/DeleteNodeCommand.cpp
+        command/deleteCommands/DeleteNodeCommand.h
         command/ProcessCommand.cpp
         command/ProcessCommand.h
-        command/SetColorGeneratorCommand.cpp
-        command/SetColorGeneratorCommand.h
-        command/SetGaussianBlurCommand.cpp
-        command/SetGaussianBlurCommand.h
-        command/SetGaussianNoiseCommand.cpp
-        command/SetGaussianNoiseCommand.h
-        command/SetMedianCommand.cpp
-        command/SetMedianCommand.h
-        command/SetNodeInputCommand.cpp
-        command/SetNodeInputCommand.h
-        command/SetNodeOutputCommand.cpp
-        command/SetNodeOutputCommand.h
-        cards/ColorGeneratorCard.cpp
-        cards/ColorGeneratorCard.h
-        cards/GaussianNoiseCard.cpp
-        cards/GaussianNoiseCard.h
-        cards/MedianCard.cpp
-        cards/MedianCard.h
-        cards/NodeOutputCard.cpp
-        cards/NodeOutputCard.h
-        command/AConnectCommand.h
-        command/ConnectGaussianBlurCommand.cpp
-        command/ConnectGaussianBlurCommand.h
-        command/ConnectInputCommand.cpp
-        command/ConnectInputCommand.h
-        command/ConnectOutputCommand.cpp
-        command/ConnectOutputCommand.h
-        command/ConnectMedianCommand.cpp
-        command/ConnectMedianCommand.h
-        command/ConnectGaussianNoiseCommand.cpp
-        command/ConnectGaussianNoiseCommand.h
-        command/ConnectColorGeneratorCommand.cpp
-        command/ConnectColorGeneratorCommand.h command/DisconnectColorGeneratorCommand.cpp command/DisconnectColorGeneratorCommand.h command/DisconnectGaussianBlurCommand.cpp command/DisconnectGaussianBlurCommand.h command/DisconnectGaussianNoiseCommand.cpp command/DisconnectGaussianNoiseCommand.h command/DisconnectInputCommand.cpp command/DisconnectInputCommand.h command/DisconnectMedianCommand.cpp command/DisconnectMedianCommand.h command/DisconnectOutputCommand.cpp command/DisconnectOutputCommand.h cards/ConveyorCard.cpp cards/ConveyorCard.h cards/ConveyorManagerCard.cpp cards/ConveyorManagerCard.h command/ConnectConveyorCommand.cpp command/ConnectConveyorCommand.h command/DisconnectConveyorCommand.cpp command/DisconnectConveyorCommand.h command/ConnectConveyorManagerCommand.cpp command/ConnectConveyorManagerCommand.h command/DisconnectConveyorManagerCommand.cpp command/DisconnectConveyorManagerCommand.h)
+        command/setCommands/SetColorGeneratorCommand.cpp
+        command/setCommands/SetColorGeneratorCommand.h
+        command/setCommands/SetGaussianBlurCommand.cpp
+        command/setCommands/SetGaussianBlurCommand.h
+        command/setCommands/SetGaussianNoiseCommand.cpp
+        command/setCommands/SetGaussianNoiseCommand.h
+        command/setCommands/SetMedianCommand.cpp
+        command/setCommands/SetMedianCommand.h
+        command/setCommands/SetNodeInputCommand.cpp
+        command/setCommands/SetNodeInputCommand.h
+        command/setCommands/SetNodeOutputCommand.cpp
+        command/setCommands/SetNodeOutputCommand.h
+        gui/cards/ColorGeneratorCard.cpp
+        gui/cards/ColorGeneratorCard.h
+        gui/cards/GaussianNoiseCard.cpp
+        gui/cards/GaussianNoiseCard.h
+        gui/cards/MedianCard.cpp
+        gui/cards/MedianCard.h
+        gui/cards/NodeOutputCard.cpp
+        gui/cards/NodeOutputCard.h
+        command/attachCommands/AConnectCommand.h
+        command/attachCommands/ConnectGaussianBlurCommand.cpp
+        command/attachCommands/ConnectGaussianBlurCommand.h
+        command/attachCommands/ConnectInputCommand.cpp
+        command/attachCommands/ConnectInputCommand.h
+        command/attachCommands/ConnectOutputCommand.cpp
+        command/attachCommands/ConnectOutputCommand.h
+        command/attachCommands/ConnectMedianCommand.cpp
+        command/attachCommands/ConnectMedianCommand.h
+        command/attachCommands/ConnectGaussianNoiseCommand.cpp
+        command/attachCommands/ConnectGaussianNoiseCommand.h
+        command/attachCommands/ConnectColorGeneratorCommand.cpp
+        command/attachCommands/ConnectColorGeneratorCommand.h
+        command/deattach/DisconnectColorGeneratorCommand.cpp
+        command/deattach/DisconnectColorGeneratorCommand.h
+        command/deattach/DisconnectGaussianBlurCommand.cpp
+        command/deattach/DisconnectGaussianBlurCommand.h
+        command/deattach/DisconnectGaussianNoiseCommand.cpp
+        command/deattach/DisconnectGaussianNoiseCommand.h
+        command/deattach/DisconnectInputCommand.cpp
+        command/deattach/DisconnectInputCommand.h
+        command/deattach/DisconnectMedianCommand.cpp
+        command/deattach/DisconnectMedianCommand.h
+        command/deattach/DisconnectOutputCommand.cpp
+        command/deattach/DisconnectOutputCommand.h
+        gui/cards/ConveyorCard.cpp
+        gui/cards/ConveyorCard.h
+        gui/cards/ConveyorManagerCard.cpp
+        gui/cards/ConveyorManagerCard.h
+        command/attachCommands/ConnectConveyorCommand.cpp
+        command/attachCommands/ConnectConveyorCommand.h
+        command/deattach/DisconnectConveyorCommand.cpp
+        command/deattach/DisconnectConveyorCommand.h
+        command/attachCommands/ConnectConveyorManagerCommand.cpp
+        command/attachCommands/ConnectConveyorManagerCommand.h
+        command/deattach/DisconnectConveyorManagerCommand.cpp
+        command/deattach/DisconnectConveyorManagerCommand.h gui/FiltersScene.cpp gui/FiltersScene.h gui/FiltersView.cpp gui/FiltersView.h)
+
+target_link_libraries(filters Qt5::Core)
+target_link_libraries(filters Qt5::Gui)
+target_link_libraries(filters Qt5::Widgets)
+
