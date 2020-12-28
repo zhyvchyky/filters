@@ -125,7 +125,11 @@ add_executable(filters
         command/attachCommands/AttachConveyorManagerCommand.cpp
         command/attachCommands/AttachConveyorManagerCommand.h
         command/deattach/DeattachConveyorManagerCommand.cpp
-        command/deattach/DeattachConveyorManagerCommand.h gui/FiltersScene.cpp gui/FiltersScene.h gui/FiltersView.cpp gui/FiltersView.h)
+        command/deattach/DeattachConveyorManagerCommand.h
+        gui/FiltersScene.cpp gui/FiltersScene.h
+        gui/FiltersView.cpp gui/FiltersView.h
+        gui/FiltersWindow.cpp gui/FiltersWindow.h
+        )
 
 target_link_libraries(filters Qt5::Core)
 target_link_libraries(filters Qt5::Gui)
