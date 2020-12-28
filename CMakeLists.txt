@@ -89,43 +89,43 @@ add_executable(filters
         gui/cards/MedianCard.h
         gui/cards/NodeOutputCard.cpp
         gui/cards/NodeOutputCard.h
-        command/attachCommands/AConnectCommand.h
-        command/attachCommands/ConnectGaussianBlurCommand.cpp
-        command/attachCommands/ConnectGaussianBlurCommand.h
-        command/attachCommands/ConnectInputCommand.cpp
-        command/attachCommands/ConnectInputCommand.h
-        command/attachCommands/ConnectOutputCommand.cpp
-        command/attachCommands/ConnectOutputCommand.h
-        command/attachCommands/ConnectMedianCommand.cpp
-        command/attachCommands/ConnectMedianCommand.h
-        command/attachCommands/ConnectGaussianNoiseCommand.cpp
-        command/attachCommands/ConnectGaussianNoiseCommand.h
-        command/attachCommands/ConnectColorGeneratorCommand.cpp
-        command/attachCommands/ConnectColorGeneratorCommand.h
-        command/deattach/DisconnectColorGeneratorCommand.cpp
-        command/deattach/DisconnectColorGeneratorCommand.h
-        command/deattach/DisconnectGaussianBlurCommand.cpp
-        command/deattach/DisconnectGaussianBlurCommand.h
-        command/deattach/DisconnectGaussianNoiseCommand.cpp
-        command/deattach/DisconnectGaussianNoiseCommand.h
-        command/deattach/DisconnectInputCommand.cpp
-        command/deattach/DisconnectInputCommand.h
-        command/deattach/DisconnectMedianCommand.cpp
-        command/deattach/DisconnectMedianCommand.h
-        command/deattach/DisconnectOutputCommand.cpp
-        command/deattach/DisconnectOutputCommand.h
+        command/attachCommands/AAttachCommand.h
+        command/attachCommands/AttachGaussianBlurCommand.cpp
+        command/attachCommands/AttachGaussianBlurCommand.h
+        command/attachCommands/AttachInputCommand.cpp
+        command/attachCommands/AttachInputCommand.h
+        command/attachCommands/AttachOutputCommand.cpp
+        command/attachCommands/AttachOutputCommand.h
+        command/attachCommands/AttachMedianCommand.cpp
+        command/attachCommands/AttachMedianCommand.h
+        command/attachCommands/AttachGaussianNoiseCommand.cpp
+        command/attachCommands/AttachGaussianNoiseCommand.h
+        command/attachCommands/AttachColorGeneratorCommand.cpp
+        command/attachCommands/AttachColorGeneratorCommand.h
+        command/deattach/DeattachColorGeneratorCommand.cpp
+        command/deattach/DeattachColorGeneratorCommand.h
+        command/deattach/DeattachGaussianBlurCommand.cpp
+        command/deattach/DeattachGaussianBlurCommand.h
+        command/deattach/DeattachGaussianNoiseCommand.cpp
+        command/deattach/DeattachGaussianNoiseCommand.h
+        command/deattach/DeattachInputCommand.cpp
+        command/deattach/DeattachInputCommand.h
+        command/deattach/DeattachMedianCommand.cpp
+        command/deattach/DeattachMedianCommand.h
+        command/deattach/DeattachOutputCommand.cpp
+        command/deattach/DeattachOutputCommand.h
         gui/cards/ConveyorCard.cpp
         gui/cards/ConveyorCard.h
         gui/cards/ConveyorManagerCard.cpp
         gui/cards/ConveyorManagerCard.h
-        command/attachCommands/ConnectConveyorCommand.cpp
-        command/attachCommands/ConnectConveyorCommand.h
-        command/deattach/DisconnectConveyorCommand.cpp
-        command/deattach/DisconnectConveyorCommand.h
-        command/attachCommands/ConnectConveyorManagerCommand.cpp
-        command/attachCommands/ConnectConveyorManagerCommand.h
-        command/deattach/DisconnectConveyorManagerCommand.cpp
-        command/deattach/DisconnectConveyorManagerCommand.h gui/FiltersScene.cpp gui/FiltersScene.h gui/FiltersView.cpp gui/FiltersView.h)
+        command/attachCommands/AttachConveyorCommand.cpp
+        command/attachCommands/AttachConveyorCommand.h
+        command/deattach/DeattachConveyorCommand.cpp
+        command/deattach/DeattachConveyorCommand.h
+        command/attachCommands/AttachConveyorManagerCommand.cpp
+        command/attachCommands/AttachConveyorManagerCommand.h
+        command/deattach/DeattachConveyorManagerCommand.cpp
+        command/deattach/DeattachConveyorManagerCommand.h gui/FiltersScene.cpp gui/FiltersScene.h gui/FiltersView.cpp gui/FiltersView.h)
 
 target_link_libraries(filters Qt5::Core)
 target_link_libraries(filters Qt5::Gui)
