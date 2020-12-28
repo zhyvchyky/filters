@@ -52,18 +52,18 @@ public:
     friend class SetMedianCommand;
     friend class SetNodeInputCommand;
     friend class SetNodeOutputCommand;
-    friend class ConnectGaussianBlurCommand;
-    friend class ConnectInputCommand;
-    friend class ConnectOutputCommand;
-    friend class ConnectMedianCommand;
-    friend class ConnectGaussianNoiseCommand;
-    friend class ConnectColorGeneratorCommand;
-    friend class DisconnectGaussianBlurCommand;
-    friend class DisconnectInputCommand;
-    friend class DisconnectOutputCommand;
-    friend class DisconnectMedianCommand;
-    friend class DisconnectGaussianNoiseCommand;
-    friend class DisconnectColorGeneratorCommand;
+    friend class AttachGaussianBlurCommand;
+    friend class AttachInputCommand;
+    friend class AttachOutputCommand;
+    friend class AttachMedianCommand;
+    friend class AttachGaussianNoiseCommand;
+    friend class AttachColorGeneratorCommand;
+    friend class DeattachGaussianBlurCommand;
+    friend class DeattachInputCommand;
+    friend class DeattachOutputCommand;
+    friend class DeattachMedianCommand;
+    friend class DeattachGaussianNoiseCommand;
+    friend class DeattachColorGeneratorCommand;
 };
 
 #endif
