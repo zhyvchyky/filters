@@ -6,8 +6,16 @@
 #define FILTERS_FILTERSVIEW_H
 
 #include <cmath>
+#include <QtWidgets/QMenu>
+#include <QContextMenuEvent>
 #include <QtWidgets/QGraphicsView>
+#include <QLineEdit>
+#include <QWidgetAction>
+#include <QListWidget>
+#include <QTreeWidgetItem>
+#include <QHeaderView>
 #include "gui/FiltersScene.h"
+#include <QDebug>
 
 class FiltersView : public QGraphicsView{
     Q_OBJECT
@@ -20,7 +28,7 @@ public:
 protected:
     void drawBackground(QPainter* painter, const QRectF& r) override;
     void showEvent(QShowEvent *event) override;
-
+    void contextMenuEvent(QContextMenuEvent *event) override;
     FiltersScene* _scene;
 };
 
