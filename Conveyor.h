@@ -1,7 +1,3 @@
-//
-// Created by makstsar on 27.10.2020.
-//
-
 #ifndef FILTERS_CONVEYOR_H
 #define FILTERS_CONVEYOR_H
 
@@ -30,7 +26,7 @@
 class Conveyor: public ISubject<Conveyor> {
 private:
     std::map<size_t, std::shared_ptr<ANode>> nodes;
-    size_t curId;
+    IdGenerator idGenerator;
     bool isCyclic();
     bool DFS(std::shared_ptr<ANode>, std::set<std::shared_ptr<ANode>>);
     size_t createNode(NodeType nodeType);
@@ -41,6 +37,7 @@ private:
 public:
     Conveyor();
     std::map<size_t, std::shared_ptr<ANode>> getNodes();
+
     friend class CreateNodeCommand;
     friend class DeleteNodeCommand;
     friend class CreateConnectionCommand;
