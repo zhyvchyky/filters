@@ -7,7 +7,7 @@
 #include "Conveyor.h"
 
 Conveyor::Conveyor() {
-    this->nodes.emplace_back(std::make_shared<NodeOutput>());
+    this->nodes[0]=std::make_shared<NodeOutput>();
 }
 
 bool Conveyor::isCyclic() {
@@ -117,6 +117,6 @@ void Conveyor::deleteNode(size_t nodeId) {
     this->idGenerator.freeId(nodeId);
 }
 
-std::vector<std::shared_ptr<ANode>> Conveyor::getNodes() {
+std::map<size_t, std::shared_ptr<ANode>> Conveyor::getNodes() {
     return this->nodes;
 }

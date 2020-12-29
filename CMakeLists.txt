@@ -129,7 +129,7 @@ add_executable(filters
         gui/FiltersScene.cpp gui/FiltersScene.h
         gui/FiltersView.cpp gui/FiltersView.h
         gui/FiltersWindow.cpp gui/FiltersWindow.h
-        )
+        gui/NodeDataModel.h)
 
 target_link_libraries(filters Qt5::Core)
 target_link_libraries(filters Qt5::Gui)

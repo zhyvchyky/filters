@@ -5,6 +5,7 @@
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QTabBar>
+#include <command/deleteCommands/DeleteConveyorCommand.h>
 
 #include "FiltersWindow.h"
 #include "command/createCommands/CreateConveyorCommand.h"
@@ -15,7 +16,7 @@ using namespace std;
 FiltersWindow::FiltersWindow(QWidget *parent) : QTabWidget(parent){
     this->setTabPosition(QTabWidget::North);
     this->setTabsClosable(true);
-    this->setMovable(true);
+    //this->setMovable(true);
 
 
     runButton = new QPushButton(this);
@@ -32,9 +33,17 @@ FiltersWindow::FiltersWindow(QWidget *parent) : QTabWidget(parent){
 
     connect(runButton, &QPushButton::clicked, this, &FiltersWindow::handleRunButton);
     connect(addConveyorButton, &QPushButton::clicked, this, &FiltersWindow::handleAddButton);
+    connect(this, &QTabWidget::tabCloseRequested, this, &FiltersWindow::handleCloseRequest);
 
     addConveyorButton->move(25, this->height()-75);
     runButton->move(this->width() - 75, this->height()-75);
+
+}
+
+void FiltersWindow::handleCloseRequest(int index){
+    cout << "Close " << index << endl;
+    auto cmd = make_shared<DeleteConveyorCommand>(this->filters->getConveyorManager() ,this->tabIndexToConveyorIndex[index]);
+    filters->executeCommand(cmd);
 
 }
 
@@ -51,11 +60,9 @@ void FiltersWindow::handleRunButton() {
 void FiltersWindow::handleAddButton() {
     auto cmd = make_shared<CreateConveyorCommand>(this->filters->getConveyorManager());
     this->filters->executeCommand(cmd);
-    std::cout << "Conveyor added" << std::endl;
 }
 
 void FiltersWindow::notify(std::shared_ptr<ConveyorManager> manager) {
-
     std::set<size_t> added;
     std::set<size_t> removed;
     std::set<size_t> newConveyors;
@@ -68,14 +75,42 @@ void FiltersWindow::notify(std::shared_ptr<ConveyorManager> manager) {
     }
     //may add optimization
     for(auto elem: this->conveyors){
-        if(newConveyors.contains(elem))
+        if(!newConveyors.contains(elem))
             removed.insert(elem);
     }
     for(auto elem: newConveyors){
-        if(conveyors.contains(elem))
+        if(!conveyors.contains(elem))
             added.insert(elem);
     }
     conveyors = newConveyors;
+
+    for(auto elem: added){
+        this->scenes[elem] = new FiltersScene();
+        this->sceneViews[elem] = new FiltersView(scenes[elem]);
+        this->addTab(sceneViews[elem], QString::fromStdString("conv"+to_string(elem)));
+    }
+    for(auto elem: removed){
+        this->scenes.erase(elem);
+        this->sceneViews.erase(elem);
+        this->removeTab(conveyorIndexToTabIndex[elem]);
+
+        map<size_t, size_t> newTabIndexToConveyorIndex;
+        map<size_t, size_t> newConveyorIndexToTabIndex;
+
+        for(int i = conveyorIndexToTabIndex[elem]; i < tabIndexToConveyorIndex.size()-1; i++){
+            tabIndexToConveyorIndex[i] = tabIndexToConveyorIndex[i+1];
+        }
+        tabIndexToConveyorIndex.erase(tabIndexToConveyorIndex.size() - 1);
+        conveyorIndexToTabIndex.erase(elem);
+        for(auto i = tabIndexToConveyorIndex.begin(); i != tabIndexToConveyorIndex.end(); i++){
+            conveyorIndexToTabIndex[i->second] = i->first;
+        }
+
+    }
+    for(auto elem: added){
+        tabIndexToConveyorIndex[tabIndexToConveyorIndex.size()] = elem;
+        conveyorIndexToTabIndex[elem] = tabIndexToConveyorIndex.size() - 1;
+    }
 }
 
 void FiltersWindow::setFilters(std::shared_ptr<Filters> f) {
