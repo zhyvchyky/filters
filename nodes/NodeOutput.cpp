@@ -7,7 +7,12 @@
 #include <utility>
 
 void NodeOutput::process() {
-    writeImageToFile(this->inputs[0]->getOutputPtr(), this->filePath);
+    if (this->inputs.empty()){
+        writeImageToFile(std::make_shared<Image>(0, 0, 255, new Pixel[0]), this->filePath);
+    }
+    else {
+        writeImageToFile(this->inputs[0]->getOutputPtr(), this->filePath);
+    }
 }
 
 
