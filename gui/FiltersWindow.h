@@ -9,6 +9,8 @@
 #include <QtWidgets/QPushButton>
 #include <Filters.h>
 #include <gui/cards/ConveyorManagerCard.h>
+#include "FiltersScene.h"
+#include "FiltersView.h"
 
 class FiltersWindow : public QTabWidget, public IObserver<ConveyorManager>{
 Q_OBJECT
@@ -24,12 +26,14 @@ public:
 private slots:
 
     void handleRunButton();
-
+    void handleCloseRequest(int);
     void handleAddButton();
 
 private:
     std::map<size_t, size_t> tabIndexToConveyorIndex;
     std::map<size_t, size_t> conveyorIndexToTabIndex;
+    std::map<size_t, FiltersScene*> scenes;
+    std::map<size_t, FiltersView*> sceneViews;
     std::shared_ptr<Filters> filters;
     std::set<size_t> conveyors;
     QPushButton *runButton;
