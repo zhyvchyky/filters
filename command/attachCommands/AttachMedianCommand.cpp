@@ -11,5 +11,6 @@ AttachMedianCommand::AttachMedianCommand(std::shared_ptr<ConveyorManager> rec, s
 bool AttachMedianCommand::execute() {
     auto nodeMedian = std::dynamic_pointer_cast<MedianNode>(this->receiver->getConveyorByID(this->conveyorId)->nodes[this->nodeId]);
     nodeMedian->subscribe(this->card);
+    this->card->notify(nodeMedian);
     return false;
 }

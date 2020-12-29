@@ -1,31 +1,35 @@
 #include <QtWidgets/QApplication>
+#include <command/attachCommands/AttachConveyorManagerCommand.h>
 
 
 #include "gui/FiltersScene.h"
 #include "gui/FiltersView.h"
 #include "gui/FiltersWindow.h"
+#include "command/createCommands/CreateConveyorCommand.h"
+#include "gui/cards/ConveyorManagerCard.h"
+#include "Filters.h"
 
 
 int main(int argc, char *argv[]) {
+    auto filters = std::make_shared<Filters>();
     QApplication app(argc, argv);
 
-    FiltersScene scene;
-    FiltersScene scene2;
 
-    FiltersView view(&scene);
-    FiltersView view2(&scene2);
+    auto *window = new FiltersWindow;
+    window->setFilters(filters);
 
-    view.setWindowTitle("Node-based flow editor");
-    //view.resize(800, 600);
-    //view.show();
+    auto cmd = make_shared<AttachConveyorManagerCommand>(filters->getConveyorManager(), std::shared_ptr<FiltersWindow>(window));
+    filters->executeCommand(cmd);
 
-    FiltersWindow window;
-    window.setWindowTitle("Filters");
-    window.resize(800, 600);
-    window.addTab(view.viewport(), QString("tab"));
-    window.addTab(view2.viewport(), QString("tab2"));
+    window->setWindowTitle("Filters");
 
-    window.show();
+    window->resize(800, 600);
+
+
+
+    window->show();
 
     return app.exec();
+
+
 }

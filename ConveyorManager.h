@@ -18,7 +18,6 @@ class ConveyorManager: public ISubject<ConveyorManager> {
 private:
     size_t curId = 0;
     std::vector<std::shared_ptr<Conveyor>> conveyors;
-    IdGenerator idGenerator;
     size_t createConveyor();
     void deleteConveyor(size_t id);
 public:

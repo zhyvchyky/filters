@@ -10,9 +10,9 @@
 
 class ConveyorManagerCard: public IObserver<ConveyorManager> {
 private:
-    std::vector<std::shared_ptr<Conveyor>> conveyors;
+    std::set<size_t> conveyors;
 public:
-    std::vector<std::shared_ptr<Conveyor>> getConveyors();
+    std::set<size_t> getConveyors();
     void notify(std::shared_ptr<ConveyorManager>) override;
 };
 

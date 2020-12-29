@@ -29,7 +29,7 @@
 
 class Conveyor: public ISubject<Conveyor> {
 private:
-    std::map<size_t, std::shared_ptr<ANode>> nodes;
+    std::vector<std::shared_ptr<ANode>> nodes;
     IdGenerator idGenerator;
     bool isCyclic();
     bool DFS(std::shared_ptr<ANode>, std::set<std::shared_ptr<ANode>>);
@@ -40,7 +40,7 @@ private:
     void process();
 public:
     Conveyor();
-    std::map<size_t, std::shared_ptr<ANode>> getNodes();
+    std::vector<std::shared_ptr<ANode>> getNodes();
     friend class CreateNodeCommand;
     friend class DeleteNodeCommand;
     friend class CreateConnectionCommand;

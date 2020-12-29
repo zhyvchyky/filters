@@ -11,5 +11,6 @@ this->card = c;
 
 bool AttachConveyorManagerCommand::execute() {
     this->receiver->subscribe(this->card);
+    this->card->notify(this->receiver);
     return false;
 }

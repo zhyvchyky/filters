@@ -9,7 +9,7 @@
 
 size_t ConveyorManager::createConveyor() {
     if (curId == conveyors.size())
-        conveyors.push_back(std::make_shared<Conveyor>());
+        conveyors.emplace_back(std::make_shared<Conveyor>());
     else
         this->conveyors[curId] = std::make_shared<Conveyor>();
     notify();

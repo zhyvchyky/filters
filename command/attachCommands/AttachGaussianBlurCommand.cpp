@@ -11,5 +11,6 @@ AttachGaussianBlurCommand::AttachGaussianBlurCommand(std::shared_ptr<ConveyorMan
 bool AttachGaussianBlurCommand::execute() {
     auto nodeGB = std::dynamic_pointer_cast<GaussianBlurNode>(this->receiver->getConveyorByID(this->conveyorId)->nodes[this->nodeId]);
     nodeGB->subscribe(this->card);
+    this->card->notify(nodeGB);
     return false;
 }

@@ -12,5 +12,6 @@ AttachConveyorCommand::AttachConveyorCommand(std::shared_ptr<ConveyorManager> re
 
 bool AttachConveyorCommand::execute() {
     this->receiver->getConveyorByID(this->conveyorId)->subscribe(this->card);
+    this->card->notify(this->receiver->getConveyorByID(this->conveyorId));
     return false;
 }

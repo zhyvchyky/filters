@@ -2,6 +2,7 @@
 // Created by noxin on 12/27/20.
 //
 
+#include <iostream>
 #include "FiltersView.h"
 
 void FiltersView::drawBackground(QPainter *painter, const QRectF &r) {
@@ -46,31 +47,18 @@ void FiltersView::contextMenuEvent(QContextMenuEvent *event) {
 
     QMenu modelMenu;
 
-    auto skipText = QStringLiteral("skip me");
-
-    //Add filterbox to the context menu
-    auto *txtBox = new QLineEdit(&modelMenu);
-
-    txtBox->setPlaceholderText(QStringLiteral("Filter"));
-    txtBox->setClearButtonEnabled(true);
-
-    auto *txtBoxAction = new QWidgetAction(&modelMenu);
-    txtBoxAction->setDefaultWidget(txtBox);
-
-    modelMenu.addAction(txtBoxAction);
-
-    auto *listView = new QListWidget(&modelMenu);
+    auto *listWidget = new QListWidget(&modelMenu);
     auto *listViewAction = new QWidgetAction(&modelMenu);
-    listViewAction->setDefaultWidget(listView);
+    listViewAction->setDefaultWidget(listWidget);
     modelMenu.addAction(listViewAction);
 
-    listView->addItem("somestring");
+    listWidget->addItem("somestring");
+    connect(listWidget, &QListWidget::itemClicked, [&](QListWidgetItem *item )
+    {
+        std::cout << item->text().toStdString() << " clicked" << std::endl;
+        modelMenu.close();
+    });
 
 
-    txtBox->setFocus();
     modelMenu.exec(event->globalPos());
 }
-
-
-
-

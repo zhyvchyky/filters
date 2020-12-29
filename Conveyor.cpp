@@ -7,7 +7,7 @@
 #include "Conveyor.h"
 
 Conveyor::Conveyor() {
-    this->nodes[0] = std::make_shared<NodeOutput>();
+    this->nodes.emplace_back(std::make_shared<NodeOutput>());
 }
 
 bool Conveyor::isCyclic() {
@@ -17,14 +17,13 @@ bool Conveyor::isCyclic() {
 
 bool Conveyor::DFS(std::shared_ptr<ANode> node, std::set<std::shared_ptr<ANode>> hashset) {
     std::vector<std::shared_ptr<ANode>> inputs = node->getInputs();
-    if(inputs.empty()) return false;
+    if (inputs.empty()) return false;
 
-    for(auto & input : inputs){
-        if(hashset.find(input) == hashset.end()){
+    for (auto &input : inputs) {
+        if (hashset.find(input) == hashset.end()) {
             hashset.insert(input);
             return this->DFS(input, hashset);
-        }
-        else{
+        } else {
             return true;
         }
     }
@@ -37,15 +36,15 @@ void Conveyor::process() {
     std::queue<std::shared_ptr<ANode>> queue;
     queue.push(this->nodes[0]);
 
-    while(!queue.empty()){
+    while (!queue.empty()) {
         stack.push(queue.front());
         queue.pop();
 
-        for(auto & input : stack.top()->getInputs())
+        for (auto &input : stack.top()->getInputs())
             queue.push(input);
     }
 
-    while(!stack.empty()){
+    while (!stack.empty()) {
         stack.top()->process();
         stack.pop();
     }
@@ -92,7 +91,7 @@ void Conveyor::createConnection(size_t inputNodeId, size_t outputNodeId) {
     std::shared_ptr<ANode> outputNode = this->nodes[outputNodeId];
     outputNode->setInput(inputNode);
     inputNode->setOutput(outputNode);
-    if(isCyclic()){
+    if (isCyclic()) {
         std::cout << "Graph contains cycle!" << std::endl;
         deleteConnection(inputNodeId, outputNodeId);
     }
@@ -110,7 +109,7 @@ void Conveyor::deleteConnection(size_t inputNodeId, size_t outputNodeId) {
 void Conveyor::deleteNode(size_t nodeId) {
     std::shared_ptr<ANode> rmvNode = this->nodes[nodeId];
     std::vector<std::shared_ptr<ANode>> inputs = rmvNode->getInputs();
-    for(int i = 0; i < inputs.size(); i++){
+    for (int i = 0; i < inputs.size(); i++) {
         inputs[i]->resetOutput(rmvNode);
     }
     inputs.clear();
@@ -118,6 +117,6 @@ void Conveyor::deleteNode(size_t nodeId) {
     this->idGenerator.freeId(nodeId);
 }
 
-std::map<size_t, std::shared_ptr<ANode>> Conveyor::getNodes() {
+std::vector<std::shared_ptr<ANode>> Conveyor::getNodes() {
     return this->nodes;
 }

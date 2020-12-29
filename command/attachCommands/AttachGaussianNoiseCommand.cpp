@@ -11,5 +11,6 @@ AttachGaussianNoiseCommand::AttachGaussianNoiseCommand(std::shared_ptr<ConveyorM
 bool AttachGaussianNoiseCommand::execute() {
     auto nodeGN = std::dynamic_pointer_cast<GaussianNoiseNode>(this->receiver->getConveyorByID(this->conveyorId)->nodes[this->nodeId]);
     nodeGN->subscribe(this->card);
+    this->card->notify(nodeGN);
     return false;
 }

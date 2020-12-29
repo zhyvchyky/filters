@@ -10,10 +10,10 @@
 
 class ConveyorCard: public IObserver<Conveyor> {
 private:
-    std::map<size_t, std::shared_ptr<ANode>> nodes;
+    std::set<size_t> nodes;
     std::map<size_t, size_t> connections;
 public:
-    std::map<size_t, std::shared_ptr<ANode>> getNodes();
+    std::set<size_t> getNodes();
     void notify(std::shared_ptr<Conveyor>) override;
 };
 

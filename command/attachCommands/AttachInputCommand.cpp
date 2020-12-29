@@ -11,5 +11,6 @@ AttachInputCommand::AttachInputCommand(std::shared_ptr<ConveyorManager> rec, siz
 bool AttachInputCommand::execute() {
     auto nodeInput = std::dynamic_pointer_cast<NodeInput>(this->receiver->getConveyorByID(this->conveyorId)->nodes[this->nodeId]);
     nodeInput->subscribe(this->card);
+    this->card->notify(nodeInput);
     return false;
 }

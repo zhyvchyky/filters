@@ -11,5 +11,6 @@ AttachOutputCommand::AttachOutputCommand(std::shared_ptr<ConveyorManager> rec, s
 bool AttachOutputCommand::execute() {
     auto nodeOutput = std::dynamic_pointer_cast<NodeOutput>(this->receiver->getConveyorByID(this->conveyorId)->nodes[this->nodeId]);
     nodeOutput->subscribe(this->card);
+    this->card->notify(nodeOutput);
     return false;
 }

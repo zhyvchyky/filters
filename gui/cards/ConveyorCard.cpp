@@ -4,18 +4,25 @@
 
 #include "ConveyorCard.h"
 
-std::map<size_t, std::shared_ptr<ANode>> ConveyorCard::getNodes() {
+std::set<size_t> ConveyorCard::getNodes() {
     return this->nodes;
 }
 
 void ConveyorCard::notify(std::shared_ptr<Conveyor> conv) {
-    this->nodes = conv->getNodes();
-    auto it = this->nodes.begin();
-    for(auto it = this->nodes.begin(); it != this->nodes.end(); it++) {
-        for (auto &node : it->second->getOutputs()) {
-            for (auto it2 = this->nodes.begin(); it2 != this->nodes.end(); it2++) {
-                if (node == it2->second)
-                    this->connections[it->first] = it2->first;
+    this->nodes.erase(this->nodes.begin(),this->nodes.end());
+
+    auto nodesVector = conv->getNodes();
+    for(size_t i = 0; i < nodesVector.size(); i++){
+        if(nodesVector[i] != nullptr){
+            nodes.insert(i);
+        }
+    }
+
+    for(int i = 0; i < nodesVector.size(); i++){
+        for(const auto& node: nodesVector[i]->getOutputs()){
+            for(int j = 0; j < nodesVector.size(); i++){
+                if(node == nodesVector[j])
+                    this->connections[i] = j;
             }
         }
     }

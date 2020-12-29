@@ -11,5 +11,6 @@ AttachColorGeneratorCommand::AttachColorGeneratorCommand(std::shared_ptr<Conveyo
 bool AttachColorGeneratorCommand::execute() {
     auto nodeCG = std::dynamic_pointer_cast<ColorGeneratorNode>(this->receiver->getConveyorByID(this->conveyorId)->nodes[this->nodeId]);
     nodeCG->subscribe(this->card);
+    this->card->notify(nodeCG);
     return false;
 }
