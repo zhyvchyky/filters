@@ -9,7 +9,7 @@
 
 size_t ConveyorManager::createConveyor() {
     if (curId == conveyors.size())
-        conveyors.emplace_back(std::make_shared<Conveyor>());
+        conveyors[curId] = std::make_shared<Conveyor>();
     else
         this->conveyors[curId] = std::make_shared<Conveyor>();
     notify();
@@ -17,7 +17,7 @@ size_t ConveyorManager::createConveyor() {
 }
 
 void ConveyorManager::deleteConveyor(size_t id) {
-    this->conveyors.erase(conveyors.begin()+id);
+    this->conveyors.erase(id);
     this->curId--;
     notify();
 }
@@ -26,6 +26,6 @@ std::shared_ptr<Conveyor> ConveyorManager::getConveyorByID(size_t id) {
     return this->conveyors[id];
 }
 
-std::vector<std::shared_ptr<Conveyor>> ConveyorManager::getConveyors() {
+std::map<size_t, std::shared_ptr<Conveyor>> ConveyorManager::getConveyors() {
     return this->conveyors;
 }
