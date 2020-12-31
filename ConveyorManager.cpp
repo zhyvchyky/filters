@@ -18,7 +18,6 @@ size_t ConveyorManager::createConveyor() {
 
 void ConveyorManager::deleteConveyor(size_t id) {
     this->conveyors.erase(id);
-    this->curId--;
     notify();
 }
 

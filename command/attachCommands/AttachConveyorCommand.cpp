@@ -4,7 +4,7 @@
 
 #include "AttachConveyorCommand.h"
 
-AttachConveyorCommand::AttachConveyorCommand(std::shared_ptr<ConveyorManager> rec, size_t id, std::shared_ptr<IObserver<Conveyor>> c) {
+AttachConveyorCommand::AttachConveyorCommand(std::shared_ptr<ConveyorManager> rec, size_t id, std::shared_ptr<IConveyorObserver> c) {
     this->receiver = rec;
     this->conveyorId = id;
     this->card = c;

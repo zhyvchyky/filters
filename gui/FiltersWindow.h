@@ -32,7 +32,7 @@ private slots:
 private:
     std::map<size_t, size_t> tabIndexToConveyorIndex;
     std::map<size_t, size_t> conveyorIndexToTabIndex;
-    std::map<size_t, FiltersScene*> scenes;
+    std::map<size_t, std::shared_ptr<FiltersScene>> scenes;
     std::map<size_t, FiltersView*> sceneViews;
     std::shared_ptr<Filters> filters;
     std::set<size_t> conveyors;

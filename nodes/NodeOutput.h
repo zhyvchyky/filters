@@ -13,7 +13,7 @@
 
 class NodeOutput : public ANode, public ISubject<NodeOutput> {
 private:
-    std::string filePath = "Default.ppm";
+    std::string filePath = "default.ppm";
 
     void setFilePath(std::string filepath);
     static void writeImageToFile(std::shared_ptr<Image> image, std::string path);

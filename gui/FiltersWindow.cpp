@@ -6,6 +6,8 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QTabBar>
 #include <command/deleteCommands/DeleteConveyorCommand.h>
+#include <command/ProcessCommand.h>
+#include <QWindow>
 
 #include "FiltersWindow.h"
 #include "command/createCommands/CreateConveyorCommand.h"
@@ -55,6 +57,12 @@ void FiltersWindow::resizeEvent(QResizeEvent *event) {
 
 void FiltersWindow::handleRunButton() {
     std::cout << "Run pressed" << std::endl;
+    this->scenes[tabIndexToConveyorIndex[this->currentIndex()]]->getFilters()->getConveyorManager();
+    cout << "Break" << endl;
+    auto cmd = make_shared<ProcessCommand>(filters->getConveyorManager(), tabIndexToConveyorIndex[this->currentIndex()]);
+    filters->executeCommand(cmd);
+
+
 }
 
 void FiltersWindow::handleAddButton() {
@@ -85,8 +93,15 @@ void FiltersWindow::notify(std::shared_ptr<ConveyorManager> manager) {
     conveyors = newConveyors;
 
     for(auto elem: added){
-        this->scenes[elem] = new FiltersScene();
-        this->sceneViews[elem] = new FiltersView(scenes[elem]);
+        this->scenes[elem] = make_shared<FiltersScene>(elem, this->filters);
+
+        auto cmd = make_shared<AttachConveyorCommand>(this->filters->getConveyorManager(), elem, shared_ptr<FiltersScene>(this->scenes[elem]));
+        this->filters->executeCommand(cmd);
+
+        this->scenes[elem]->getFilters()->getConveyorManager();
+
+        this->sceneViews[elem] = new FiltersView(scenes[elem].get());
+        this->sceneViews[elem]->conveyorId = elem;
         this->addTab(sceneViews[elem], QString::fromStdString("conv"+to_string(elem)));
     }
     for(auto elem: removed){

@@ -21,9 +21,17 @@ class FiltersView : public QGraphicsView{
     Q_OBJECT
 public:
     FiltersView(QWidget *parent = Q_NULLPTR);
-
+    size_t conveyorId = 100;
     FiltersView(FiltersScene *scene, QWidget *parent = Q_NULLPTR);
     void setScene(FiltersScene *scene);
+    enum class PredefinedConveyorType{
+        NoiseConveyor,
+        SecondConveyor,
+        ThirdConveyor,
+
+
+    };
+    Q_ENUM(PredefinedConveyorType)
 
 protected:
     void drawBackground(QPainter* painter, const QRectF& r) override;

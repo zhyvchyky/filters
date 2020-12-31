@@ -13,7 +13,7 @@
 
 template<class T>
 class ISubject : public std::enable_shared_from_this<T> {
-private:
+public:
     std::vector<std::weak_ptr<IObserver<T>>> observers;
 
 public:
@@ -21,11 +21,11 @@ public:
         observers.clear();
     };
 
-    inline void subscribe(const std::shared_ptr<IObserver<T>> &observer) {
+    virtual inline void subscribe(const std::shared_ptr<IObserver<T>> &observer) {
         observers.push_back(observer);
     }
 
-    inline void notify() {
+    virtual inline void notify() {
         for (auto wptr : observers) {
             if (!wptr.expired()) {
                 auto observer = wptr.lock();
@@ -34,7 +34,7 @@ public:
         }
     }
 
-    inline void unsubscribe(const std::shared_ptr<IObserver<T>> &observer) {
+    virtual inline void unsubscribe(const std::shared_ptr<IObserver<T>> &observer) {
         auto it = std::find_if(observers.begin(), observers.end(), [observer](std::weak_ptr<IObserver<T>> &p) {
             return p.expired() || p.lock() == observer;
         });

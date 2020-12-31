@@ -12,9 +12,9 @@ class AttachConveyorCommand: public ICommand {
 private:
     std::shared_ptr<ConveyorManager> receiver;
     size_t conveyorId;
-    std::shared_ptr<IObserver<Conveyor>> card;
+    std::shared_ptr<IConveyorObserver> card;
 public:
-    explicit AttachConveyorCommand(std::shared_ptr<ConveyorManager>, size_t, std::shared_ptr<IObserver<Conveyor>>);
+    explicit AttachConveyorCommand(std::shared_ptr<ConveyorManager>, size_t, std::shared_ptr<IConveyorObserver>);
     bool execute() override;
 };
 

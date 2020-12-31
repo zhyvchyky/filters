@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <iostream>
 #include <map>
 
 #include "Conveyor.h"
@@ -25,6 +26,9 @@ public:
     std::map<size_t, std::shared_ptr<Conveyor>> getConveyors();
     friend class CreateConveyorCommand;
     friend class DeleteConveyorCommand;
+    inline ~ConveyorManager() {
+        std::cout<< "Conveyor Manager destructor called" << std::endl;
+    }
 };
 
 #endif //FILTERS_CONVEYORMANAGER_H

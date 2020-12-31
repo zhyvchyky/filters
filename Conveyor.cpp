@@ -49,6 +49,8 @@ void Conveyor::process() {
         stack.top()->process();
         stack.pop();
     }
+
+    this->processNotify();
 }
 
 size_t Conveyor::createNode(NodeType nodeType) {

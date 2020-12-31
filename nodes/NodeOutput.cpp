@@ -12,6 +12,8 @@ void NodeOutput::process() {
     }
     else {
         writeImageToFile(this->inputs[0]->getOutputPtr(), this->filePath);
+        this->outputPtr = this->inputs[0]->getOutputPtr();
+
     }
 }
 

@@ -21,9 +21,9 @@
 #include "nodes/CombineNode.h"
 #include "nodes/GaussianNoiseNode.h"
 #include "utilities/IdGenerator.h"
-#include "ISubject.h"
+#include "IConveyorSubject.h"
 
-class Conveyor: public ISubject<Conveyor> {
+class Conveyor: public IConveyorSubject {
 private:
     std::map<size_t, std::shared_ptr<ANode>> nodes;
     IdGenerator idGenerator;
