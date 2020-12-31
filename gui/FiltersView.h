@@ -24,10 +24,12 @@ public:
     size_t conveyorId = 100;
     FiltersView(FiltersScene *scene, QWidget *parent = Q_NULLPTR);
     void setScene(FiltersScene *scene);
+
     enum class PredefinedConveyorType{
         NoiseConveyor,
         SecondConveyor,
         ThirdConveyor,
+        FourthConveyor,
 
 
     };

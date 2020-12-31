@@ -9,6 +9,7 @@
 #include <command/setCommands/SetNodeOutputCommand.h>
 #include <command/setCommands/SetGaussianNoiseCommand.h>
 #include <command/setCommands/SetNodeInputCommand.h>
+#include <command/setCommands/SetGaussianBlurCommand.h>
 #include "FiltersView.h"
 
 void FiltersView::drawBackground(QPainter *painter, const QRectF &r) {
@@ -70,10 +71,15 @@ void FiltersView::contextMenuEvent(QContextMenuEvent *event) {
     listItem3->setData(Qt::UserRole, QVariant::fromValue(PredefinedConveyorType::ThirdConveyor));
     listItem3->setText("Third Conveyor");
 
+    auto listItem4 = new QListWidgetItem();
+    listItem4->setData(Qt::UserRole, QVariant::fromValue(PredefinedConveyorType::FourthConveyor));
+    listItem4->setText("Fourth Conveyor");
+
 
     listWidget->addItem(listItem);
     listWidget->addItem(listItem2);
     listWidget->addItem(listItem3);
+    listWidget->addItem(listItem4);
 
     connect(listWidget, &QListWidget::itemClicked, [&](QListWidgetItem *item) {
         std::cout << item->text().toStdString() << " clicked " << conveyorId << std::endl;
@@ -116,23 +122,34 @@ void FiltersView::contextMenuEvent(QContextMenuEvent *event) {
             this->_scene->getFilters()->executeCommand(set3);
         } else if (item->data(Qt::UserRole).value<PredefinedConveyorType>() == PredefinedConveyorType::SecondConveyor) {
 
-            auto nodeIn = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), NodeType::NodeInput);
-            auto nodeEf = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(),
+            auto nodeIn = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                              _scene->getConveyorId(), NodeType::NodeInput);
+            auto nodeEf = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                              _scene->getConveyorId(),
                                                               NodeType::BlackAndWhiteNode);
-            auto nodeNS = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(),
+            auto nodeNS = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                              _scene->getConveyorId(),
                                                               NodeType::GaussianNoiseNode);
-            auto nodeComb = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(),
+            auto nodeComb = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                _scene->getConveyorId(),
                                                                 NodeType::CombineNode);
 
-            auto con1 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 1, 2);
-            auto con2 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 2, 4);
-            auto con3 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 3, 4);
-            auto con4 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 4, 0);
+            auto con1 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                  _scene->getConveyorId(), 1, 2);
+            auto con2 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                  _scene->getConveyorId(), 2, 4);
+            auto con3 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                  _scene->getConveyorId(), 3, 4);
+            auto con4 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                  _scene->getConveyorId(), 4, 0);
 
 
-            auto set1 = std::make_shared<SetGaussianNoiseCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 3, 1000, 467, 551);
-            auto set2 = std::make_shared<SetNodeOutputCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), "anon1.ppm");
-            auto set3 = std::make_shared<SetNodeInputCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 1, "cherniy.ppm");
+            auto set1 = std::make_shared<SetGaussianNoiseCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                  _scene->getConveyorId(), 3, 1000, 500, 500);
+            auto set2 = std::make_shared<SetNodeOutputCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                               _scene->getConveyorId(), "anon1.ppm");
+            auto set3 = std::make_shared<SetNodeInputCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                              _scene->getConveyorId(), 1, "girl.ppm");
 
             this->_scene->getFilters()->executeCommand(nodeIn);
             this->_scene->getFilters()->executeCommand(nodeEf);
@@ -143,6 +160,77 @@ void FiltersView::contextMenuEvent(QContextMenuEvent *event) {
             this->_scene->getFilters()->executeCommand(con3);
             this->_scene->getFilters()->executeCommand(con4);
             this->_scene->getFilters()->executeCommand(set1);
+            this->_scene->getFilters()->executeCommand(set2);
+            this->_scene->getFilters()->executeCommand(set3);
+        } else if (item->data(Qt::UserRole).value<PredefinedConveyorType>() == PredefinedConveyorType::ThirdConveyor) {
+            auto nodeIn = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                              _scene->getConveyorId(), NodeType::NodeInput);
+            auto nodeEf = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                              _scene->getConveyorId(), NodeType::GaussianBlurNode);
+            auto nodeNS = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                              _scene->getConveyorId(), NodeType::ColorGeneratorNode);
+            auto nodeComb = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                _scene->getConveyorId(), NodeType::CombineNode);
+
+            auto con1 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                  _scene->getConveyorId(), 1, 2);
+            auto con2 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                  _scene->getConveyorId(), 2, 4);
+            auto con3 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                  _scene->getConveyorId(), 3, 4);
+            auto con4 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                  _scene->getConveyorId(), 4, 0);
+
+
+            auto set1 = std::make_shared<SetGaussianBlurCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                 _scene->getConveyorId(), 2, 13);
+            auto set2 = std::make_shared<SetNodeOutputCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                               _scene->getConveyorId(), "anon1.ppm");
+            auto set3 = std::make_shared<SetNodeInputCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                              _scene->getConveyorId(), 1, "girl.ppm");
+            auto set4 = std::make_shared<SetColorGeneratorCommand>(this->_scene->getFilters()->getConveyorManager(),
+                                                                   _scene->getConveyorId(), 3, 0, 255, 0, 500, 500);
+
+            this->_scene->getFilters()->executeCommand(nodeIn);
+            this->_scene->getFilters()->executeCommand(nodeEf);
+            this->_scene->getFilters()->executeCommand(nodeNS);
+            this->_scene->getFilters()->executeCommand(nodeComb);
+            this->_scene->getFilters()->executeCommand(con1);
+            this->_scene->getFilters()->executeCommand(con2);
+            this->_scene->getFilters()->executeCommand(con3);
+            this->_scene->getFilters()->executeCommand(con4);
+            this->_scene->getFilters()->executeCommand(set1);
+            this->_scene->getFilters()->executeCommand(set2);
+            this->_scene->getFilters()->executeCommand(set3);
+            this->_scene->getFilters()->executeCommand(set4);
+        } else if (item->data(Qt::UserRole).value<PredefinedConveyorType>() == PredefinedConveyorType::FourthConveyor) {
+            auto nodeIn = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), NodeType::NodeInput);
+            auto nodeEf = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(),
+                                                              NodeType::EdgeDetectionNode);
+            auto nodeNS = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), NodeType::NegativeNode);
+            auto nodeComb = std::make_shared<CreateNodeCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(),
+                                                                NodeType::CombineNode);
+
+            auto con1 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 1, 2);
+            auto con2 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 1, 3);
+            auto con3 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 2, 4);
+            auto con4 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 3, 4);
+            auto con5 = std::make_shared<CreateConnectionCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 4, 0);
+
+
+            auto set2 = std::make_shared<SetNodeOutputCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), "anon1.ppm");
+            auto set3 = std::make_shared<SetNodeInputCommand>(this->_scene->getFilters()->getConveyorManager(), _scene->getConveyorId(), 1, "girl.ppm");
+
+
+            this->_scene->getFilters()->executeCommand(nodeIn);
+            this->_scene->getFilters()->executeCommand(nodeEf);
+            this->_scene->getFilters()->executeCommand(nodeNS);
+            this->_scene->getFilters()->executeCommand(nodeComb);
+            this->_scene->getFilters()->executeCommand(con1);
+            this->_scene->getFilters()->executeCommand(con2);
+            this->_scene->getFilters()->executeCommand(con3);
+            this->_scene->getFilters()->executeCommand(con4);
+            this->_scene->getFilters()->executeCommand(con5);
             this->_scene->getFilters()->executeCommand(set2);
             this->_scene->getFilters()->executeCommand(set3);
         }
